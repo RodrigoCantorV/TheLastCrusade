@@ -25,6 +25,7 @@ public class CharacterVideo : MonoBehaviour
     public StandingState standing;
     public CrouchingState crouching;
     public SprintState sprinting;
+    public CombatState combatting;
  
     [HideInInspector]
     public float gravityValue = -9.81f;
@@ -54,6 +55,7 @@ public class CharacterVideo : MonoBehaviour
         standing = new StandingState(this, movementSM);
         crouching = new CrouchingState(this, movementSM);
         sprinting = new SprintState(this, movementSM);
+        combatting = new CombatState(this, movementSM);
  
         movementSM.Initialize(standing);
  

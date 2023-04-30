@@ -1,20 +1,16 @@
 using UnityEngine;
- 
-public class StandingState: State
+public class CombatState : State
 {
-    
     float gravityValue;
-    //bool jump;   
-    bool crouch;
     Vector3 currentVelocity;
     bool grounded;
-    bool sprint;
+    bool sheathWeapon;
     float playerSpeed;
-    bool drawWeapon;
+    //bool attack;
  
     Vector3 cVelocity;
  
-    public StandingState(CharacterVideo _character, StateMachine _stateMachine) : base(_character, _stateMachine)
+    public CombatState(CharacterVideo _character, StateMachine _stateMachine) : base(_character, _stateMachine)
     {
         characterVideo = _character;
         stateMachine = _stateMachine;
@@ -24,41 +20,38 @@ public class StandingState: State
     {
         base.Enter();
  
-        crouch = false;
-        sprint = false;
-        drawWeapon = false;
+        sheathWeapon = false;
         input = Vector2.zero;
-        velocity = Vector3.zero;
         currentVelocity = Vector3.zero;
         gravityVelocity.y = 0;
+        //attack = false;
  
+        velocity = characterVideo.playerVelocity;
         playerSpeed = characterVideo.playerSpeed;
         grounded = characterVideo.controller.isGrounded;
-        gravityValue = characterVideo.gravityValue;    
+        gravityValue = characterVideo.gravityValue;
     }
  
     public override void HandleInput()
     {
         base.HandleInput();
  
-        if (crouchAction.triggered)
-        {
-            crouch = true;
-        }
-        if (sprintAction.triggered)
-        {
-            sprint = true;
-        }
         if (drawWeaponAction.triggered)
         {
-            drawWeapon = true;
+            sheathWeapon = true;
         }
+ 
+        /*if (attackAction.triggered)
+        {
+            attack = true;
+        }*/
+ 
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
  
         velocity = velocity.x * characterVideo.cameraTransform.right.normalized + velocity.z * characterVideo.cameraTransform.forward.normalized;
         velocity.y = 0f;
-     
+ 
     }
  
     public override void LogicUpdate()
@@ -67,19 +60,17 @@ public class StandingState: State
  
         characterVideo.animator.SetFloat("speed", input.magnitude, characterVideo.speedDampTime, Time.deltaTime);
  
-        if (sprint)
+        if (sheathWeapon)
         {
-            stateMachine.ChangeState(characterVideo.sprinting);
-        }    
-        if (crouch)
-        {
-            stateMachine.ChangeState(characterVideo.crouching);
+            characterVideo.animator.SetTrigger("sheathWeapon");
+            stateMachine.ChangeState(characterVideo.standing);
         }
-        if (drawWeapon)
+ 
+        /*if (attack)
         {
-            characterVideo.animator.SetTrigger("drawWeapon");
-        }
-        
+            characterVideo.animator.SetTrigger("attack");
+            stateMachine.ChangeState(characterVideo.attacking);
+        }*/
     }
  
     public override void PhysicsUpdate()
@@ -93,15 +84,15 @@ public class StandingState: State
         {
             gravityVelocity.y = 0f;
         }
-       
-        currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity,ref cVelocity, characterVideo.velocityDampTime);
+ 
+        currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, characterVideo.velocityDampTime);
         characterVideo.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime);
-  
-        if (velocity.sqrMagnitude>0)
+ 
+        if (velocity.sqrMagnitude > 0)
         {
-            characterVideo.transform.rotation = Quaternion.Slerp(characterVideo.transform.rotation, Quaternion.LookRotation(velocity),characterVideo.rotationDampTime);
+            characterVideo.transform.rotation = Quaternion.Slerp(characterVideo.transform.rotation, Quaternion.LookRotation(velocity), characterVideo.rotationDampTime);
         }
-        
+ 
     }
  
     public override void Exit()
@@ -115,6 +106,7 @@ public class StandingState: State
         {
             characterVideo.transform.rotation = Quaternion.LookRotation(velocity);
         }
+ 
     }
  
 }
