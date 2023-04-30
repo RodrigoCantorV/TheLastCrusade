@@ -11,10 +11,10 @@ public class State
     protected Vector2 input;
  
     public InputAction moveAction;
-    //public InputAction lookAction;
-    //public InputAction jumpAction;
     public InputAction crouchAction;
     public InputAction sprintAction;
+    public InputAction drawWeaponAction;
+    public InputAction attackAction;
  
     public State(CharacterVideo _character, StateMachine _stateMachine)
     {
@@ -22,10 +22,10 @@ public class State
         stateMachine = _stateMachine;
  
         moveAction = characterVideo.playerInput.actions["Move"];
-        // = characterVideo.playerInput.actions["Look"];
-        // = characterVideo.playerInput.actions["Jump"];
         crouchAction = characterVideo.playerInput.actions["Crouch"];
         sprintAction = characterVideo.playerInput.actions["Sprint"];
+        drawWeaponAction = characterVideo.playerInput.actions["DrawWeapon"];
+        attackAction = characterVideo.playerInput.actions["Attack"];
  
     }
  
