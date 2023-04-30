@@ -10,6 +10,7 @@ public class StandingState: State
     bool grounded;
     bool sprint;
     float playerSpeed;
+    bool drawWeapon;
  
     Vector3 cVelocity;
  
@@ -23,9 +24,9 @@ public class StandingState: State
     {
         base.Enter();
  
-        //jump = false;
         crouch = false;
         sprint = false;
+        drawWeapon = false;
         input = Vector2.zero;
         velocity = Vector3.zero;
         currentVelocity = Vector3.zero;
@@ -40,10 +41,6 @@ public class StandingState: State
     {
         base.HandleInput();
  
-       /*if (jumpAction.triggered)
-        {
-            jump = true;
-        }*/
         if (crouchAction.triggered)
         {
             crouch = true;
@@ -52,7 +49,10 @@ public class StandingState: State
         {
             sprint = true;
         }
- 
+        if (drawWeaponAction.triggered)
+        {
+            drawWeapon = true;
+        }
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
  
@@ -71,13 +71,13 @@ public class StandingState: State
         {
             stateMachine.ChangeState(characterVideo.sprinting);
         }    
-        /*if (jump)
-        {
-            stateMachine.ChangeState(characterVideo.jumping);
-        }*/
         if (crouch)
         {
             stateMachine.ChangeState(characterVideo.crouching);
+        }
+        if (drawWeapon)
+        {
+            characterVideo.animator.SetTrigger("drawWeapon");
         }
         
     }
