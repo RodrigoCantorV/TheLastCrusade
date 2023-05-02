@@ -6,7 +6,7 @@ public class CombatState : State
     bool grounded;
     bool sheathWeapon;
     float playerSpeed;
-    //bool attack;
+    bool attack;
  
     Vector3 cVelocity;
  
@@ -24,7 +24,7 @@ public class CombatState : State
         input = Vector2.zero;
         currentVelocity = Vector3.zero;
         gravityVelocity.y = 0;
-        //attack = false;
+        attack = false;
  
         velocity = characterVideo.playerVelocity;
         playerSpeed = characterVideo.playerSpeed;
@@ -41,10 +41,10 @@ public class CombatState : State
             sheathWeapon = true;
         }
  
-        /*if (attackAction.triggered)
+        if (attackAction.triggered)
         {
             attack = true;
-        }*/
+        }
  
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
@@ -66,11 +66,11 @@ public class CombatState : State
             stateMachine.ChangeState(characterVideo.standing);
         }
  
-        /*if (attack)
+        if (attack)
         {
             characterVideo.animator.SetTrigger("attack");
             stateMachine.ChangeState(characterVideo.attacking);
-        }*/
+        }
     }
  
     public override void PhysicsUpdate()
