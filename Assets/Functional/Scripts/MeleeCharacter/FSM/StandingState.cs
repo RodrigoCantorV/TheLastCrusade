@@ -56,7 +56,7 @@ public class StandingState : State
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
 
-        //velocity = velocity.x * characterVideo.cameraTransform.right.normalized + velocity.z * characterVideo.cameraTransform.forward.normalized;
+        velocity = velocity.x * characterVideo.transform.right.normalized + velocity.z * characterVideo.transform.forward.normalized;
         velocity.y = 0f;
 
     }
@@ -94,16 +94,21 @@ public class StandingState : State
         //{
         //    gravityVelocity.y = 0f;
         //}
-       
+
         currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, characterVideo.velocityDampTime);
+
+        if (velocity == Vector3.zero)
+        {
+            currentVelocity = Vector3.zero;
+        }
         characterVideo.controller.Move(currentVelocity * Time.deltaTime * playerSpeed);
 
         characterVideo.transform.rotation = Quaternion.Euler(new Vector3(0, -RotationAngle(), 0));
 
-        if (velocity.sqrMagnitude > 0)
-        {
-            characterVideo.transform.rotation = Quaternion.Slerp(characterVideo.transform.rotation, Quaternion.Euler(new Vector3(0, -RotationAngle(), 0)), characterVideo.rotationDampTime);
-        }
+        //if (velocity.sqrMagnitude > 0)
+        //{
+        //    characterVideo.transform.rotation = Quaternion.Slerp(characterVideo.transform.rotation, Quaternion.Euler(new Vector3(0, -RotationAngle(), 0)), characterVideo.rotationDampTime);
+        //}
 
 
 
