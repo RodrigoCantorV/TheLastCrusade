@@ -15,6 +15,7 @@ public class State
     //public InputAction sprintAction;
     //public InputAction drawWeaponAction;
     //public InputAction attackAction;
+    public InputAction dashAction;
 
     public State(CharacterVideo _character, StateMachine _stateMachine)
     {
@@ -26,7 +27,7 @@ public class State
         //sprintAction = characterVideo.playerInput.actions["Sprint"];
         //drawWeaponAction = characterVideo.playerInput.actions["DrawWeapon"];
         //attackAction = characterVideo.playerInput.actions["Attack"];
-
+        dashAction = characterVideo.playerInput.actions["Dash"];
     }
 
     public virtual void Enter()

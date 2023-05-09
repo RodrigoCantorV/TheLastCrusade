@@ -20,6 +20,7 @@ public class CharacterVideo : MonoBehaviour
 
     public StateMachine movementSM;
     public StandingState movement;
+    public DashState dashing;
     //public CrouchingState crouching;
     //public SprintState sprinting;
     //public CombatState combatting;
@@ -51,6 +52,7 @@ public class CharacterVideo : MonoBehaviour
  
         movementSM = new StateMachine();
         movement = new StandingState(this, movementSM);
+        dashing = new DashState(this, movementSM);
         //crouching = new CrouchingState(this, movementSM);
         //sprinting = new SprintState(this, movementSM);
         //combatting = new CombatState(this, movementSM);

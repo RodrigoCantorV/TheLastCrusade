@@ -11,6 +11,7 @@ public class StandingState : State
     //bool sprint;
     float playerSpeed;
     //bool drawWeapon;
+    bool dash;
 
     Vector3 cVelocity;
 
@@ -27,6 +28,7 @@ public class StandingState : State
         //crouch = false;
         //sprint = false;
         //drawWeapon = false;
+        dash = false;
         input = Vector2.zero;
         velocity = Vector3.zero;
         currentVelocity = Vector3.zero;
@@ -53,12 +55,15 @@ public class StandingState : State
         //{
         //    drawWeapon = true;
         //}
+        if(dashAction.triggered)
+        {
+            dash = true;
+        }
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
 
         velocity = velocity.x * characterVideo.transform.right.normalized + velocity.z * characterVideo.transform.forward.normalized;
         velocity.y = 0f;
-
     }
 
     public override void LogicUpdate()
@@ -67,6 +72,11 @@ public class StandingState : State
 
         characterVideo.animator.SetFloat("speed", input.magnitude, characterVideo.speedDampTime, Time.deltaTime);
 
+        if(dash)
+        {
+            stateMachine.ChangeState(characterVideo.dashing);
+            //characterVideo.animator.SetTrigger("dashTrigger");
+        }
         //if (sprint)
         //{
         //    stateMachine.ChangeState(characterVideo.sprinting);
@@ -109,10 +119,6 @@ public class StandingState : State
         //{
         //    characterVideo.transform.rotation = Quaternion.Slerp(characterVideo.transform.rotation, Quaternion.Euler(new Vector3(0, -RotationAngle(), 0)), characterVideo.rotationDampTime);
         //}
-
-
-
-
     }
 
     float RotationAngle()
