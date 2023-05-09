@@ -1,56 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
  
-public class EquipmentSystem : MonoBehaviour
-{
-    //[SerializeField] GameObject weaponHolder;
-    [SerializeField] GameObject weapon;
-    //[SerializeField] GameObject weaponSheath;
+//public class EquipmentSystem : MonoBehaviour
+//{
+//    //[SerializeField] GameObject weaponHolder;
+//    [SerializeField] GameObject weapon;
+//    //[SerializeField] GameObject weaponSheath;
  
  
-    GameObject currentWeaponInHand;
-    //GameObject currentWeaponInSheath;
-    /*void Start()
-    {
-        currentWeaponInSheath = Instantiate(weapon, weaponSheath.transform);
-    }*/
+//    GameObject currentWeaponInHand;
+//    //GameObject currentWeaponInSheath;
+//    /*void Start()
+//    {
+//        currentWeaponInSheath = Instantiate(weapon, weaponSheath.transform);
+//    }*/
  
-    public void DrawWeapon()
-    {
-        currentWeaponInHand = Instantiate(weapon/*, weaponHolder.transform*/);
-        //Destroy(currentWeaponInSheath);
-    }
+//    public void DrawWeapon()
+//    {
+//        currentWeaponInHand = Instantiate(weapon/*, weaponHolder.transform*/);
+//        //Destroy(currentWeaponInSheath);
+//    }
  
-    /*public void SheathWeapon()
-    {
-        currentWeaponInSheath = Instantiate(weapon, weaponSheath.transform);
-        Destroy(currentWeaponInHand);
-    }*/
+//    /*public void SheathWeapon()
+//    {
+//        currentWeaponInSheath = Instantiate(weapon, weaponSheath.transform);
+//        Destroy(currentWeaponInHand);
+//    }*/
  
-    public void StartDealDamage()
-    {
-        if(currentWeaponInHand != null)
-        {
-            currentWeaponInHand.GetComponentInChildren<DamageDealer>().StartDealDamage();
-        }
-        else
-        {
-            Debug.Log("Start Damage");
-        }
+//    public void StartDealDamage()
+//    {
+//        if(currentWeaponInHand != null)
+//        {
+//            currentWeaponInHand.GetComponentInChildren<DamageDealer>().StartDealDamage();
+//        }
+//        else
+//        {
+//            Debug.Log("Start Damage");
+//        }
             
-    }
+//    }
 
-    public void EndDealDamage()
-    {
-        if(currentWeaponInHand != null)
-        {
-            currentWeaponInHand.GetComponentInChildren<DamageDealer>().EndDealDamage();
-        }
-        else
-        {
-            Debug.Log("End Damage");
-        }
-    }
+//    public void EndDealDamage()
+//    {
+//        if(currentWeaponInHand != null)
+//        {
+//            currentWeaponInHand.GetComponentInChildren<DamageDealer>().EndDealDamage();
+//        }
+//        else
+//        {
+//            Debug.Log("End Damage");
+//        }
+//    }
 
-}
+//}

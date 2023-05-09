@@ -15,30 +15,12 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Crouch",
+                    "name": "Dash",
                     "type": "Button",
                     "id": "2288e971-7fe3-4e53-8ed2-9fae31ba7dcb",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Sprint",
-                    "type": "Button",
-                    "id": "584d7e26-9506-4155-b52f-ecebf4595969",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DrawWeapon",
-                    "type": "Button",
-                    "id": "f13e4c71-6c56-462c-a6b0-42407d9c239c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -48,6 +30,15 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialAttack",
+                    "type": "Button",
+                    "id": "fcc20f15-6e72-4efa-8d60-20233c76e436",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -110,33 +101,11 @@
                 {
                     "name": "",
                     "id": "e3d16895-7309-4e72-b541-1dea3b0cd37d",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d5b5867d-2fb7-4a29-af79-e6e0523f5b80",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "Press(behavior=2)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "98f94f96-d6c8-4c0f-b49f-6deab09705d6",
-                    "path": "<Keyboard>/r",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DrawWeapon",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -148,6 +117,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "907aa0fc-a0ef-47b2-acd6-181f96d603e9",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "632d1524-8f28-48b5-a4e8-da0b5af00d06",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

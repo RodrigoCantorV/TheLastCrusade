@@ -4,34 +4,31 @@ public class CharacterVideo : MonoBehaviour
 {
     [Header("Controls")]
     public float playerSpeed = 5.0f;
-    public float crouchSpeed = 2.0f;
-    public float sprintSpeed = 7.0f;
-    public float jumpHeight = 0.8f; 
-    public float gravityMultiplier = 2;
+    public float dashSpeed = 10.0f;
+    //public float gravityMultiplier = 2;
     public float rotationSpeed = 5f;
-    public float crouchColliderHeight = 1.35f;
  
     [Header("Animation Smoothing")]
     [Range(0, 1)]
     public float speedDampTime = 0.1f;
     [Range(0, 1)]
     public float velocityDampTime = 0.9f;
-    [Range(0, 1)]
-    public float rotationDampTime = 0.2f;
-    [Range(0, 1)]
-    public float airControl = 0.5f;
- 
+    //[Range(0, 1)]
+    //public float rotationDampTime = 0.2f;
+    //[Range(0, 1)]
+    //public float airControl = 0.5f;
+
     public StateMachine movementSM;
-    public StandingState standing;
-    public CrouchingState crouching;
-    public SprintState sprinting;
-    public CombatState combatting;
-    public AttackState attacking;
+    public StandingState movement;
+    //public CrouchingState crouching;
+    //public SprintState sprinting;
+    //public CombatState combatting;
+    //public AttackState attacking;
  
-    [HideInInspector]
-    public float gravityValue = -9.81f;
-    [HideInInspector]
-    public float normalColliderHeight;
+    //[HideInInspector]
+    //public float gravityValue = -9.81f;
+    //[HideInInspector]
+    //public float normalColliderHeight;
     [HideInInspector]
     public CharacterController controller;
     [HideInInspector]
@@ -53,16 +50,16 @@ public class CharacterVideo : MonoBehaviour
         cameraTransform = Camera.main.transform;
  
         movementSM = new StateMachine();
-        standing = new StandingState(this, movementSM);
-        crouching = new CrouchingState(this, movementSM);
-        sprinting = new SprintState(this, movementSM);
-        combatting = new CombatState(this, movementSM);
-        attacking = new AttackState(this, movementSM);
+        movement = new StandingState(this, movementSM);
+        //crouching = new CrouchingState(this, movementSM);
+        //sprinting = new SprintState(this, movementSM);
+        //combatting = new CombatState(this, movementSM);
+        //attacking = new AttackState(this, movementSM);
  
-        movementSM.Initialize(standing);
+        movementSM.Initialize(movement);
  
-        normalColliderHeight = controller.height;
-        gravityValue *= gravityMultiplier;
+        //normalColliderHeight = controller.height;
+        //gravityValue *= gravityMultiplier;
     }
  
     private void Update()

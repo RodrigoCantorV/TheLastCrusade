@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+/*using System.Collections.Generic;
 using UnityEngine;
  
 public class DamageDealer : MonoBehaviour
@@ -47,4 +47,4 @@ public class DamageDealer : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position - transform.up * weaponLength);
     }
-}
+}*/

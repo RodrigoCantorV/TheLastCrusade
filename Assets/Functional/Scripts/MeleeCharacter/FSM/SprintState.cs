@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 public class SprintState : State
 {
     float gravityValue;
@@ -50,7 +50,7 @@ public class SprintState : State
         {
             sprintJump = true;
  
-        }*/
+        }
  
     }
  
@@ -85,4 +85,4 @@ public class SprintState : State
             characterVideo.transform.rotation = Quaternion.Slerp(characterVideo.transform.rotation, Quaternion.LookRotation(velocity), characterVideo.rotationDampTime);
         }
     }
-}
+}*/
