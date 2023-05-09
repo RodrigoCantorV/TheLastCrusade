@@ -94,11 +94,19 @@ public class StandingState : State
         //{
         //    gravityVelocity.y = 0f;
         //}
-
+       
         currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, characterVideo.velocityDampTime);
-        characterVideo.controller.Move(currentVelocity * Time.deltaTime * playerSpeed * Time.deltaTime);
+        characterVideo.controller.Move(currentVelocity * Time.deltaTime * playerSpeed);
 
-        characterVideo.transform.localRotation = Quaternion.Euler(new Vector3(0, -RotationAngle(), 0));
+        characterVideo.transform.rotation = Quaternion.Euler(new Vector3(0, -RotationAngle(), 0));
+
+        if (velocity.sqrMagnitude > 0)
+        {
+            characterVideo.transform.rotation = Quaternion.Slerp(characterVideo.transform.rotation, Quaternion.Euler(new Vector3(0, -RotationAngle(), 0)), characterVideo.rotationDampTime);
+        }
+
+
+
 
     }
 

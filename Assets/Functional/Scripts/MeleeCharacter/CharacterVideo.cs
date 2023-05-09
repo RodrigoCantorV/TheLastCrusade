@@ -13,8 +13,8 @@ public class CharacterVideo : MonoBehaviour
     public float speedDampTime = 0.1f;
     [Range(0, 1)]
     public float velocityDampTime = 0.9f;
-    //[Range(0, 1)]
-    //public float rotationDampTime = 0.2f;
+    [Range(0, 1)]
+    public float rotationDampTime = 0.2f;
     //[Range(0, 1)]
     //public float airControl = 0.5f;
 
@@ -33,8 +33,8 @@ public class CharacterVideo : MonoBehaviour
     public CharacterController controller;
     [HideInInspector]
     public PlayerInput playerInput;
-    [HideInInspector]
-    public Transform cameraTransform;
+   // [HideInInspector]
+   // public Transform cameraTransform;
     [HideInInspector]
     public Animator animator;
     [HideInInspector]
@@ -47,7 +47,7 @@ public class CharacterVideo : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
-        cameraTransform = Camera.main.transform;
+        //cameraTransform = Camera.main.transform;
  
         movementSM = new StateMachine();
         movement = new StandingState(this, movementSM);
