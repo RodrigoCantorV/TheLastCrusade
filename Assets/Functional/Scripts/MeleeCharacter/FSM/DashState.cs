@@ -9,6 +9,7 @@ public class DashState : State
     float clipLength;
     float clipSpeed;
     bool dash;
+    Vector3 currentVelocity;
 
     public DashState(CharacterVideo _character, StateMachine _stateMachine) : base(_character, _stateMachine)
     {
@@ -23,6 +24,7 @@ public class DashState : State
         characterVideo.animator.SetTrigger("dash");
         dash = false;
         dashSpeed = characterVideo.dashSpeed;
+        currentVelocity = Vector3.zero;
         //timePassed = 0f;
     }
 
@@ -66,12 +68,12 @@ public class DashState : State
 
     }
 
-    //public override void PhysicsUpdate()
-    //{
-    //    base.PhysicsUpdate();
-    //
-    //
-    //}
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+        currentVelocity = Vector3.forward;
+        characterVideo.controller.Move(currentVelocity * dashSpeed);
+    }
 
     public override void Exit()
     {
