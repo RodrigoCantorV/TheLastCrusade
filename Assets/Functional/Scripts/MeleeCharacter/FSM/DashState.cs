@@ -8,7 +8,7 @@ public class DashState : State
     float timePassed;
     float clipLength;
     float clipSpeed;
-    bool dash;
+
    // Vector3 currentVelocity;
    // Vector3 cVelocity;
 
@@ -22,8 +22,7 @@ public class DashState : State
 
     public override void Enter()
     {
-        base.Enter();
-        dash = true;
+        base.Enter();     
         characterVideo.animator.SetTrigger("dash");     
         dashSpeed = characterVideo.dashSpeed;
       //  currentVelocity = Vector3.zero;
@@ -43,12 +42,7 @@ public class DashState : State
         //    dash = true;
         //}
 
-        if (!dash) {
-            input = moveAction.ReadValue<Vector2>();
-            velocity = new Vector3(input.x, 0, input.y);
-            velocity = velocity.x * characterVideo.transform.right.normalized + velocity.z * characterVideo.transform.forward.normalized;
-        }
-        
+
  
     }
 
@@ -70,14 +64,7 @@ public class DashState : State
         clipSpeed = characterVideo.animator.GetCurrentAnimatorStateInfo(0).speed;
    
 
-        if (timePassed >= clipLength / clipSpeed && dash)
-        {
 
-           
-            //stateMachine.ChangeState(characterVideo.dashing);
-            
-
-        }
         if (timePassed >= clipLength / clipSpeed)
         {
             
@@ -110,7 +97,7 @@ public class DashState : State
     public override void Exit()
     {
         base.Exit();
-        dash = false;
+       
         //characterVideo.playerVelocity = new Vector3(input.x, 0, input.y);
         characterVideo.animator.SetTrigger("move");
         timePassed = 0f;
