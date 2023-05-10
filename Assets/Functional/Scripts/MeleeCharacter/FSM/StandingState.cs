@@ -1,16 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class StandingState : State
 {
-
-    //float gravityValue;
-    //bool jump;   
-    //bool crouch;
     Vector3 currentVelocity;
-    //bool grounded;
-    //bool sprint;
     float playerSpeed;
-    //bool drawWeapon;
+    bool attack;
     bool dash;
 
     Vector3 cVelocity;
@@ -25,39 +20,32 @@ public class StandingState : State
     {
         base.Enter();
 
-        //crouch = false;
-        //sprint = false;
-        //drawWeapon = false;
+        attack = false;
         dash = false;
         input = Vector2.zero;
+<<<<<<< Updated upstream
         velocity = new Vector3(5f, 0f, 5f);
         currentVelocity = new Vector3(5f,0f,5f);
         //gravityVelocity.y = 0;
+=======
+        velocity = Vector3.zero;
+        currentVelocity = Vector3.zero;
+>>>>>>> Stashed changes
 
         playerSpeed = characterVideo.playerSpeed;
-        //grounded = characterVideo.controller.isGrounded;
-        //gravityValue = characterVideo.gravityValue;
     }
 
     public override void HandleInput()
     {
         base.HandleInput();
 
-        //if (crouchAction.triggered)
-        //{
-        //    crouch = true;
-        //}
-        //if (sprintAction.triggered)
-        //{
-        //    sprint = true;
-        //}
-        //if (drawWeaponAction.triggered)
-        //{
-        //    drawWeapon = true;
-        //}
-        if(dashAction.triggered)
+        if (dashAction.triggered)
         {
             dash = true;
+        }
+        if (attackAction.triggered)
+        {
+            attack = true;
         }
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
@@ -77,33 +65,15 @@ public class StandingState : State
             stateMachine.ChangeState(characterVideo.dashing);
             //characterVideo.animator.SetTrigger("dashTrigger");
         }
-        //if (sprint)
-        //{
-        //    stateMachine.ChangeState(characterVideo.sprinting);
-        //}
-        //if (crouch)
-        //{
-        //    stateMachine.ChangeState(characterVideo.crouching);
-        //}
-        //if (drawWeapon)
-        //{
-        //    stateMachine.ChangeState(characterVideo.combatting);
-        //    characterVideo.animator.SetTrigger("drawWeapon");
-        //}
-
+        if (attack)
+        {
+            stateMachine.ChangeState(characterVideo.attacking);
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-
-        //gravityVelocity.y += gravityValue * Time.deltaTime;
-        //grounded = characterVideo.controller.isGrounded;
-
-        //if (grounded && gravityVelocity.y < 0)
-        //{
-        //    gravityVelocity.y = 0f;
-        //}
 
         currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, characterVideo.velocityDampTime);
         Debug.Log(currentVelocity);
@@ -114,11 +84,6 @@ public class StandingState : State
         characterVideo.controller.Move(currentVelocity * Time.deltaTime * playerSpeed);
 
         characterVideo.transform.rotation = Quaternion.Euler(new Vector3(0, -RotationAngle(), 0));
-
-        //if (velocity.sqrMagnitude > 0)
-        //{
-        //    characterVideo.transform.rotation = Quaternion.Slerp(characterVideo.transform.rotation, Quaternion.Euler(new Vector3(0, -RotationAngle(), 0)), characterVideo.rotationDampTime);
-        //}
     }
 
     float RotationAngle()
@@ -138,12 +103,7 @@ public class StandingState : State
     {
         base.Exit();
 
-        //gravityVelocity.y = 0f;
         characterVideo.playerVelocity = new Vector3(input.x, 0, input.y);
 
-        //if (velocity.sqrMagnitude > 0)
-        //{
-        //    characterVideo.transform.rotation = Quaternion.LookRotation(velocity);
-        //}
     }
 }
