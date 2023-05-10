@@ -3,8 +3,11 @@ using UnityEngine.InputSystem;
 public class CharacterVideo : MonoBehaviour
 {
     [Header("Controls")]
+
+
     public float playerSpeed = 5.0f;
     public float dashSpeed = 5.0f;
+
     //public float gravityMultiplier = 2;
     //public float rotationSpeed = 5f;
  
@@ -12,7 +15,11 @@ public class CharacterVideo : MonoBehaviour
     [Range(0, 1)]
     public float delayAnimationTime = 0f;
     [Range(0, 1)]
+
+
+
     public float velocityDampTime = 0f;
+
     //[Range(0, 1)]
     //public float rotationDampTime = 0.2f;
     //[Range(0, 1)]
@@ -66,8 +73,7 @@ public class CharacterVideo : MonoBehaviour
  
     private void Update()
     {
-        movementSM.currentState.HandleInput();
- 
+        movementSM.currentState.HandleInput(); 
         movementSM.currentState.LogicUpdate();
     }
  
