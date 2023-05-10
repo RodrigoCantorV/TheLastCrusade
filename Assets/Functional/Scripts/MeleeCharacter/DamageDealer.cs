@@ -1,4 +1,4 @@
-/*using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
  
 public class DamageDealer : MonoBehaviour
@@ -21,7 +21,7 @@ public class DamageDealer : MonoBehaviour
             RaycastHit hit;
  
             int layerMask = 1 << 9;
-            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
+            /*if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
                 if (hit.transform.TryGetComponent(out Enemy enemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
                 {
@@ -29,7 +29,7 @@ public class DamageDealer : MonoBehaviour
                     enemy.HitVFX(hit.point);
                     hasDealtDamage.Add(hit.transform.gameObject);
                 }
-            }
+            }*/
         }
     }
     public void StartDealDamage()
@@ -47,4 +47,4 @@ public class DamageDealer : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position - transform.up * weaponLength);
     }
-}*/
+}
