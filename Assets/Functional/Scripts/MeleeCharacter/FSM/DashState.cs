@@ -36,6 +36,11 @@ public class DashState : State
         {
             dash = true;
         }
+        input = moveAction.ReadValue<Vector2>();
+        velocity = new Vector3(input.x, 0, input.y);
+
+        velocity = velocity.x * characterVideo.transform.right.normalized + velocity.z * characterVideo.transform.forward.normalized;
+ 
     }
 
     public override void LogicUpdate()
@@ -71,8 +76,11 @@ public class DashState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        currentVelocity = Vector3.forward;
-        characterVideo.controller.Move(currentVelocity * dashSpeed);
+        if (velocity == Vector3.zero)
+        {
+            velocity = characterVideo.transform.forward;
+        }       
+        characterVideo.controller.Move(velocity * dashSpeed * Time.deltaTime);
     }
 
     public override void Exit()
