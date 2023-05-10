@@ -23,14 +23,9 @@ public class StandingState : State
         attack = false;
         dash = false;
         input = Vector2.zero;
-<<<<<<< Updated upstream
         velocity = new Vector3(5f, 0f, 5f);
         currentVelocity = new Vector3(5f,0f,5f);
         //gravityVelocity.y = 0;
-=======
-        velocity = Vector3.zero;
-        currentVelocity = Vector3.zero;
->>>>>>> Stashed changes
 
         playerSpeed = characterVideo.playerSpeed;
     }

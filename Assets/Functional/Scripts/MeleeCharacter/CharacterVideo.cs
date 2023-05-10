@@ -3,37 +3,14 @@ using UnityEngine.InputSystem;
 public class CharacterVideo : MonoBehaviour
 {
     [Header("Controls")]
-<<<<<<< Updated upstream
-
-
-    public float playerSpeed = 5.0f;
-    public float dashSpeed = 5.0f;
-
-    //public float gravityMultiplier = 2;
-    //public float rotationSpeed = 5f;
- 
-=======
     public float playerSpeed = 7.0f;
     public float dashSpeed = 10.0f;
     
->>>>>>> Stashed changes
     [Header("Animation Smoothing")]
     [Range(0, 1)]
     public float delayAnimationTime = 0f;
     [Range(0, 1)]
-<<<<<<< Updated upstream
-
-
-
-    public float velocityDampTime = 0f;
-
-    //[Range(0, 1)]
-    //public float rotationDampTime = 0.2f;
-    //[Range(0, 1)]
-    //public float airControl = 0.5f;
-=======
     public float velocityDampTime = 0.9f;
->>>>>>> Stashed changes
 
     public StateMachine movementSM;
     public StandingState movement;
