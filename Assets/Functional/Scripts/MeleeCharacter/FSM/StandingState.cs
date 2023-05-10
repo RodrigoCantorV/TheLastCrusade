@@ -30,8 +30,8 @@ public class StandingState : State
         //drawWeapon = false;
         dash = false;
         input = Vector2.zero;
-        velocity = Vector3.zero;
-        currentVelocity = Vector3.zero;
+        velocity = new Vector3(5f, 0f, 5f);
+        currentVelocity = new Vector3(5f,0f,5f);
         //gravityVelocity.y = 0;
 
         playerSpeed = characterVideo.playerSpeed;
@@ -70,7 +70,7 @@ public class StandingState : State
     {
         base.LogicUpdate();
 
-        characterVideo.animator.SetFloat("speed", input.magnitude, characterVideo.speedDampTime, Time.deltaTime);
+        characterVideo.animator.SetFloat("speed", input.magnitude, characterVideo.delayAnimationTime, Time.deltaTime);
 
         if(dash)
         {
@@ -106,7 +106,7 @@ public class StandingState : State
         //}
 
         currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, characterVideo.velocityDampTime);
-
+        Debug.Log(currentVelocity);
         if (velocity == Vector3.zero)
         {
             currentVelocity = Vector3.zero;

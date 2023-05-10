@@ -3,21 +3,23 @@ using UnityEngine.InputSystem;
 public class CharacterVideo : MonoBehaviour
 {
     [Header("Controls")]
-    public float playerSpeed = 7.0f;
 
-    
-    public float dashSpeed = 50f;
+
+    public float playerSpeed = 5.0f;
+    public float dashSpeed = 5.0f;
+
     //public float gravityMultiplier = 2;
     //public float rotationSpeed = 5f;
  
     [Header("Animation Smoothing")]
     [Range(0, 1)]
-    public float speedDampTime = 0.1f;
+    public float delayAnimationTime = 0f;
     [Range(0, 1)]
-    public float velocityDampTime = 0.9f;
 
 
-    public float dashDampTime = 2f;
+
+    public float velocityDampTime = 0f;
+
     //[Range(0, 1)]
     //public float rotationDampTime = 0.2f;
     //[Range(0, 1)]
