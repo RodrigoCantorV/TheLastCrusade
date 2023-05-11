@@ -17,7 +17,7 @@ public class DashState : State
 
     public DashState(CharacterBase _character, StateMachine _stateMachine) : base(_character, _stateMachine)
     {
-        characterVideo = _character;
+        CharacterBase = _character;
         stateMachine = _stateMachine;
     }
 
@@ -27,11 +27,11 @@ public class DashState : State
 
         heavyAttack = false;
         lightAttack = false;
-        characterVideo.animator.SetTrigger("dash");     
-        dashSpeed = characterVideo.dashSpeed;
+        CharacterBase.animator.SetTrigger("dash");     
+        dashSpeed = CharacterBase.dashSpeed;
       //  currentVelocity = Vector3.zero;
         velocity = new Vector3(input.x, 0, input.y);
-        velocity = velocity.x * characterVideo.transform.right.normalized + velocity.z * characterVideo.transform.forward.normalized;
+        velocity = velocity.x * CharacterBase.transform.right.normalized + velocity.z * CharacterBase.transform.forward.normalized;
       
         //timePassed = 0f;
     }
@@ -65,24 +65,24 @@ public class DashState : State
 
         if (lightAttack)
         {
-            stateMachine.ChangeState(characterVideo.lightAttacking);
+            stateMachine.ChangeState(CharacterBase.lightAttacking);
         }
         if (heavyAttack)
         {
-            stateMachine.ChangeState(characterVideo.heavyAttacking);
+            stateMachine.ChangeState(CharacterBase.heavyAttacking);
         }
 
         timePassed += Time.deltaTime;
-        clipLength = characterVideo.animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-        clipSpeed = characterVideo.animator.GetCurrentAnimatorStateInfo(0).speed;
+        clipLength = CharacterBase.animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
    
 
 
         if (timePassed >= clipLength / clipSpeed)
         {
             
-            stateMachine.ChangeState(characterVideo.movement);
-            characterVideo.animator.SetTrigger("move");
+            stateMachine.ChangeState(CharacterBase.movement);
+            CharacterBase.animator.SetTrigger("move");
             //dash = false;
         }
 
@@ -94,14 +94,14 @@ public class DashState : State
         //currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, characterVideo.dashDampTime);
         if (velocity == Vector3.zero)
         {
-            velocity = characterVideo.transform.forward;
+            velocity = CharacterBase.transform.forward;
         }
 
         Debug.Log(dashSpeed);
         Debug.Log(velocity  * dashSpeed * Time.deltaTime);
 
      
-        characterVideo.controller.Move(velocity * dashSpeed * Time.deltaTime);
+        CharacterBase.controller.Move(velocity * dashSpeed * Time.deltaTime);
         
       
         

@@ -13,7 +13,7 @@ public class StandingState : State
 
     public StandingState(CharacterBase _character, StateMachine _stateMachine) : base(_character, _stateMachine)
     {
-        characterVideo = _character;
+        CharacterBase = _character;
         stateMachine = _stateMachine;
        
     }
@@ -31,7 +31,7 @@ public class StandingState : State
         currentVelocity = new Vector3(5f,0f,5f);
      
 
-        playerSpeed = characterVideo.playerSpeed;
+        playerSpeed = CharacterBase.playerSpeed;
     }
 
     public override void HandleInput()
@@ -56,7 +56,7 @@ public class StandingState : State
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
 
-        velocity = velocity.x * characterVideo.transform.right.normalized + velocity.z * characterVideo.transform.forward.normalized;
+        velocity = velocity.x * CharacterBase.transform.right.normalized + velocity.z * CharacterBase.transform.forward.normalized;
         velocity.y = 0f;
     }
 
@@ -64,20 +64,20 @@ public class StandingState : State
     {
         base.LogicUpdate();
 
-        characterVideo.animator.SetFloat("speed", input.magnitude, characterVideo.delayAnimationTime, Time.deltaTime);
+        CharacterBase.animator.SetFloat("speed", input.magnitude, CharacterBase.delayAnimationTime, Time.deltaTime);
 
         if(dash)
         {
-            stateMachine.ChangeState(characterVideo.dashing);
+            stateMachine.ChangeState(CharacterBase.dashing);
             //characterVideo.animator.SetTrigger("dashTrigger");
         }
         if (lightAttack)
         {
-            stateMachine.ChangeState(characterVideo.lightAttacking);
+            stateMachine.ChangeState(CharacterBase.lightAttacking);
         }     
         if (heavyAttack)
         {
-            stateMachine.ChangeState(characterVideo.heavyAttacking);
+            stateMachine.ChangeState(CharacterBase.heavyAttacking);
         }
     }
 
@@ -85,20 +85,20 @@ public class StandingState : State
     {
         base.PhysicsUpdate();
 
-        currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, characterVideo.velocityDampTime);
+        currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, CharacterBase.velocityDampTime);
   
         if (velocity == Vector3.zero)
         {
             currentVelocity = Vector3.zero;
         }
-        characterVideo.controller.Move(currentVelocity * Time.deltaTime * playerSpeed);
+        CharacterBase.controller.Move(currentVelocity * Time.deltaTime * playerSpeed);
 
-        characterVideo.transform.rotation = Quaternion.Euler(new Vector3(0, -RotationAngle() + playerSyncWithPointer, 0));
+        CharacterBase.transform.rotation = Quaternion.Euler(new Vector3(0, -RotationAngle() + playerSyncWithPointer, 0));
     }
 
     float RotationAngle()
     {
-        Vector3 positionOnScreen = Camera.main.WorldToViewportPoint(characterVideo.transform.position);
+        Vector3 positionOnScreen = Camera.main.WorldToViewportPoint(CharacterBase.transform.position);
         Vector3 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
         Vector3 direction = mouseOnScreen - positionOnScreen;
@@ -113,7 +113,7 @@ public class StandingState : State
     {
         base.Exit();
 
-        characterVideo.playerVelocity = new Vector3(input.x, 0, input.y);
+        CharacterBase.playerVelocity = new Vector3(input.x, 0, input.y);
 
     }
 }

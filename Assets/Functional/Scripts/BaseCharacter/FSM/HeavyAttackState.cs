@@ -1,22 +1,24 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class LightAttackState : State
+public class HeavyAttackState : State
 {
     float timePassed;
     float clipLength;
     float clipSpeed;
+
     bool attack;
-    public LightAttackState(CharacterBase _characterVideo, StateMachine _stateMachine) : base(_characterVideo, _stateMachine)
+
+
+    public HeavyAttackState(CharacterBase _characterVideo, StateMachine _stateMachine) : base(_characterVideo, _stateMachine)
     {
-        characterVideo = _characterVideo;
+        CharacterBase = _characterVideo;
         stateMachine = _stateMachine;
     }
 
     public override void Enter()
     {
         base.Enter();
-        attack = true;
-
+        attack=true;
 
 
     }
@@ -24,8 +26,6 @@ public class LightAttackState : State
     public override void HandleInput()
     {
         base.HandleInput();
-
-      
 
         // Verificar si se presionó el botón izquierdo del mouse
 
@@ -35,36 +35,31 @@ public class LightAttackState : State
     {
         base.LogicUpdate();
 
-        
+        base.LogicUpdate();
+
+
         timePassed += Time.deltaTime;
 
 
-        clipLength = FindAnimation(characterVideo.animator, "combat_attack").length;
-        clipSpeed = characterVideo.animator.GetCurrentAnimatorStateInfo(0).speed;
+        clipLength = FindAnimation(CharacterBase.animator, "HeavyAttack").length;
+        clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
 
         if (timePassed <= clipLength / clipSpeed && attack)
         {
-            
-            characterVideo.animator.SetTrigger("lightAttack");
-            attack = false;
-        }        
 
-    
+            CharacterBase.animator.SetTrigger("heavyAttack");
+            attack = false;
+        }
+
+
         if (timePassed >= clipLength / clipSpeed)
         {
-           
-            stateMachine.ChangeState(characterVideo.movement);
-            
-            characterVideo.animator.SetTrigger("move");
+
+            stateMachine.ChangeState(CharacterBase.movement);
+
+            CharacterBase.animator.SetTrigger("move");
         }
     }
-
-    public override void Exit()
-    {
-        base.Exit();
-        timePassed = 0f;
-    }
-
     public AnimationClip FindAnimation(Animator animator, string name)
     {
         foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
@@ -76,5 +71,11 @@ public class LightAttackState : State
         }
 
         return null;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        timePassed = 0f;
     }
 }
