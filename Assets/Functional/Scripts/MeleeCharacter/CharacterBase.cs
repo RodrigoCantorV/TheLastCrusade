@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class CharacterVideo : MonoBehaviour
+public class CharacterBase : MonoBehaviour
 {
     [Header("Controls")]
     public float playerSpeed = 7.0f;
@@ -15,8 +15,10 @@ public class CharacterVideo : MonoBehaviour
     public StateMachine movementSM;
     public StandingState movement;
     public DashState dashing;
-    public AttackState attacking;
- 
+    public HeavyAttackState heavyAttacking;
+
+    public LightAttackState lightAttacking;
+
     [HideInInspector]
     public CharacterController controller;
     [HideInInspector]
@@ -37,8 +39,9 @@ public class CharacterVideo : MonoBehaviour
         movementSM = new StateMachine();
         movement = new StandingState(this, movementSM);
         dashing = new DashState(this, movementSM);
-        attacking = new AttackState(this, movementSM);
- 
+        heavyAttacking = new HeavyAttackState(this, movementSM);
+        lightAttacking = new LightAttackState(this, movementSM);
+
         movementSM.Initialize(movement);
     }
  

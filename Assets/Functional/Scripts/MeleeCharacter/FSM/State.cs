@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class State
 {
-    public CharacterVideo characterVideo;
+    public CharacterBase characterVideo;
     public StateMachine stateMachine;
 
     protected Vector3 velocity;
@@ -11,16 +11,18 @@ public class State
 
     public InputAction moveAction;
     public InputAction dashAction;
-    public InputAction attackAction;
+    public InputAction lightAttackAction;
+    public InputAction heavyAttackAction;
 
-    public State(CharacterVideo _character, StateMachine _stateMachine)
+    public State(CharacterBase _character, StateMachine _stateMachine)
     {
         characterVideo = _character;
         stateMachine = _stateMachine;
 
         moveAction = characterVideo.playerInput.actions["Move"];
         dashAction = characterVideo.playerInput.actions["Dash"];
-        attackAction = characterVideo.playerInput.actions["Attack"];
+        lightAttackAction = characterVideo.playerInput.actions["LightAttack"];
+        heavyAttackAction = characterVideo.playerInput.actions["HeavyAttack"];
     }
 
     public virtual void Enter()

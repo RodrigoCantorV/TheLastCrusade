@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DashState : State
 {
@@ -8,13 +8,14 @@ public class DashState : State
     float timePassed;
     float clipLength;
     float clipSpeed;
+    bool heavyAttack, lightAttack;
 
-   // Vector3 currentVelocity;
-   // Vector3 cVelocity;
+    // Vector3 currentVelocity;
+    // Vector3 cVelocity;
 
-  
 
-    public DashState(CharacterVideo _character, StateMachine _stateMachine) : base(_character, _stateMachine)
+
+    public DashState(CharacterBase _character, StateMachine _stateMachine) : base(_character, _stateMachine)
     {
         characterVideo = _character;
         stateMachine = _stateMachine;
@@ -22,7 +23,10 @@ public class DashState : State
 
     public override void Enter()
     {
-        base.Enter();     
+        base.Enter();
+
+        heavyAttack = false;
+        lightAttack = false;
         characterVideo.animator.SetTrigger("dash");     
         dashSpeed = characterVideo.dashSpeed;
       //  currentVelocity = Vector3.zero;
@@ -41,23 +45,32 @@ public class DashState : State
         //    Debug.Log("aqui");
         //    dash = true;
         //}
+        if (lightAttackAction.triggered)
+        {
+            lightAttack = true;
+
+        }
+        if (heavyAttackAction.triggered)
+        {
+            heavyAttack = true;
+
+        }
 
 
- 
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        //if (dash)
-        //{
-        //    characterVideo.animator.SetFloat("speed", input.magnitude + 0.5f, characterVideo.speedDampTime, Time.deltaTime);
-        //}
-        //else
-        //{
-        //    stateMachine.ChangeState(characterVideo.movement);
-        //}
+        if (lightAttack)
+        {
+            stateMachine.ChangeState(characterVideo.lightAttacking);
+        }
+        if (heavyAttack)
+        {
+            stateMachine.ChangeState(characterVideo.heavyAttacking);
+        }
 
         timePassed += Time.deltaTime;
         clipLength = characterVideo.animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
@@ -99,7 +112,7 @@ public class DashState : State
         base.Exit();
        
         //characterVideo.playerVelocity = new Vector3(input.x, 0, input.y);
-        characterVideo.animator.SetTrigger("move");
+        //characterVideo.animator.SetTrigger("move");
         timePassed = 0f;
     }
 }

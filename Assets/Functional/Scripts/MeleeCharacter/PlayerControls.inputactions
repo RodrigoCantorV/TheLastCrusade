@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "LightAttack",
                     "type": "Button",
                     "id": "a7a8298f-f451-4177-a07c-7497f3ee8e86",
                     "expectedControlType": "Button",
@@ -39,6 +39,15 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HeavyAttack",
+                    "type": "Button",
+                    "id": "b0f99650-3886-42b0-a0de-507899e790b3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -116,18 +125,7 @@
                     "interactions": "Tap",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "907aa0fc-a0ef-47b2-acd6-181f96d603e9",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
+                    "action": "LightAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -139,6 +137,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SpecialAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c495c334-55df-4aca-bcc8-47f85393300e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HeavyAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

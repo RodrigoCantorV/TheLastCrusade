@@ -5,27 +5,30 @@ public class StandingState : State
 {
     Vector3 currentVelocity;
     float playerSpeed;
-    bool attack;
+    bool heavyAttack, lightAttack;
     bool dash;
 
     Vector3 cVelocity;
 
-    public StandingState(CharacterVideo _character, StateMachine _stateMachine) : base(_character, _stateMachine)
+    public StandingState(CharacterBase _character, StateMachine _stateMachine) : base(_character, _stateMachine)
     {
         characterVideo = _character;
         stateMachine = _stateMachine;
+       
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        attack = false;
+
+        heavyAttack = false;
+        lightAttack = false;
         dash = false;
         input = Vector2.zero;
         velocity = new Vector3(5f, 0f, 5f);
         currentVelocity = new Vector3(5f,0f,5f);
-        //gravityVelocity.y = 0;
+     
 
         playerSpeed = characterVideo.playerSpeed;
     }
@@ -33,15 +36,22 @@ public class StandingState : State
     public override void HandleInput()
     {
         base.HandleInput();
-
+        var mouse = Mouse.current;
         if (dashAction.triggered)
         {
             dash = true;
         }
-        if (attackAction.triggered)
+        if (lightAttackAction.triggered)
         {
-            attack = true;
+            lightAttack = true;
+           
+        }    
+        if (heavyAttackAction.triggered)
+        {
+            heavyAttack = true;
+           
         }
+
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
 
@@ -60,9 +70,13 @@ public class StandingState : State
             stateMachine.ChangeState(characterVideo.dashing);
             //characterVideo.animator.SetTrigger("dashTrigger");
         }
-        if (attack)
+        if (lightAttack)
         {
-            stateMachine.ChangeState(characterVideo.attacking);
+            stateMachine.ChangeState(characterVideo.lightAttacking);
+        }     
+        if (heavyAttack)
+        {
+            stateMachine.ChangeState(characterVideo.heavyAttacking);
         }
     }
 
@@ -71,7 +85,7 @@ public class StandingState : State
         base.PhysicsUpdate();
 
         currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, characterVideo.velocityDampTime);
-        Debug.Log(currentVelocity);
+  
         if (velocity == Vector3.zero)
         {
             currentVelocity = Vector3.zero;
