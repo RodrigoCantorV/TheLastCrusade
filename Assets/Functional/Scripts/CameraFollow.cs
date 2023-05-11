@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
 
     void LateUpdate()
     {
-        // Posición actual de la cámara
+        // Posición actual de la cámara - maincamera
         Vector3 currentPosition = transform.position;
 
         // Posición a la que debe moverse la cámara

@@ -30,7 +30,7 @@ public class CharacterBase : MonoBehaviour
  
  
     // Start is called before the first frame update
-    private void Start()
+    protected void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
@@ -45,13 +45,13 @@ public class CharacterBase : MonoBehaviour
         movementSM.Initialize(movement);
     }
  
-    private void Update()
+    protected void Update()
     {
         movementSM.currentState.HandleInput(); 
         movementSM.currentState.LogicUpdate();
     }
  
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         movementSM.currentState.PhysicsUpdate();
     }
