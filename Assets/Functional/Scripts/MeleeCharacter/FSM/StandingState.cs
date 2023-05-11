@@ -7,6 +7,7 @@ public class StandingState : State
     float playerSpeed;
     bool heavyAttack, lightAttack;
     bool dash;
+    float playerSyncWithPointer = 90f;
 
     Vector3 cVelocity;
 
@@ -92,7 +93,7 @@ public class StandingState : State
         }
         characterVideo.controller.Move(currentVelocity * Time.deltaTime * playerSpeed);
 
-        characterVideo.transform.rotation = Quaternion.Euler(new Vector3(0, -RotationAngle(), 0));
+        characterVideo.transform.rotation = Quaternion.Euler(new Vector3(0, -RotationAngle() + playerSyncWithPointer, 0));
     }
 
     float RotationAngle()
