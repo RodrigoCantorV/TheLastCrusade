@@ -59,12 +59,26 @@ public class DashState : State
 
     }
 
+    public AnimationClip FindAnimation(Animator animator, string name)
+    {
+        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == name)
+            {
+                return clip;
+            }
+        }
+
+        return null;
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
         if (lightAttack)
         {
+            Debug.Log("Ajuaaaa");
             stateMachine.ChangeState(CharacterBase.lightAttacking);
         }
         if (heavyAttack)
@@ -73,14 +87,16 @@ public class DashState : State
         }
 
         timePassed += Time.deltaTime;
-        clipLength = CharacterBase.animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        clipLength = FindAnimation(CharacterBase.animator, "Dash").length;
+
+        //clipLength = CharacterBase.animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
         clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
    
 
 
         if (timePassed >= clipLength / clipSpeed)
         {
-            
+            Debug.Log("añoño");
             stateMachine.ChangeState(CharacterBase.movement);
             CharacterBase.animator.SetTrigger("move");
             //dash = false;
@@ -94,11 +110,11 @@ public class DashState : State
         //currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, characterVideo.dashDampTime);
         if (velocity == Vector3.zero)
         {
-            velocity = CharacterBase.transform.forward;
+            velocity = CharacterBase.transform.right;
         }
 
-        Debug.Log(dashSpeed);
-        Debug.Log(velocity  * dashSpeed * Time.deltaTime);
+        //Debug.Log(dashSpeed);
+        //Debug.Log(velocity  * dashSpeed * Time.deltaTime);
 
      
         CharacterBase.controller.Move(velocity * dashSpeed * Time.deltaTime);
@@ -112,7 +128,7 @@ public class DashState : State
         base.Exit();
        
         //characterVideo.playerVelocity = new Vector3(input.x, 0, input.y);
-        //characterVideo.animator.SetTrigger("move");
+        CharacterBase.animator.SetTrigger("move");
         timePassed = 0f;
     }
 }

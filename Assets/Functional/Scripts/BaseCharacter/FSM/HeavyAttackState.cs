@@ -44,7 +44,7 @@ public class HeavyAttackState : State
         clipLength = FindAnimation(CharacterBase.animator, "HeavyAttack").length;
         clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
 
-        if (timePassed <= clipLength / clipSpeed && attack)
+        if (timePassed < clipLength / clipSpeed && attack)
         {
 
             CharacterBase.animator.SetTrigger("heavyAttack");
@@ -52,12 +52,12 @@ public class HeavyAttackState : State
         }
 
 
-        if (timePassed >= clipLength / clipSpeed)
+        if (timePassed > clipLength / clipSpeed)
         {
 
             stateMachine.ChangeState(CharacterBase.movement);
 
-            CharacterBase.animator.SetTrigger("move");
+            //CharacterBase.animator.SetTrigger("move");
         }
     }
     public AnimationClip FindAnimation(Animator animator, string name)
@@ -76,6 +76,7 @@ public class HeavyAttackState : State
     public override void Exit()
     {
         base.Exit();
+        CharacterBase.animator.SetTrigger("move");
         timePassed = 0f;
     }
 }

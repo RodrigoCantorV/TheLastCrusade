@@ -36,7 +36,7 @@ public class EquipmentSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("Start Damage");
+            //Debug.Log("Start Damage");
         }
 
     }
@@ -49,7 +49,7 @@ public class EquipmentSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("End Damage");
+            //Debug.Log("End Damage");
         }
     }
 
