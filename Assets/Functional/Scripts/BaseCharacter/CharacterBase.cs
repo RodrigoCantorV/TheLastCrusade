@@ -25,6 +25,8 @@ public class CharacterBase : MonoBehaviour
     public PlayerInput playerInput;
     [HideInInspector]
     public Animator animator;
+    // [HideInInspector]
+    // public DamageDealer dealer;
     [HideInInspector]
     public Vector3 playerVelocity;
  
@@ -35,6 +37,7 @@ public class CharacterBase : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
+        //dealer = GetComponentInChildren<DamageDealer>();
  
         movementSM = new StateMachine();
         movement = new StandingState(this, movementSM);
@@ -43,6 +46,14 @@ public class CharacterBase : MonoBehaviour
         lightAttacking = new LightAttackState(this, movementSM);
 
         movementSM.Initialize(movement);
+    }
+    void StartDealDamage()
+    {
+        GetComponentInChildren<DamageDealer>().StartDealDamage();      
+    }
+     void EndDealDamage()
+    {
+        GetComponentInChildren<DamageDealer>().EndDealDamage();
     }
  
     protected void Update()

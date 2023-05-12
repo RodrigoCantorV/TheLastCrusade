@@ -32,11 +32,8 @@ public class EquipmentSystem : MonoBehaviour
     {
         if (currentWeaponInHand != null)
         {
+            Debug.Log("StartDealDamage");
             currentWeaponInHand.GetComponentInChildren<DamageDealer>().StartDealDamage();
-        }
-        else
-        {
-            Debug.Log("Start Damage");
         }
 
     }
@@ -45,11 +42,8 @@ public class EquipmentSystem : MonoBehaviour
     {
         if (currentWeaponInHand != null)
         {
+            Debug.Log("StartDealDamage");
             currentWeaponInHand.GetComponentInChildren<DamageDealer>().EndDealDamage();
-        }
-        else
-        {
-            Debug.Log("End Damage");
         }
     }
 

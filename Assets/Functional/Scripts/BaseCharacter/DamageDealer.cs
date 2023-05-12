@@ -4,38 +4,47 @@ using UnityEngine;
 public class DamageDealer : MonoBehaviour
 {
     bool canDealDamage;
-    List<GameObject> hasDealtDamage;
+    bool hasDealtDamage;
+    // List<GameObject> hasDealtDamage;
  
     [SerializeField] float weaponLength;
     [SerializeField] float weaponDamage;
     void Start()
     {
         canDealDamage = false;
-        hasDealtDamage = new List<GameObject>();
+        hasDealtDamage = false;
+        // hasDealtDamage = new List<GameObject>();
     }
  
     void Update()
     {
-        if (canDealDamage)
+        if (canDealDamage && !hasDealtDamage)
         {
             RaycastHit hit;
  
             int layerMask = 1 << 9;
-            /*if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
+            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
-                if (hit.transform.TryGetComponent(out Enemy enemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
+                if(hit.transform.TryGetComponent(out EnemyAI enemy))
                 {
-                    enemy.TakeDamage(weaponDamage);
-                    enemy.HitVFX(hit.point);
-                    hasDealtDamage.Add(hit.transform.gameObject);
+                    Debug.Log("Ataco al enemigo");
+                    hasDealtDamage = true;
                 }
-            }*/
+                // if (hit.transform.TryGetComponent(out EnemyAI enemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
+                // {
+                //     Debug.Log("Golpeo enemigo");
+                //     // enemy.TakeDamage(weaponDamage);
+                //     // enemy.HitVFX(hit.point);
+                //     // hasDealtDamage.Add(hit.transform.gameObject);
+                // }
+            }
         }
     }
     public void StartDealDamage()
     {
         canDealDamage = true;
-        hasDealtDamage.Clear();
+        hasDealtDamage = false; 
+        // hasDealtDamage.Clear();
     }
     public void EndDealDamage()
     {

@@ -27,7 +27,7 @@ public class LightAttackState : State
 
       
 
-        // Verificar si se presionó el botón izquierdo del mouse
+        // Verificar si se presionï¿½ el botï¿½n izquierdo del mouse
 
 
     }
@@ -44,7 +44,6 @@ public class LightAttackState : State
 
         if (timePassed <= clipLength / clipSpeed && attack)
         {
-            
             CharacterBase.animator.SetTrigger("lightAttack");
             attack = false;
         }        
@@ -58,6 +57,18 @@ public class LightAttackState : State
             CharacterBase.animator.SetTrigger("move");
         }
     }
+
+    // public override void StartDealDamage()
+    // {
+    //     base.StartDealDamage();
+    //     CharacterBase.dealer.StartDealDamage();       
+    // }
+    // public override void EndDealDamage()
+    // {
+    //     base.EndDealDamage();
+    //     CharacterBase.dealer.EndDealDamage();
+    // }
+
 
     public override void Exit()
     {

@@ -42,6 +42,13 @@ public class State
     {
     }
 
+    // public virtual void StartDealDamage()
+    // {          
+    // }
+    // public virtual void EndDealDamage()
+    // {
+    // }
+
     public virtual void Exit()
     {
     }
