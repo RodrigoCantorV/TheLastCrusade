@@ -30,21 +30,20 @@ public class DashState : State
         CharacterBase.animator.SetTrigger("dash");     
         dashSpeed = CharacterBase.dashSpeed;
       //  currentVelocity = Vector3.zero;
-        velocity = new Vector3(input.x, 0, input.y);
-        velocity = velocity.x * CharacterBase.transform.right.normalized + velocity.z * CharacterBase.transform.forward.normalized;
-      
+        
         //timePassed = 0f;
     }
 
     public override void HandleInput()
     {
         base.HandleInput();
-        //input = dashAction.ReadValue<Vector2>();
-        //if(dashAction.triggered)
-        //{
-        //    Debug.Log("aqui");
-        //    dash = true;
-        //}
+
+        velocity = new Vector3(input.x, 0, input.y);
+
+        velocity = velocity.x * CharacterBase.transform.right.normalized + velocity.z * CharacterBase.transform.forward.normalized;
+        Debug.Log("velocidad de entrada: " + velocity);
+
+
         if (lightAttackAction.triggered)
         {
             lightAttack = true;
@@ -77,8 +76,7 @@ public class DashState : State
         base.LogicUpdate();
 
         if (lightAttack)
-        {
-            Debug.Log("Ajuaaaa");
+        {           
             stateMachine.ChangeState(CharacterBase.lightAttacking);
         }
         if (heavyAttack)
@@ -95,8 +93,7 @@ public class DashState : State
 
 
         if (timePassed >= clipLength / clipSpeed)
-        {
-            Debug.Log("añoño");
+        {        
             stateMachine.ChangeState(CharacterBase.movement);
             CharacterBase.animator.SetTrigger("move");
             //dash = false;
@@ -107,11 +104,12 @@ public class DashState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        //currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, characterVideo.dashDampTime);
-        if (velocity == Vector3.zero)
-        {
-            velocity = CharacterBase.transform.right;
-        }
+        Debug.Log(velocity);
+        //if (velocity == Vector3.zero)
+        //{
+        //    Debug.Log("hola?");
+        velocity = CharacterBase.transform.forward;
+        //}
 
         //Debug.Log(dashSpeed);
         //Debug.Log(velocity  * dashSpeed * Time.deltaTime);

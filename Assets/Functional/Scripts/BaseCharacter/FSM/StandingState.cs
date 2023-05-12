@@ -37,7 +37,7 @@ public class StandingState : State
     public override void HandleInput()
     {
         base.HandleInput();
-        var mouse = Mouse.current;
+        
         if (dashAction.triggered)
         {
             dash = true;
@@ -69,7 +69,7 @@ public class StandingState : State
         if(dash)
         {
             stateMachine.ChangeState(CharacterBase.dashing);
-            //characterVideo.animator.SetTrigger("dashTrigger");
+            
         }
         if (lightAttack)
         {
