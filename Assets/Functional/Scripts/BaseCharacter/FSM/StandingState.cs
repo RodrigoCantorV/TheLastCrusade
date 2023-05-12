@@ -27,8 +27,8 @@ public class StandingState : State
         lightAttack = false;
         dash = false;
         input = Vector2.zero;
-        velocity = new Vector3(5f, 0f, 5f);
-        currentVelocity = new Vector3(5f,0f,5f);
+        velocity = Vector3.zero;
+        currentVelocity = Vector3.zero;
      
 
         playerSpeed = CharacterBase.playerSpeed;

@@ -42,19 +42,19 @@ public class LightAttackState : State
         clipLength = FindAnimation(CharacterBase.animator, "combat_attack").length;
         clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
 
-        if (timePassed <= clipLength / clipSpeed && attack)
+        if (timePassed < clipLength / clipSpeed && attack)
         {
             CharacterBase.animator.SetTrigger("lightAttack");
             attack = false;
         }        
 
     
-        if (timePassed >= clipLength / clipSpeed)
+        if (timePassed > clipLength / clipSpeed)
         {
            
             stateMachine.ChangeState(CharacterBase.movement);
             
-            CharacterBase.animator.SetTrigger("move");
+            //CharacterBase.animator.SetTrigger("move");
         }
     }
 
@@ -73,6 +73,7 @@ public class LightAttackState : State
     public override void Exit()
     {
         base.Exit();
+        CharacterBase.animator.SetTrigger("move");
         timePassed = 0f;
     }
 
