@@ -17,7 +17,7 @@ public class LightAttackState : State
         base.Enter();
         attack = true;
 
-
+        Debug.Log(CharacterBase.hola);
 
     }
 

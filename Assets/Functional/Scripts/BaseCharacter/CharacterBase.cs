@@ -29,16 +29,16 @@ public class CharacterBase : MonoBehaviour
     // public DamageDealer dealer;
     [HideInInspector]
     public Vector3 playerVelocity;
- 
- 
+    public string hola;
+
     // Start is called before the first frame update
-    protected void Start()
+    protected virtual void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
         //dealer = GetComponentInChildren<DamageDealer>();
- 
+
         movementSM = new StateMachine();
         movement = new StandingState(this, movementSM);
         dashing = new DashState(this, movementSM);
