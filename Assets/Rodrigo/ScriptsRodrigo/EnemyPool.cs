@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyPool : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefab1;
+    [SerializeField] private List<GameObject> enemyesPrefabs;
     [SerializeField] private List<GameObject> enemyList1;
     private int poolSize = 10;
 
@@ -23,22 +23,40 @@ public class EnemyPool : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        AddEnemyToPool(poolSize);
     }
 
     void Start()
     {
-        AddEnemyToPool(poolSize);
+
     }
 
     private void AddEnemyToPool(int amount)
     {
-        // Creamos las instancias de los enemigos
-        for (int i = 0; i < amount; i++)
+        // Creamos las instancia por cada enemigo
+        for (int i = 0; i < enemyesPrefabs.Count; i++)
         {
-            GameObject enemy1 = Instantiate(enemyPrefab1);
-            enemy1.SetActive(false);
-            enemyList1.Add(enemy1);
-            enemy1.transform.parent = this.gameObject.transform;
+            for (int j = 0; j < amount; j++)
+            {
+                GameObject myEnemy = Instantiate(enemyesPrefabs[i]);
+                myEnemy.SetActive(false);
+                enemyList1.Add(myEnemy);
+                myEnemy.transform.parent = this.gameObject.transform;
+            }
         }
+    }
+
+    public GameObject RequestEnemy(string tag)
+    {
+        for (int i = 0; i < enemyList1.Count; i++)
+        {
+            if (!(enemyList1[i].activeSelf) && enemyList1[i].CompareTag(tag))
+            {
+                enemyList1[i].SetActive(true);
+                return enemyList1[i];
+            }
+        }
+        return null;
     }
 }
