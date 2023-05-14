@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDamageDealer : MonoBehaviour
+public abstract class EnemyDamageDealer : MonoBehaviour
 {
-    bool canDealDamage;
-    bool hasDealtDamage;
+    protected bool canDealDamage;
+    protected bool hasDealtDamage;
 
-    [SerializeField] float weaponLength;
+   
     [SerializeField] float weaponDamage;
     void Start()
     {
@@ -18,24 +18,10 @@ public class EnemyDamageDealer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canDealDamage && !hasDealtDamage)
-        {
-            RaycastHit hit;
-
-            int layerMask = 1 << 8;
-            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
-            {
-                //  if (hit.transform.TryGetComponent(out HealthSystem health))
-                if (hit.transform.TryGetComponent(out CharacterBase health))
-                {
-                    // health.TakeDamage(weaponDamage);
-                    // health.HitVFX(hit.point);
-                    Debug.Log("Atacando Jugador");
-                    hasDealtDamage = true;
-                }
-            }
-        }
+    GenerateDamage();
     }
+
+    public abstract void GenerateDamage();
 
     public void StartDealDamage()
     {
@@ -50,8 +36,8 @@ public class EnemyDamageDealer : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-       // Gizmos.DrawWireSphere(transform.position, 2);
-       // Gizmos.DrawLine(transform.position, transform.position - transform.up * weaponLength);
+       PaintGizmos();
     }
+
+    public abstract void PaintGizmos();
 }
