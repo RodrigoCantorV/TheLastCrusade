@@ -17,7 +17,7 @@ public class ShootPower : MonoBehaviour
 
     private void OnEnable()
     {
-        ObtenerDireccion();
+        GetPlayerPosition();
     }
 
     private void Update()
@@ -25,14 +25,10 @@ public class ShootPower : MonoBehaviour
 
         DirectionPower();
     }
-    public void ObtenerDireccion()
+    public void GetPlayerPosition()
     {
-        floor = GameObject.Find("Floor");
         target = GameObject.Find("Player").transform;
         posicionJugadorActual = target.position;
-        // posicionJugadorActual.y -= 2;
-        //posicionJugadorActual.x -= 3;
-        //posicionJugadorActual.z += 2;
     }
 
     public void DirectionPower()
@@ -65,8 +61,7 @@ public class ShootPower : MonoBehaviour
             // Debug.Log(ppo.name);
         }
     }
-
-
+    
     void Desactivar()
     {
 

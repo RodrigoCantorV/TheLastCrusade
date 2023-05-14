@@ -35,6 +35,7 @@ public abstract class Enemy : MonoBehaviour
     {
         MoveEnemy();
         AttackEnemy();
+        Obser();
     }
 
     void InitializeVariables()
@@ -94,6 +95,10 @@ public abstract class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, aggroRange);
+    }
+
+    void Obser(){
+        transform.LookAt(player.transform.position);
     }
 
     protected abstract void AttackEnemy();
