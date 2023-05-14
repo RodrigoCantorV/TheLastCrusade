@@ -16,13 +16,13 @@ public class EnemyLongDistance : Enemy
             {
                 animator.SetTrigger("attack");
                 timePassed = 0;
-                Invoke("lanzarPoder", .8f);
+                Invoke("CreatePower", .8f);
             }
         }
         timePassed += Time.deltaTime;
     }
 
-    void lanzarPoder()
+    void CreatePower()
     {
         //power = PowerPool.Instance.RequestPower();
         power = GetComponentInChildren<PowerPool>().RequestPower();
