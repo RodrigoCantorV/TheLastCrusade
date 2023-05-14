@@ -8,20 +8,20 @@ public class PowerPool : MonoBehaviour
     [SerializeField] private List<GameObject> powerList;
 
     // Patron singleton
-    private static PowerPool instance;
-    public static PowerPool Instance { get { return instance; } }
+   // private static PowerPool instance;
+   // public static PowerPool Instance { get { return instance; } }
     private void Awake()
     {
          addPowersToPool(poolZise);
          
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+      //   if (instance == null)
+      //   {
+      //       instance = this;
+      //   }
+      //  else
+      //  {
+      //      Destroy(gameObject);
+      //  }
     }
     void Start()
     {

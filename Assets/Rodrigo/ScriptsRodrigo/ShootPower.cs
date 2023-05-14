@@ -53,7 +53,7 @@ public class ShootPower : MonoBehaviour
             GameObject ppo = po.GetComponentInParent<EnemyLongDistance>().gameObject;
             ppo.GetComponentInParent<EnemyLongDistance>().EndDealDamage();
             this.gameObject.SetActive(false);
-            // Debug.Log(ppo.name);
+           // Debug.Log(ppo.name);
         }
     }
 

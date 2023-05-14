@@ -84,15 +84,15 @@ public class EnemyAI : MonoBehaviour
     {
         if (this.gameObject.name.Equals("wizard_weapon_macanim DEMO") || this.gameObject.name.Equals("wizard_weapon_macanim DEMO (1)"))
         {
-            GameObject power = PowerPool.Instance.RequestPower();
+            //GameObject power = PowerPool.Instance.RequestPower();
             //Vector3 position = new Vector3(transform.localPosition.x - 3, transform.position.y + 3, transform.position.z);
             //power.transform.position = gameObject.transform.position;
             Vector3 position = transform.position;
             position = position + transform.forward * 5;
             position.y += 5f;
 
-            power.transform.position = position;
-            power.transform.localEulerAngles = transform.forward;
+            //power.transform.position = position;
+            //power.transform.localEulerAngles = transform.forward;
         }
 
     }

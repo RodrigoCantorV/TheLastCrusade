@@ -51,6 +51,7 @@ public class EnemyDamageDealer : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position - transform.up * weaponLength);
+       // Gizmos.DrawWireSphere(transform.position, 2);
+       // Gizmos.DrawLine(transform.position, transform.position - transform.up * weaponLength);
     }
 }
