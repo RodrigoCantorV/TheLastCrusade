@@ -12,6 +12,8 @@ public class PowerPool : MonoBehaviour
     public static PowerPool Instance { get { return instance; } }
     private void Awake()
     {
+         addPowersToPool(poolZise);
+         
         if (instance == null)
         {
             instance = this;
@@ -23,7 +25,7 @@ public class PowerPool : MonoBehaviour
     }
     void Start()
     {
-        addPowersToPool(poolZise);
+       
     }
     private void addPowersToPool(int amount)
     {

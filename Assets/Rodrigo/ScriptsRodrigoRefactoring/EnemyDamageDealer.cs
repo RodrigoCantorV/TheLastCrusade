@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyDamageDealer : MonoBehaviour
 {
-   bool canDealDamage;
+    bool canDealDamage;
     bool hasDealtDamage;
- 
+
     [SerializeField] float weaponLength;
     [SerializeField] float weaponDamage;
     void Start()
@@ -14,7 +14,7 @@ public class EnemyDamageDealer : MonoBehaviour
         canDealDamage = false;
         hasDealtDamage = false;
     }
- 
+
     // Update is called once per frame
     void Update()
     {
@@ -25,28 +25,29 @@ public class EnemyDamageDealer : MonoBehaviour
             int layerMask = 1 << 8;
             if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
-             //  if (hit.transform.TryGetComponent(out HealthSystem health))
-             if (hit.transform.TryGetComponent(out CharacterBase health))
+                //  if (hit.transform.TryGetComponent(out HealthSystem health))
+                if (hit.transform.TryGetComponent(out CharacterBase health))
                 {
-                   // health.TakeDamage(weaponDamage);
-                   // health.HitVFX(hit.point);
-                      Debug.Log("Atacando Jugador");
-                      hasDealtDamage = true;
-                }                   
+                    // health.TakeDamage(weaponDamage);
+                    // health.HitVFX(hit.point);
+                    Debug.Log("Atacando Jugador");
+                    hasDealtDamage = true;
+                }
             }
         }
     }
+
     public void StartDealDamage()
     {
         canDealDamage = true;
         hasDealtDamage = false;
-     
     }
+    
     public void EndDealDamage()
     {
         canDealDamage = false;
     }
- 
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
