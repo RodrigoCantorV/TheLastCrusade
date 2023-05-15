@@ -30,7 +30,8 @@ public class CharacterBase : MonoBehaviour
     // public DamageDealer dealer;
     [HideInInspector]
     public Vector3 playerVelocity;
-    public string hola;
+    [HideInInspector]
+    public string dashAnimationName, heavyAttackAnimationName, lightAttackAnimationName;
 
     // Start is called before the first frame update
     protected virtual void Start()

@@ -85,7 +85,7 @@ public class DashState : State
         }
 
         timePassed += Time.deltaTime;
-        clipLength = FindAnimation(CharacterBase.animator, "Dash").length;
+        clipLength = FindAnimation(CharacterBase.animator, CharacterBase.dashAnimationName).length;
 
         //clipLength = CharacterBase.animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
         clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;

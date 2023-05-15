@@ -17,7 +17,7 @@ public class LightAttackState : State
         base.Enter();
         attack = true;
 
-        Debug.Log(CharacterBase.hola);
+        
 
     }
 
@@ -39,7 +39,7 @@ public class LightAttackState : State
         timePassed += Time.deltaTime;
 
 
-        clipLength = FindAnimation(CharacterBase.animator, "combat_attack").length;
+        clipLength = FindAnimation(CharacterBase.animator, CharacterBase.lightAttackAnimationName).length;
         clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
 
         if (timePassed < clipLength / clipSpeed && attack)

@@ -13,7 +13,7 @@ public class MiddleCharacter : CharacterBase
 
         // Dash media
         dashSpeed = 5.0f;
-        hola = "hola";
+        dashAnimationName = "hola";
 
         // Media vida: seria la mitad del total de vida entre el Melee y Large character
         life = 50.0f;
