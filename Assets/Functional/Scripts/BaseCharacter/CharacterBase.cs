@@ -5,6 +5,7 @@ public class CharacterBase : MonoBehaviour
     [Header("Controls")]
     public float playerSpeed = 7.0f;
     public float dashSpeed = 10.0f;
+    public float life = 100.0f;
     
     [Header("Animation Smoothing")]
     [Range(0, 1)]
