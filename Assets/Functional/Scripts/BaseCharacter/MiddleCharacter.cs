@@ -8,9 +8,21 @@ public class MiddleCharacter : CharacterBase
     protected override void Start()
     {
         base.Start();
-        playerSpeed = 8f;
+        // Media velocidad
+        playerSpeed = 10.0f;
+
+        // Dash media
         dashSpeed = 5.0f;
         hola = "hola";
+
+        // Media vida: seria la mitad del total de vida entre el Melee y Large character
+        life = 50.0f;
+
+        // Ulti, buffdaño, velocidad ( +20% PD, +15% VM )
+
+        // Ataque rápido: cono ( 30 - 40 PD)
+
+        // Ataque Fuerte: Patada(empuja a los enemigos hacia atrás)(70 PD)
     }
 
     // Cambio posible
