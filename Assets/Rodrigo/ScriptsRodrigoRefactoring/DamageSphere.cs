@@ -11,7 +11,7 @@ public class DamageSphere : EnemyDamageDealer
     {
         if (canDealDamage && !hasDealtDamage)
         {
-            if (Vector3.Distance(GameObject.Find("Player").transform.position, transform.position) <= weaponRatio)
+            if (Vector3.Distance(GameObject.Find("Player").transform.position, transform.position) < weaponRatio + 1)
             {
 
                 // health.TakeDamage(weaponDamage);

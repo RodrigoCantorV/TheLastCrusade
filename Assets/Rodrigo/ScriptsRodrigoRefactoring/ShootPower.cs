@@ -51,22 +51,20 @@ public class ShootPower : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Floor"))
-        {
+         {
             //Debug.Log("Golpeo al jugador con la bola del poder");
 
             GameObject po = GetComponentInParent<PowerPool>().gameObject;
             GameObject ppo = po.GetComponentInParent<EnemyLongDistance>().gameObject;
             ppo.GetComponentInParent<EnemyLongDistance>().EndDealDamage();
             this.gameObject.SetActive(false);
-            // Debug.Log(ppo.name);
+            Debug.Log("ppo.name");
         }
     }
-    
+   
     void Desactivar()
     {
-
         this.gameObject.SetActive(false);
-
     }
 
 }
