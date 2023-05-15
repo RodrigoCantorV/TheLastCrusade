@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
-{
+{   
+    // Agregamos singleton para poder llamar facilmente la informacion
     public static GameManager Instance;
 
     public List<Personajes> personajes;
