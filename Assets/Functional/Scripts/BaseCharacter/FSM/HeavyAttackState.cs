@@ -41,7 +41,7 @@ public class HeavyAttackState : State
         timePassed += Time.deltaTime;
 
 
-        clipLength = FindAnimation(CharacterBase.animator, "HeavyAttack").length;
+        clipLength = FindAnimation(CharacterBase.animator, CharacterBase.heavyAttackAnimationName).length;
         clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
 
         if (timePassed < clipLength / clipSpeed && attack)
