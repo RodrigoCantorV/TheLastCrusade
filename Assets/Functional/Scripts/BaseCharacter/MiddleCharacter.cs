@@ -4,42 +4,35 @@ using UnityEngine;
 
 public class MiddleCharacter : CharacterBase
 {
+    private const string dashAnimation = "DashMiddleAnimation";
+    private const string heavyAttackAnimation = "HeavyAttackMiddleAnimation";
+    private const string lightAttackAnimation = "LightAttackMiddleAnimation";
 
     protected override void Start()
     {
         base.Start();
         // Media velocidad
-        playerSpeed = 10.0f;
-
+        playerSpeed = 8.0f;
         // Dash media
-        dashSpeed = 5.0f;
-        dashAnimationName = "hola";
+        dashSpeed = 6.0f;
+        dashAnimationName = dashAnimation;
+        heavyAttackAnimationName = heavyAttackAnimation;
+        lightAttackAnimationName = lightAttackAnimation;
 
-        // Media vida: seria la mitad del total de vida entre el Melee y Large character
-        life = 50.0f;
+        StartDealDamage();
+        EndDealDamage();
 
-        // Ulti, buffdaño, velocidad ( +20% PD, +15% VM )
-
-        // Ataque rápido: cono ( 30 - 40 PD)
-
-        // Ataque Fuerte: Patada(empuja a los enemigos hacia atrás)(70 PD)
     }
 
-    // Cambio posible
-    //private void Start()
-    //{
-    //    controller = GetComponent<CharacterController>();
-    //    animator = GetComponent<Animator>();
-    //    playerInput = GetComponent<PlayerInput>();
-    //    //dealer = GetComponentInChildren<DamageDealer>();
+    protected override void StartDealDamage()
+    {
+        base.StartDealDamage();
+        GetComponentInChildren<DamageDealer>().StartDealDamage(); 
+    }
 
-    //    movementSM = new StateMachine();
-    //    movement = new StandingState(this, movementSM);
-    //    dashing = new DashState(this, movementSM);
-    //    heavyAttacking = new HeavyAttackState(this, movementSM);
-    //    lightAttacking = new LightAttackState(this, movementSM);
-
-    //    movementSM.Initialize(movement);
-    //}
-
+    protected override void EndDealDamage()
+    {
+        base.EndDealDamage();
+        GetComponentInChildren<DamageDealer>().EndDealDamage();
+    }
 }

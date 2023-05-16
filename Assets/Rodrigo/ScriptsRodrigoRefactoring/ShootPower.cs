@@ -27,7 +27,8 @@ public class ShootPower : MonoBehaviour
     }
     public void GetPlayerPosition()
     {
-        target = GameObject.Find("Player").transform;
+        //target = GameObject.Find("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform; 
         posicionJugadorActual = target.position;
     }
 
