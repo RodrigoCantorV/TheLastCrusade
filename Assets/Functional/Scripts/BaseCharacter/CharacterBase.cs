@@ -49,13 +49,11 @@ public class CharacterBase : MonoBehaviour
 
         movementSM.Initialize(movement);
     }
-    void StartDealDamage()
-    {
-        GetComponentInChildren<DamageDealer>().StartDealDamage();      
+    protected virtual void StartDealDamage()
+    {        
     }
-     void EndDealDamage()
+    protected virtual void EndDealDamage()
     {
-        GetComponentInChildren<DamageDealer>().EndDealDamage();
     }
  
     protected void Update()
