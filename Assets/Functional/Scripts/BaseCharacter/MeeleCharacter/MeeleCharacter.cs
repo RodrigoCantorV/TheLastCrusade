@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiddleCharacter : CharacterBase
+public class MeeleCharacter : CharacterBase
 {
-    private const string dashAnimation = "DashMiddleAnimation";
-    private const string heavyAttackAnimation = "HeavyAttackMiddleAnimation";
-    private const string lightAttackAnimation = "LightAttackMiddleAnimation";
+    private const string dashAnimation = "DashMeeleAnimation";
+    private const string heavyAttackAnimation = "HeavyAttackMeeleAnimation";
+    private const string lightAttackAnimation = "LightAtackMeeletAnimation";
+    
 
     protected override void Start()
     {
         base.Start();
-        // Media velocidad
-        playerSpeed = 8.0f;
-        // Dash media
-        dashSpeed = 6.0f;
+
+        playerSpeed = 5.0f;
         dashAnimationName = dashAnimation;
         heavyAttackAnimationName = heavyAttackAnimation;
         lightAttackAnimationName = lightAttackAnimation;
@@ -35,4 +34,5 @@ public class MiddleCharacter : CharacterBase
         base.EndDealDamage();
         GetComponentInChildren<DamageDealer>().EndDealDamage();
     }
+
 }

@@ -25,11 +25,16 @@ public class DamageDealer : MonoBehaviour
             int layerMask = 1 << 9;
             if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
-                if(hit.transform.TryGetComponent(out EnemyAI enemy))
+                if(hit.transform.TryGetComponent(out EnemyShortDistance enemyShortDistance) || hit.transform.TryGetComponent(out EnemyLongDistance enemyLongDistance))
                 {
                     Debug.Log("Ataco al enemigo");
                     hasDealtDamage = true;
                 }
+                /*if(hit.transform.TryGetComponent(out EnemyLongDistance enemyLongDistance))
+                {
+                    Debug.Log("Ataco al mago");
+                    hasDealtDamage = true;
+                }*/
                 // if (hit.transform.TryGetComponent(out EnemyAI enemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
                 // {
                 //     Debug.Log("Golpeo enemigo");
