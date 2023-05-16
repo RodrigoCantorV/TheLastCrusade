@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+{   
+    // Agregamos singleton para poder llamar facilmente la informacion
+    public static GameManager Instance;
 
-    // Update is called once per frame
-    void Update()
+    public List<Personajes> personajes;
+
+    private void Awake()
     {
-        
+        if(GameManager.Instance == null)
+        {
+            GameManager.Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
