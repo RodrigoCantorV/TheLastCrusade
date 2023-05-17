@@ -16,20 +16,11 @@ public class LightAttackState : State
     {
         base.Enter();
         attack = true;
-
-        
-
     }
 
     public override void HandleInput()
     {
         base.HandleInput();
-
-      
-
-        // Verificar si se presion� el bot�n izquierdo del mouse
-
-
     }
     public override void LogicUpdate()
     {
@@ -50,24 +41,11 @@ public class LightAttackState : State
 
     
         if (timePassed > clipLength / clipSpeed)
-        {
-           
-            stateMachine.ChangeState(CharacterBase.movement);
-            
-            //CharacterBase.animator.SetTrigger("move");
+        {           
+            stateMachine.ChangeState(CharacterBase.movement);                       
         }
     }
 
-    // public override void StartDealDamage()
-    // {
-    //     base.StartDealDamage();
-    //     CharacterBase.dealer.StartDealDamage();       
-    // }
-    // public override void EndDealDamage()
-    // {
-    //     base.EndDealDamage();
-    //     CharacterBase.dealer.EndDealDamage();
-    // }
 
 
     public override void Exit()
@@ -86,7 +64,6 @@ public class LightAttackState : State
                 return clip;
             }
         }
-
         return null;
     }
 }

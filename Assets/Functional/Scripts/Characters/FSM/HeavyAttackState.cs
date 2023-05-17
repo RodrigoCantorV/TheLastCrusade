@@ -19,17 +19,11 @@ public class HeavyAttackState : State
     {
         base.Enter();
         attack=true;
-
-
     }
 
     public override void HandleInput()
     {
         base.HandleInput();
-
-        // Verificar si se presionó el botón izquierdo del mouse
-
-
     }
     public override void LogicUpdate()
     {
@@ -46,7 +40,6 @@ public class HeavyAttackState : State
 
         if (timePassed < clipLength / clipSpeed && attack)
         {
-
             CharacterBase.animator.SetTrigger("heavyAttack");
             attack = false;
         }
@@ -54,10 +47,7 @@ public class HeavyAttackState : State
 
         if (timePassed > clipLength / clipSpeed)
         {
-
             stateMachine.ChangeState(CharacterBase.movement);
-
-            //CharacterBase.animator.SetTrigger("move");
         }
     }
     public AnimationClip FindAnimation(Animator animator, string name)
