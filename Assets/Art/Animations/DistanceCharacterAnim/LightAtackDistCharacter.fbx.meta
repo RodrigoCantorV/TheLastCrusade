@@ -71,7 +71,7 @@ ModelImporter:
       - time: 0.98796886
         functionName: ShotArrow
         data: 
-        objectReferenceParameter: {fileID: 8516157145064327348, guid: 7dd0aa5e01fa1c34ba49de9103242dca,
+        objectReferenceParameter: {fileID: 11500000, guid: 734653a41d1950f4695f8765fc85895e,
           type: 3}
         floatParameter: 0
         intParameter: 0

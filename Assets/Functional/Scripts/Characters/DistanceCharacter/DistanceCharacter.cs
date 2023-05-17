@@ -8,7 +8,7 @@ public class DistanceCharacter : CharacterBase
     private const string dashAnimation = "DashDistAnimation";
     private const string heavyAttackAnimation = "HeavyAttackDistAnimation";
     private const string lightAttackAnimation = "LightAtackDistAnimation";
-    public Arrow arrowFunctional;    
+    private Arrow arrowFunctional;    
     public Transform arrowReference;
   
 

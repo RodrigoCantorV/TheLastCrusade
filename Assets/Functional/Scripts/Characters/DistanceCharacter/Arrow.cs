@@ -8,7 +8,7 @@ public class Arrow : MonoBehaviour
 
     bool isShot = false;
     Vector3 arrowDirection;
-    public Transform arrowReference;
+    private Transform arrowReference;
     Ray ray;
     private Rigidbody rb;
     float arrowDamage = 5;
