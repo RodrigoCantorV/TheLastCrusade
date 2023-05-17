@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target; // Objeto a seguir
+    public Transform target; // Objeto a seguir 
     public float distance = 10f; // Distancia entre la cámara y el objeto a seguir
     public float smoothSpeed = 0.5f; // Velocidad de movimiento de la cámara
     public float yRotation = 0.0f; // Rotación en el eje Y
 
     private Vector3 velocity = Vector3.zero;
+
+    void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;    
+    }
 
     void LateUpdate()
     {
