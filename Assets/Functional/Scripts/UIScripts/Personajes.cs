@@ -7,8 +7,8 @@ using UnityEngine;
 public class Personajes : ScriptableObject
 {
     public GameObject personajeJugable;
-    public Sprite imagen;
-    public string nombre;
+    //public Sprite imagen;
+    //public string nombre;
 
 
 }

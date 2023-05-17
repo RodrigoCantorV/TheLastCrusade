@@ -38,8 +38,8 @@ public class MenuSelectionCharacter : MonoBehaviour
         if(index >= 0 && index < gameManager.personajes.Count)
         {
             PlayerPrefs.SetInt("JugadorIndex", index);
-            imagen.sprite = gameManager.personajes[index].imagen;
-            nombre.text = gameManager.personajes[index].nombre;
+            //imagen.sprite = gameManager.personajes[index].imagen;
+            //nombre.text = gameManager.personajes[index].nombre;
         } else
         {
             Debug.LogError("Indice fuera de rango: " + index);
