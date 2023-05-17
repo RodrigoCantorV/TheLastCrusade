@@ -22,18 +22,26 @@ public class ShootPower : MonoBehaviour
 
     private void Update()
     {
+        if (target != null)
+        {
+            DirectionPower();
+        }
 
-        DirectionPower();
+    }
+    private void LateUpdate()
+    {
+
     }
     public void GetPlayerPosition()
     {
         //target = GameObject.Find("Player").transform;
-        target = GameObject.FindGameObjectWithTag("Player").transform; 
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         posicionJugadorActual = target.position;
     }
 
     public void DirectionPower()
     {
+
         directionFinal = (posicionJugadorActual - transform.position).normalized; // Calcular la dirección hacia el objeto objetivo
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = (directionFinal * 2 * speed); // Mover el objeto en la dirección calculada a la velocidad especificada
@@ -52,7 +60,7 @@ public class ShootPower : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Floor"))
-         {
+        {
             //Debug.Log("Golpeo al jugador con la bola del poder");
 
             GameObject po = GetComponentInParent<PowerPool>().gameObject;
@@ -62,7 +70,7 @@ public class ShootPower : MonoBehaviour
             Debug.Log("ppo.name");
         }
     }
-   
+
     void Desactivar()
     {
         this.gameObject.SetActive(false);

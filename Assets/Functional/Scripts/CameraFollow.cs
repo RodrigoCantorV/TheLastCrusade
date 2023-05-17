@@ -5,32 +5,28 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform target; // Objeto a seguir 
-    public float distance = 10f; // Distancia entre la cámara y el objeto a seguir
-    public float smoothSpeed = 0.5f; // Velocidad de movimiento de la cámara
-    public float yRotation = 0.0f; // Rotación en el eje Y
+    public float distance = 10f; // Distancia entre la cï¿½mara y el objeto a seguir
+    public float smoothSpeed = 0.5f; // Velocidad de movimiento de la cï¿½mara
+    public float yRotation = 0.0f; // Rotaciï¿½n en el eje Y
 
     private Vector3 velocity = Vector3.zero;
 
-    void Start()
-    {
-        target = GameObject.FindGameObjectWithTag("Player").transform;    
-    }
-
     void LateUpdate()
     {
-        // Posición actual de la cámara - maincamera
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+        // Posiciï¿½n actual de la cï¿½mara - maincamera
         Vector3 currentPosition = transform.position;
 
-        // Posición a la que debe moverse la cámara
+        // Posiciï¿½n a la que debe moverse la cï¿½mara
         Vector3 targetPosition = target.position - transform.forward * distance;
 
-        //// Creamos una rotación en el eje Y
+        //// Creamos una rotaciï¿½n en el eje Y
         Quaternion yRotationQuaternion = Quaternion.Euler(yRotation, 0, 0);
 
-        //// Actualizamos la rotación de la cámara
+        //// Actualizamos la rotaciï¿½n de la cï¿½mara
         transform.rotation = yRotationQuaternion;
 
-        // Movimiento suave de la cámara
+        // Movimiento suave de la cï¿½mara
         transform.position = Vector3.SmoothDamp(currentPosition, targetPosition, ref velocity, smoothSpeed);
     }
 }

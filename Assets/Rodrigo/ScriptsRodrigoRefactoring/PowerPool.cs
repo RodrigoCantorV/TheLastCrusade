@@ -8,24 +8,28 @@ public class PowerPool : MonoBehaviour
     [SerializeField] private List<GameObject> powerList;
 
     // Patron singleton
-   // private static PowerPool instance;
-   // public static PowerPool Instance { get { return instance; } }
+    // private static PowerPool instance;
+    // public static PowerPool Instance { get { return instance; } }
     private void Awake()
     {
-         addPowersToPool(poolZise);
-         
-      //   if (instance == null)
-      //   {
-      //       instance = this;
-      //   }
-      //  else
-      //  {
-      //      Destroy(gameObject);
-      //  }
+
+
+        //   if (instance == null)
+        //   {
+        //       instance = this;
+        //   }
+        //  else
+        //  {
+        //      Destroy(gameObject);
+        //  }
+    }
+    private void LateUpdate()
+    {
+        addPowersToPool(poolZise);
     }
     void Start()
     {
-       
+
     }
     private void addPowersToPool(int amount)
     {
@@ -38,16 +42,19 @@ public class PowerPool : MonoBehaviour
         }
     }
 
-    public GameObject RequestPower(){
-        for(int i = 0; i < powerList.Count; i++){
-            if(!(powerList[i].activeSelf)){
+    public GameObject RequestPower()
+    {
+        for (int i = 0; i < powerList.Count; i++)
+        {
+            if (!(powerList[i].activeSelf))
+            {
                 powerList[i].SetActive(true);
                 return powerList[i];
             }
-        }  
+        }
         addPowersToPool(1);
         powerList[powerList.Count - 1].SetActive(true);
-        return(powerList[powerList.Count - 1]);
+        return (powerList[powerList.Count - 1]);
     }
 
 }

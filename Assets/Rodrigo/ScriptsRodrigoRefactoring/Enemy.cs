@@ -27,13 +27,18 @@ public abstract class Enemy : MonoBehaviour
 
     void Start()
     {
-        InitializeVariables();
+        
     }
 
 
     void Update()
     {
-        MoveEnemy();
+    
+    }
+
+    private void LateUpdate() {
+        InitializeVariables();
+            MoveEnemy();
         AttackEnemy();
         Obser();
     }
@@ -41,7 +46,7 @@ public abstract class Enemy : MonoBehaviour
     void InitializeVariables()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindWithTag("Player");
+        player =  GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
     }
     void MoveEnemy()
