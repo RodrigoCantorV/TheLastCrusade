@@ -104,7 +104,7 @@ public class DashState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        Debug.Log(velocity);
+        
         //if (velocity == Vector3.zero)
         //{
         //    Debug.Log("hola?");

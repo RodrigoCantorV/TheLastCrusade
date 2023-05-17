@@ -8,7 +8,9 @@ public class DistanceCharacter : CharacterBase
     private const string dashAnimation = "DashDistAnimation";
     private const string heavyAttackAnimation = "HeavyAttackDistAnimation";
     private const string lightAttackAnimation = "LightAtackDistAnimation";
-    
+    public Arrow arrowFunctional;    
+    public Transform arrowReference;
+  
 
     protected override void Start()
     {
@@ -17,8 +19,33 @@ public class DistanceCharacter : CharacterBase
         dashAnimationName = dashAnimation;
         heavyAttackAnimationName = heavyAttackAnimation;
         lightAttackAnimationName = lightAttackAnimation;
+        
+
+
 
     }
+
+    public void GenerateArrow()
+    {
+        GameObject arrow =  ArrowPool.Instance.RequestArrow();
+        arrow.transform.position = arrowReference.position;
+        arrow.transform.rotation = arrowReference.rotation;
+        arrowFunctional = arrow.GetComponent<Arrow>();
+    }
+
+
+
+    public void ShotArrow()
+    {
+        arrowFunctional.ShotArrow();
+    }
+
+    public void ShotChargedArrow()
+    {
+        arrowFunctional.ShotChargedArrow();
+    }
+
+
 
 
 
