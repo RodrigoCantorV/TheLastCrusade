@@ -13,7 +13,7 @@ public class MeeleCharacter : CharacterBase
     {
         base.Start();
 
-        playerSpeed = 5.0f;
+        playerSpeed = 0.5f;
         dashAnimationName = dashAnimation;
         heavyAttackAnimationName = heavyAttackAnimation;
         lightAttackAnimationName = lightAttackAnimation;

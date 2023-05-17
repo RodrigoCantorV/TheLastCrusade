@@ -13,7 +13,7 @@ public class DistanceCharacter : CharacterBase
     protected override void Start()
     {
         base.Start();
-        playerSpeed = 10.0f;
+        playerSpeed = 2.0f;
         dashAnimationName = dashAnimation;
         heavyAttackAnimationName = heavyAttackAnimation;
         lightAttackAnimationName = lightAttackAnimation;
