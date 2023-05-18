@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9cf23fee6c1aaa54391cb64aef3031d9
+guid: 64181e8eb916fcd4c99548be5a248122
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -36,7 +36,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: HeavyAttackDistAnimation
+      name: SpecialAttackDistAnimation
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
@@ -60,15 +60,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.59046054
-        functionName: GenerateArrow
+      - time: 0.39299932
+        functionName: GenerateArrows
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.89309216
-        functionName: ShotChargedArrow
+        functionName: ShotSpecialAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

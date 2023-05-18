@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    float bulletSpeed = 0.7f;
+    float bulletSpeed = 20f;
 
     bool isShot = false;
     Vector3 arrowDirection;
@@ -12,15 +12,16 @@ public class Arrow : MonoBehaviour
     Ray ray;
     private Rigidbody rb;
     float arrowDamage = 5;
+    Vector3 offsetSpecialAttack = new Vector3(1, 0, 1);
 
     Vector3 realArrowDirection;
+   
 
     [SerializeField]LayerMask hightFixLayer;
     void Start()
     {
         arrowReference = GameObject.Find("ArrowReference").transform; 
-        rb = GetComponent<Rigidbody>();
-        
+        rb = GetComponent<Rigidbody>();        
     }
  
 
@@ -42,21 +43,52 @@ public class Arrow : MonoBehaviour
             transform.rotation = arrowReference.rotation;
             SetPointOfShoot();
         }
-        if (isShot)
-        {            
-            rb.AddForce(realArrowDirection.normalized * bulletSpeed, ForceMode.Impulse );     
-        }  
+
     }
 
     public void ShotArrow()
-    {        
-        isShot = true;
+    {
+    
         arrowDamage = 5;
+        Shot();
+     
     }  
     public void ShotChargedArrow()
-    {        
-        isShot = true;
+    {
+
         arrowDamage = 10;
+        Shot();
+
+    }
+
+    public void ShotSpecialAttack(int arrowCounter)
+    {
+        arrowDamage = 20;
+        ShotSpecial(arrowCounter);   
+    }
+
+    void Shot()
+    {
+        transform.rotation = arrowReference.rotation;
+              
+        rb.AddForce(realArrowDirection.normalized * bulletSpeed, ForceMode.Impulse);
+        isShot = true;
+    }
+
+    void ShotSpecial(int arrowCounter) {
+        transform.rotation = arrowReference.rotation;
+        isShot = true;
+
+        print(arrowCounter);
+        if (arrowCounter == 0)
+        {
+            realArrowDirection = realArrowDirection - offsetSpecialAttack;
+        }
+        if (arrowCounter == 2)
+        {
+            realArrowDirection = realArrowDirection + offsetSpecialAttack;
+        }
+        rb.AddForce(realArrowDirection.normalized * bulletSpeed, ForceMode.Impulse);
     }
 
     
@@ -69,5 +101,7 @@ public class Arrow : MonoBehaviour
         }
         //gameObject.SetActive(false);
     }
+
+
 
 }

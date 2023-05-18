@@ -19,8 +19,8 @@ public class CharacterBase : MonoBehaviour
     public StandingState movement;
     public DashState dashing;
     public HeavyAttackState heavyAttacking;
-
     public LightAttackState lightAttacking;
+    public SpecialAttackState specialAttacking;
 
     [HideInInspector]
     public CharacterController controller;
@@ -33,7 +33,8 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector]
     public Vector3 playerVelocity;
     [HideInInspector]
-    public string dashAnimationName, heavyAttackAnimationName, lightAttackAnimationName;
+    public string dashAnimationName, heavyAttackAnimationName, lightAttackAnimationName, specialAttackAnimationName;
+    public float playerSyncWithPointer = 90f;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -48,6 +49,7 @@ public class CharacterBase : MonoBehaviour
         dashing = new DashState(this, movementSM);
         heavyAttacking = new HeavyAttackState(this, movementSM);
         lightAttacking = new LightAttackState(this, movementSM);
+        specialAttacking = new SpecialAttackState(this, movementSM);
 
         movementSM.Initialize(movement);
     }
@@ -90,5 +92,16 @@ public class CharacterBase : MonoBehaviour
     protected void FixedUpdate()
     {
         movementSM.currentState.PhysicsUpdate();
+    }
+    public float RotationAngle()
+    {
+        Vector3 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
+        Vector3 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
+        Vector3 direction = mouseOnScreen - positionOnScreen;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        return angle;
     }
 }

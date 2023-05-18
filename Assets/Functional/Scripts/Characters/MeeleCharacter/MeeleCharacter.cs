@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class MeeleCharacter : CharacterBase
 {
-    private const string dashAnimation = "DashMeeleAnimation";
-    private const string heavyAttackAnimation = "HeavyAttackMeeleAnimation";
-    private const string lightAttackAnimation = "LightAtackMeeletAnimation";
+    private const string DASH_ANIMATION_NAME = "DashMeeleAnimation";
+    private const string HEAVY_ATTACK_ANIMATION_NAME = "HeavyAttackMeeleAnimation";
+    private const string LIGHT_ATTACK_ANIMATION_NAME = "LightAtackMeeletAnimation";
+    private const string SPECIAL_ATTACK_ANIMATION_NAME = "LightAtackMeeletAnimation";// CAMBIAR A NOMBRE DE ANIMACION SPECIAL
+
     
 
     protected override void Start()
@@ -15,9 +17,10 @@ public class MeeleCharacter : CharacterBase
         base.lightAttackDamage = 65.0f;
         base.heavyAttackDamage = 130.0f;
 
-        dashAnimationName = dashAnimation;
-        heavyAttackAnimationName = heavyAttackAnimation;
-        lightAttackAnimationName = lightAttackAnimation;
+        dashAnimationName = DASH_ANIMATION_NAME;
+        heavyAttackAnimationName = HEAVY_ATTACK_ANIMATION_NAME;
+        lightAttackAnimationName = LIGHT_ATTACK_ANIMATION_NAME;
+        specialAttackAnimationName = SPECIAL_ATTACK_ANIMATION_NAME;
 
         StartDealDamageLightAttack();
         EndDealDamageLightAttack();

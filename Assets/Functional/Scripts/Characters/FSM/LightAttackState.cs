@@ -6,6 +6,7 @@ public class LightAttackState : State
     float clipLength;
     float clipSpeed;
     bool attack;
+    
     public LightAttackState(CharacterBase _characterVideo, StateMachine _stateMachine) : base(_characterVideo, _stateMachine)
     {
         CharacterBase = _characterVideo;
@@ -44,6 +45,14 @@ public class LightAttackState : State
         {           
             stateMachine.ChangeState(CharacterBase.movement);                       
         }
+
+       
+        if (CharacterBase.ToString() == "DistanceCharacter (DistanceCharacter)")
+        {
+            CharacterBase.transform.rotation = Quaternion.Euler(new Vector3(0, -CharacterBase.RotationAngle() + CharacterBase.playerSyncWithPointer, 0));
+        }
+        
+        
     }
 
 
@@ -66,4 +75,5 @@ public class LightAttackState : State
         }
         return null;
     }
+
 }
