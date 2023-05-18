@@ -19,20 +19,20 @@ public class MiddleCharacter : CharacterBase
         heavyAttackAnimationName = heavyAttackAnimation;
         lightAttackAnimationName = lightAttackAnimation;
 
-        StartDealDamage();
-        EndDealDamage();
+        // StartDealDamage();
+        // EndDealDamage();
 
     }
 
-    protected override void StartDealDamage()
-    {
-        base.StartDealDamage();
-        GetComponentInChildren<DamageDealer>().StartDealDamage(); 
-    }
+    // protected override void StartDealDamage()
+    // {
+    //     base.StartDealDamage();
+    //     GetComponentInChildren<DamageDealer>().StartDealDamage(); 
+    // }
 
-    protected override void EndDealDamage()
-    {
-        base.EndDealDamage();
-        GetComponentInChildren<DamageDealer>().EndDealDamage();
-    }
+    // protected override void EndDealDamage()
+    // {
+    //     base.EndDealDamage();
+    //     GetComponentInChildren<DamageDealer>().EndDealDamage();
+    // }
 }

@@ -12,26 +12,43 @@ public class MeeleCharacter : CharacterBase
     protected override void Start()
     {
         base.Start();
+        base.lightAttackDamage = 65.0f;
+        base.heavyAttackDamage = 130.0f;
 
-        playerSpeed = 2.5f;
         dashAnimationName = dashAnimation;
         heavyAttackAnimationName = heavyAttackAnimation;
         lightAttackAnimationName = lightAttackAnimation;
 
-        StartDealDamage();
-        EndDealDamage();
+        StartDealDamageLightAttack();
+        EndDealDamageLightAttack();
+
+        StartDealDamageHeavyAttack();
+        EndDealDamageHeavyAttack();
 
     }
 
-    protected override void StartDealDamage()
+    protected override void StartDealDamageLightAttack()
     {
-        base.StartDealDamage();
+        base.StartDealDamageLightAttack();
+        GetComponentInChildren<DamageDealer>().SetDamage(base.lightAttackDamage);
         GetComponentInChildren<DamageDealer>().StartDealDamage(); 
     }
 
-    protected override void EndDealDamage()
+    protected override void EndDealDamageLightAttack()
     {
-        base.EndDealDamage();
+        base.EndDealDamageLightAttack();
+        GetComponentInChildren<DamageDealer>().EndDealDamage();
+    }
+
+    protected override void StartDealDamageHeavyAttack()
+    {
+        base.StartDealDamageHeavyAttack();
+        GetComponentInChildren<DamageDealer>().SetDamage(base.heavyAttackDamage);
+        GetComponentInChildren<DamageDealer>().StartDealDamage();         
+    }
+    protected override void EndDealDamageHeavyAttack()
+    {
+        base.EndDealDamageHeavyAttack();
         GetComponentInChildren<DamageDealer>().EndDealDamage();
     }
 

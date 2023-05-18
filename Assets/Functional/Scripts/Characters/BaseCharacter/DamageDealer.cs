@@ -8,7 +8,7 @@ public class DamageDealer : MonoBehaviour
     // List<GameObject> hasDealtDamage;
  
     [SerializeField] float weaponLength;
-    [SerializeField] float weaponDamage;
+    public float weaponDamage;
     void Start()
     {
         canDealDamage = false;
@@ -25,16 +25,26 @@ public class DamageDealer : MonoBehaviour
             int layerMask = 1 << 9;
             if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
-                if(hit.transform.TryGetComponent(out EnemyShortDistance enemyShortDistance) || hit.transform.TryGetComponent(out EnemyLongDistance enemyLongDistance))
+                /*if(hit.transform.TryGetComponent(out Enemy enemy))
                 {
                     Debug.Log("Ataco al enemigo");
-                    hasDealtDamage = true;
-                }
-                /*if(hit.transform.TryGetComponent(out EnemyLongDistance enemyLongDistance))
-                {
-                    Debug.Log("Ataco al mago");
+                    enemy.TakeDamage(weaponDamage);
                     hasDealtDamage = true;
                 }*/
+
+                if(hit.transform.TryGetComponent(out EnemyShortDistance enemyShortDistance))
+                {
+                    Debug.Log("Ataco al esqueleto");
+                    enemyShortDistance.TakeDamage(weaponDamage);
+                    hasDealtDamage = true;
+                }
+                if(hit.transform.TryGetComponent(out EnemyLongDistance enemyLongDistance))
+                {
+                    Debug.Log("Ataco al mago");
+                    enemyLongDistance.TakeDamage(weaponDamage);
+                    hasDealtDamage = true;
+                }
+                
                 // if (hit.transform.TryGetComponent(out EnemyAI enemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
                 // {
                 //     Debug.Log("Golpeo enemigo");
@@ -54,6 +64,11 @@ public class DamageDealer : MonoBehaviour
     public void EndDealDamage()
     {
         canDealDamage = false;
+    }
+
+    public void SetDamage(float damage)
+    {
+        weaponDamage = damage;
     }
  
     private void OnDrawGizmos()

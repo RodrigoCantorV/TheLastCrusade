@@ -52,25 +52,25 @@ ModelImporter:
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
+      keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.10028249
-        functionName: StartDealDamage
+      - time: 0.27272728
+        functionName: StartDealDamageLightAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.57344633
-        functionName: EndDealDamage
+      - time: 0.50497836
+        functionName: EndDealDamageLightAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

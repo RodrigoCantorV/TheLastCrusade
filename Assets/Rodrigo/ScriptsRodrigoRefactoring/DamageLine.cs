@@ -21,6 +21,8 @@ public class DamageLine : EnemyDamageDealer
                     // health.TakeDamage(weaponDamage);
                     // health.HitVFX(hit.point);
                     Debug.Log("Atacando Jugador");
+                    health.TakeDamage(weaponDamage);
+
                     hasDealtDamage = true;
                 }
             }

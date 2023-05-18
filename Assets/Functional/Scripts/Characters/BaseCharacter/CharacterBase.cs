@@ -3,15 +3,17 @@ using UnityEngine.InputSystem;
 public class CharacterBase : MonoBehaviour
 {
     [Header("Controls")]
-    public float playerSpeed = 7.0f;
-    public float dashSpeed = 10.0f;
-    public float life = 100.0f;
+    public float playerSpeed;
+    public float dashSpeed;
+    public float life;
     
     [Header("Animation Smoothing")]
     [Range(0, 1)]
     public float delayAnimationTime = 0f;
     [Range(0, 1)]
     public float velocityDampTime = 0.9f;
+    public float lightAttackDamage;
+    public float heavyAttackDamage;
 
     public StateMachine movementSM;
     public StandingState movement;
@@ -49,11 +51,34 @@ public class CharacterBase : MonoBehaviour
 
         movementSM.Initialize(movement);
     }
-    protected virtual void StartDealDamage()
+    protected virtual void StartDealDamageLightAttack()
     {        
     }
-    protected virtual void EndDealDamage()
+    protected virtual void EndDealDamageLightAttack()
     {
+    }
+
+    protected virtual void StartDealDamageHeavyAttack()
+    {        
+    }
+    protected virtual void EndDealDamageHeavyAttack()
+    {
+    }
+
+    public void TakeDamage(float damageAmount)
+    {
+        life -= damageAmount;
+        //animator.SetTrigger("damage");
+        if (life <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("se muertio");
+        //Destroy(this.gameObject);
     }
  
     protected void Update()

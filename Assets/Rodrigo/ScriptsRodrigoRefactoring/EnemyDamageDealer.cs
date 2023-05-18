@@ -8,7 +8,7 @@ public abstract class EnemyDamageDealer : MonoBehaviour
     protected bool hasDealtDamage;
 
    
-    [SerializeField] float weaponDamage;
+    [SerializeField] protected float weaponDamage;
     void Start()
     {
         canDealDamage = false;

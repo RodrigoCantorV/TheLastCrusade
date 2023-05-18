@@ -40,7 +40,7 @@ public abstract class Enemy : MonoBehaviour
         InitializeVariables();
             MoveEnemy();
         AttackEnemy();
-        Obser();
+        //Obser();
     }
 
     void InitializeVariables()
