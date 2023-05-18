@@ -7,6 +7,7 @@ public class DamageSphere : EnemyDamageDealer
     [SerializeField] float weaponRatio;
     float poo;
 
+
     public override void GenerateDamage()
     {
         if (canDealDamage && !hasDealtDamage)
@@ -16,6 +17,7 @@ public class DamageSphere : EnemyDamageDealer
 
                 // health.TakeDamage(weaponDamage);
                 // health.HitVFX(hit.point);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterBase>().TakeDamage(weaponDamage);
                 Debug.Log("Atacando Jugador");
                 hasDealtDamage = true;
 

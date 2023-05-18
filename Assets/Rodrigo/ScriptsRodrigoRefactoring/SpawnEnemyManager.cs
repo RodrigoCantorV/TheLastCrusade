@@ -5,14 +5,14 @@ using UnityEngine;
 public class SpawnEnemyManager : MonoBehaviour
 {
     public List<GameObject> positions;
-    public int amountWave;
+    //public int amountWave;
 
     public int waveBaseEnemy2;
     public int waveBoosEnemy1;
     // Start is called before the first frame update
     void Start()
     {
-        InstanceEnemyWave(amountWave);
+        //InstanceEnemyWave(amountWave);
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class SpawnEnemyManager : MonoBehaviour
 
     }
 
-    void InstanceEnemyWave(int amountWave)
+    public void InstanceEnemyWave(int amountWave)
     {
         for (int i = 0; i < amountWave; i++)
         {

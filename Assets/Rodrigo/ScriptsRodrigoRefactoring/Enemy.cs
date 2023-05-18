@@ -64,6 +64,7 @@ public abstract class Enemy : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         health -= damageAmount;
+        HitVFX(this.gameObject.transform.position);
         animator.SetTrigger("damage");
         if (health <= 0)
         {
