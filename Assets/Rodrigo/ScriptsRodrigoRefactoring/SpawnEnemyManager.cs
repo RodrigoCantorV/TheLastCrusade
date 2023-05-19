@@ -28,7 +28,7 @@ public class SpawnEnemyManager : MonoBehaviour
             int positionCube = Random.Range(0, positions.Count);
             GameObject enemy = EnemyPool.Instance.RequestEnemy("EnemyBase1");
             enemy.transform.position = positions[positionCube].transform.position;
-        }
+        }   
         
         if ((amountWave % waveBaseEnemy2) == 0)
         {

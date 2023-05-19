@@ -57,6 +57,9 @@ public class EnemyPool : MonoBehaviour
                 return enemyList1[i];
             }
         }
-        return null;
+        AddEnemyToPool(1);
+        enemyList1[enemyList1.Count - 1].SetActive(true);
+        return (enemyList1[enemyList1.Count - 1]);
     }
 }
+    
