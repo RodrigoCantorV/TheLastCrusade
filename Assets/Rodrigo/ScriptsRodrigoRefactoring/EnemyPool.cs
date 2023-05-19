@@ -37,6 +37,10 @@ public class EnemyPool : MonoBehaviour
         // Creamos las instancia por cada enemigo
         for (int i = 0; i < enemyesPrefabs.Count; i++)
         {
+
+            if(enemyesPrefabs[i].CompareTag("EnemyBoss1")){
+                amount = 2;
+            }
             for (int j = 0; j < amount; j++)
             {
                 GameObject myEnemy = Instantiate(enemyesPrefabs[i]);
@@ -57,6 +61,9 @@ public class EnemyPool : MonoBehaviour
                 return enemyList1[i];
             }
         }
-        return null;
+        AddEnemyToPool(1);
+        enemyList1[enemyList1.Count - 1].SetActive(true);
+        return (enemyList1[enemyList1.Count - 1]);
     }
 }
+    

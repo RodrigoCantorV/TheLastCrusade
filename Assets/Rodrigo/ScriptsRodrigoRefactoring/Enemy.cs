@@ -27,18 +27,19 @@ public abstract class Enemy : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
 
     void Update()
     {
-    
+
     }
 
-    private void LateUpdate() {
+    private void LateUpdate()
+    {
         InitializeVariables();
-            MoveEnemy();
+        MoveEnemy();
         AttackEnemy();
         //Obser();
     }
@@ -46,7 +47,7 @@ public abstract class Enemy : MonoBehaviour
     void InitializeVariables()
     {
         agent = GetComponent<NavMeshAgent>();
-        player =  GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
     }
     void MoveEnemy()
@@ -64,17 +65,26 @@ public abstract class Enemy : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         health -= damageAmount;
-        HitVFX(this.gameObject.transform.position);
         animator.SetTrigger("damage");
+        HitVFX(this.gameObject.transform.position);
         if (health <= 0)
         {
+            GameManager.can--;
+            if (GameManager.can == 0)
+            {
+                GameManager.esCero = true;
+            }
+            Debug.Log(GameManager.can);
             Die();
+
         }
     }
 
+
     void Die()
     {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     public void StartDealDamage()
@@ -103,7 +113,8 @@ public abstract class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, aggroRange);
     }
 
-    void Obser(){
+    void Obser()
+    {
         transform.LookAt(player.transform.position);
     }
 

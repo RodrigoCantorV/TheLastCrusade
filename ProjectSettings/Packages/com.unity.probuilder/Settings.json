@@ -106,7 +106,11 @@
             {
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "ShapeBuilder.ActiveShapeIndex",
+<<<<<<< HEAD
                 "value": "{\"m_Value\":5}"
+=======
+                "value": "{\"m_Value\":11}"
+>>>>>>> developRodrigoLocal
             },
             {
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -126,7 +130,11 @@
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize",
+<<<<<<< HEAD
                 "value": "{\"m_Value\":{\"x\":84.0,\"y\":25.0,\"z\":-97.0}}"
+=======
+                "value": "{\"m_Value\":{\"x\":91.0,\"y\":14.0,\"z\":-96.0}}"
+>>>>>>> developRodrigoLocal
             },
             {
                 "type": "UnityEngine.Quaternion, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -162,11 +170,14 @@
                 "type": "UnityEngine.ProBuilder.Shapes.Shape, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.Torus",
                 "value": "{}"
+<<<<<<< HEAD
             },
             {
                 "type": "UnityEngine.ProBuilder.Shapes.Shape, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.Pipe",
                 "value": "{}"
+=======
+>>>>>>> developRodrigoLocal
             }
         ]
     }
