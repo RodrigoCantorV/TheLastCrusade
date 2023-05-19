@@ -69,12 +69,7 @@ public abstract class Enemy : MonoBehaviour
         HitVFX(this.gameObject.transform.position);
         if (health <= 0)
         {
-            GameManager.can--;
-            if (GameManager.can == 0)
-            {
-                GameManager.esCero = true;
-            }
-            Debug.Log(GameManager.can);
+            GameManager.amountEnemyes--;
             Die();
 
         }

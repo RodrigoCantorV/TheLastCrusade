@@ -4,54 +4,40 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject enemigo;
-    Enemy[] enemigos;
-    public static int can = 1; // Esto es igual a cero !! ESTO NO ME LO SABIA
-    public int countWaves = 1;
-    public int cantidadEnemigos;
-
-    public static bool esCero = false;
-
-    public SpawnEnemyManager waves;
+    public static int amountEnemyes = 1; // Esto es igual a cero !! ESTO NO ME LO SABIA
+    private int countWaves = 1;
+    private bool enter = false;
+    private SpawnEnemyManager waves;
     // Start is called before the first frame update
     void Start()
     {
 
         waves = GameObject.Find("EnemyPooling").GetComponent<SpawnEnemyManager>();
         waves.InstanceEnemyWave(countWaves);
-       // StartCoroutine(popo());
-
+        amountEnemyes = countWaves;
+        //StartCoroutine(InstanciateWavesWithTime());
+        //InvokeRepeating("InstanciateWaves",10,10);
     }
-
 
     // Update is called once per frame
     void Update()
     {
-        enemigos = enemigo.GetComponentsInChildren<Enemy>();
-        Debug.Log(enemigos.Length);
-        //Invoke("InstanciateWaves",10);
-          if (enemigos.Length == 0)
+        // InstanciateWaves();
+        // if (can == 0 && entro == false) // 0 && true
+        if (amountEnemyes == 0 && !(enter)) // 0 && true
         {
-            countWaves ++;
-            waves.InstanceEnemyWave(countWaves);
+            StartCoroutine(InstanciateWavesWithTime());
         }
-
     }
 
-    void InstanciateWaves()
+    IEnumerator InstanciateWavesWithTime()
     {
-        if (enemigos.Length == 0)
-        {
-            countWaves ++;
-            waves.InstanceEnemyWave(countWaves);
-        }
+        enter = true;
+        yield return new WaitForSeconds(5);
+        countWaves++; // = 2
+        amountEnemyes = countWaves; // 2
 
-
-
-    }
-    IEnumerator popo()
-    {
-        yield return new WaitForSeconds(12);
-        InstanciateWaves();
+        waves.InstanceEnemyWave(countWaves);
+        enter = false;
     }
 }
