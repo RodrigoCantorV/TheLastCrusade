@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class MiddleCharacter : CharacterBase
 {
-    private const string dashAnimation = "DashMiddleAnimation";
-    private const string heavyAttackAnimation = "HeavyAttackMiddleAnimation";
-    private const string lightAttackAnimation = "LightAttackMiddleAnimation";
+    private const string DASH_ANIMATION_NAME = "DashMiddleAnimation";
+    private const string HEAVY_ATTACK_ANIMATION_NAME = "HeavyAttackMiddleAnimation";
+    private const string LIGHT_ATTACK_ANIMATION_NAME = "LightAttackMiddleAnimation";
+    private const string SPECIAL_ATTACK_ANIMATION_NAME = "HeavyAttackMiddleAnimation";/// CAMBIAR A NOMBRE DE ANIMACION SPECIAL
+    private Animation animationLightAttack;
+    private Animation animationHardAttack;
 
     protected override void Start()
     {
@@ -15,24 +18,35 @@ public class MiddleCharacter : CharacterBase
         playerSpeed = 8.0f;
         // Dash media
         dashSpeed = 6.0f;
-        dashAnimationName = dashAnimation;
-        heavyAttackAnimationName = heavyAttackAnimation;
-        lightAttackAnimationName = lightAttackAnimation;
+        dashAnimationName = DASH_ANIMATION_NAME;
+        heavyAttackAnimationName = HEAVY_ATTACK_ANIMATION_NAME;
+        lightAttackAnimationName = LIGHT_ATTACK_ANIMATION_NAME;
+        specialAttackAnimationName = SPECIAL_ATTACK_ANIMATION_NAME;
 
+        base.lightAttackDamage = 20.0f;
+        base.heavyAttackDamage = 30.0f;
         // StartDealDamage();
         // EndDealDamage();
 
     }
+    public void SpecialAttack()
+    {
+        StartCoroutine(SpecialAttackCorroutine());
+    }
 
-    // protected override void StartDealDamage()
-    // {
-    //     base.StartDealDamage();
-    //     GetComponentInChildren<DamageDealer>().StartDealDamage(); 
-    // }
-
-    // protected override void EndDealDamage()
-    // {
-    //     base.EndDealDamage();
-    //     GetComponentInChildren<DamageDealer>().EndDealDamage();
-    // }
+    IEnumerator SpecialAttackCorroutine()
+    {
+        animationLightAttack["LightAttack"].speed = 3;
+        animationHardAttack["HeavyAttack"].speed = 3;
+        base.lightAttackDamage = 65.0f;
+        base.heavyAttackDamage = 130.0f;
+        yield return new WaitForSeconds(10);
+        animationLightAttack["LightAttack"].speed = 1;
+        animationHardAttack["HeavyAttack"].speed = 1;
+        base.lightAttackDamage = 20.0f;
+        base.heavyAttackDamage = 30.0f;
+    }
 }
+
+
+

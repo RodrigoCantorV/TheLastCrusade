@@ -7,6 +7,7 @@ public class StandingState : State
     float playerSpeed;
     bool heavyAttack, lightAttack;
     bool dash;
+    bool specialAttack;
     float playerSyncWithPointer = 90f;
 
     Vector3 cVelocity;
@@ -25,6 +26,7 @@ public class StandingState : State
 
         heavyAttack = false;
         lightAttack = false;
+        specialAttack = false; 
         dash = false;
         input = Vector2.zero;
         velocity = Vector3.zero;
@@ -52,6 +54,12 @@ public class StandingState : State
             heavyAttack = true;
            
         }
+        if (specialAttackAction.triggered)
+        {
+            specialAttack = true;
+        }
+
+
 
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
@@ -78,6 +86,10 @@ public class StandingState : State
         if (heavyAttack)
         {
             stateMachine.ChangeState(CharacterBase.heavyAttacking);
+        }
+        if(specialAttack)
+        {
+            stateMachine.ChangeState(CharacterBase.specialAttacking);
         }
     }
 

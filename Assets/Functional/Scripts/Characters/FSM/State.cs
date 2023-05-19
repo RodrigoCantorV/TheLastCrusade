@@ -13,6 +13,7 @@ public class State
     public InputAction dashAction;
     public InputAction lightAttackAction;
     public InputAction heavyAttackAction;
+    public InputAction specialAttackAction;
 
     public State(CharacterBase _character, StateMachine _stateMachine)
     {
@@ -23,6 +24,7 @@ public class State
         dashAction = CharacterBase.playerInput.actions["Dash"];
         lightAttackAction = CharacterBase.playerInput.actions["LightAttack"];
         heavyAttackAction = CharacterBase.playerInput.actions["HeavyAttack"];
+        specialAttackAction = CharacterBase.playerInput.actions["SpecialAttack"];
     }
 
     public virtual void Enter()
