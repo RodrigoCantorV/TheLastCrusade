@@ -4,7 +4,7 @@ using UnityEngine;
 public class PowerPool : MonoBehaviour
 {
     [SerializeField] private GameObject powerPrefab;
-    [SerializeField] private int poolZise = 10;
+    [SerializeField] private int poolZise = 3 ;
     [SerializeField] private List<GameObject> powerList;
 
     // Patron singleton
