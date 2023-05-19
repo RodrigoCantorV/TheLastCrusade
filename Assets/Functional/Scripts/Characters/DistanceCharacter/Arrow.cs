@@ -15,7 +15,6 @@ public class Arrow : MonoBehaviour
     Vector3 offsetSpecialAttack = new Vector3(1, 0, 1);
 
     Vector3 realArrowDirection;
-   
 
     [SerializeField]LayerMask hightFixLayer;
     void Start()
@@ -37,33 +36,28 @@ public class Arrow : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         if (!isShot)
         {
             transform.rotation = arrowReference.rotation;
             SetPointOfShoot();
-        }
-
+        } 
     }
 
     public void ShotArrow()
     {
-    
-        arrowDamage = 5;
+        arrowDamage = 50;
         Shot();
-     
     }  
     public void ShotChargedArrow()
     {
-
-        arrowDamage = 10;
+        arrowDamage = 130;
         Shot();
-
     }
 
     public void ShotSpecialAttack(int arrowCounter)
     {
-        arrowDamage = 20;
+        arrowDamage = 100;
         ShotSpecial(arrowCounter);   
     }
 
@@ -77,9 +71,7 @@ public class Arrow : MonoBehaviour
 
     void ShotSpecial(int arrowCounter) {
         transform.rotation = arrowReference.rotation;
-        isShot = true;
-
-        print(arrowCounter);
+        isShot = true;       
         if (arrowCounter == 0)
         {
             realArrowDirection = realArrowDirection - offsetSpecialAttack;
@@ -96,8 +88,11 @@ public class Arrow : MonoBehaviour
     {
         if (other.CompareTag("EnemyBoss1")|| other.CompareTag("EnemyBase1") || other.CompareTag("EnemyBase2"))
         {
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            enemy.TakeDamage(arrowDamage);
+
             gameObject.SetActive(false);
-            print("Flechado");
+            print("arrow Damage: " + arrowDamage);
         }
         //gameObject.SetActive(false);
     }
