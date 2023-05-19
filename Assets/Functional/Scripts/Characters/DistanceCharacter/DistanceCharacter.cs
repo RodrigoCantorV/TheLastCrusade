@@ -11,7 +11,8 @@ public class DistanceCharacter : CharacterBase
     private Arrow arrowFunctional;
     private int arrowsSpecialAmount = 3;
     private Arrow[] arrowsFunctional;
-    public Transform arrowReference;  
+    public Transform arrowReference;
+
     
     protected override void Start()
     {

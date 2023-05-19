@@ -7,7 +7,7 @@ public class MeeleCharacter : CharacterBase
     private const string DASH_ANIMATION_NAME = "DashMeeleAnimation";
     private const string HEAVY_ATTACK_ANIMATION_NAME = "HeavyAttackMeeleAnimation";
     private const string LIGHT_ATTACK_ANIMATION_NAME = "LightAtackMeeletAnimation";
-    private const string SPECIAL_ATTACK_ANIMATION_NAME = "LightAtackMeeletAnimation";// CAMBIAR A NOMBRE DE ANIMACION SPECIAL
+    private const string SPECIAL_ATTACK_ANIMATION_NAME = "SpecialAttackMeeleAnimation";// CAMBIAR A NOMBRE DE ANIMACION SPECIAL
 
     
 

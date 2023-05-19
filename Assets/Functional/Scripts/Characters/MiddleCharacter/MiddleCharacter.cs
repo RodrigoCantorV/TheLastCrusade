@@ -7,7 +7,7 @@ public class MiddleCharacter : CharacterBase
     private const string DASH_ANIMATION_NAME = "DashMiddleAnimation";
     private const string HEAVY_ATTACK_ANIMATION_NAME = "HeavyAttackMiddleAnimation";
     private const string LIGHT_ATTACK_ANIMATION_NAME = "LightAttackMiddleAnimation";
-    private const string SPECIAL_ATTACK_ANIMATION_NAME = "HeavyAttackMiddleAnimation";/// CAMBIAR A NOMBRE DE ANIMACION SPECIAL
+    private const string SPECIAL_ATTACK_ANIMATION_NAME = "SpecialAttackMiddleAnimation";/// CAMBIAR A NOMBRE DE ANIMACION SPECIAL
     private Animation animationLightAttack;
     private Animation animationHardAttack;
 
