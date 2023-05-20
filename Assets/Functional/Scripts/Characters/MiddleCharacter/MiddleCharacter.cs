@@ -14,6 +14,7 @@ public class MiddleCharacter : CharacterBase
     protected override void Start()
     {
         base.Start();
+        name = "DistanceCharacter";
         // Media velocidad
         playerSpeed = 8.0f;
         // Dash media

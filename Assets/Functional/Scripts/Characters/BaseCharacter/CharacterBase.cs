@@ -31,13 +31,14 @@ public class CharacterBase : MonoBehaviour
     public PlayerInput playerInput;
     [HideInInspector]
     public Animator animator;
-    // [HideInInspector]
-    // public DamageDealer dealer;
     [HideInInspector]
     public Vector3 playerVelocity;
     [HideInInspector]
-    public string dashAnimationName, heavyAttackAnimationName, lightAttackAnimationName, specialAttackAnimationName;
-    public float playerSyncWithPointer = 90f;
+
+    public string dashAnimationName, heavyAttackAnimationName, lightAttackAnimationName, specialAttackAnimationName, hurtAnimationName, deadAnimationName;
+    [HideInInspector]
+    public float playerSyncWithPointer = 90f; 
+
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -92,7 +93,6 @@ public class CharacterBase : MonoBehaviour
     void Die()
     {
         Debug.Log("se muertio");
-        //Destroy(this.gameObject);
     }
  
     protected void Update()

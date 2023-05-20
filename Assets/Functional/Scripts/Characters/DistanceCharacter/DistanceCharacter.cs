@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class DistanceCharacter : CharacterBase
 {  
-    private const string DASH_ANIMATION_NAME = "DashDistAnimation";
-    private const string HEAVY_ATTACK_ANIMATION_NAME = "HeavyAttackDistAnimation";
-    private const string LIGHT_ATTACK_ANIMATION_NAME = "LightAtackDistAnimation";
-    private const string SPECIAL_ATTACK_ANIMATION_NAME = "SpecialAttackDistAnimation";
+    private const string DASH_ANIMATION_NAME = "DashDistance";
+    private const string HEAVY_ATTACK_ANIMATION_NAME = "HardAttackDist";
+    private const string LIGHT_ATTACK_ANIMATION_NAME = "LightAttackDistance";
+    private const string SPECIAL_ATTACK_ANIMATION_NAME = "SpecialAttackDist";
+    private const string HURT_ANIMATION_NAME = "HurtDistancia";
+    private const string DEAD_ANIMATION_NAME = "DeadDist";
     private Arrow arrowFunctional;
     private int arrowsSpecialAmount = 3;
     private Arrow[] arrowsFunctional;
@@ -21,7 +23,9 @@ public class DistanceCharacter : CharacterBase
         dashAnimationName = DASH_ANIMATION_NAME;
         heavyAttackAnimationName = HEAVY_ATTACK_ANIMATION_NAME;
         lightAttackAnimationName = LIGHT_ATTACK_ANIMATION_NAME;
-        specialAttackAnimationName = SPECIAL_ATTACK_ANIMATION_NAME;    
+        specialAttackAnimationName = SPECIAL_ATTACK_ANIMATION_NAME;
+        hurtAnimationName=HURT_ANIMATION_NAME;
+        deadAnimationName = DEAD_ANIMATION_NAME;
     }
 
     public void GenerateArrow()
@@ -49,6 +53,7 @@ public class DistanceCharacter : CharacterBase
     public void ShotArrow()
     {
         arrowFunctional.ShotArrow();
+        
     }
 
     public void ShotChargedArrow()
