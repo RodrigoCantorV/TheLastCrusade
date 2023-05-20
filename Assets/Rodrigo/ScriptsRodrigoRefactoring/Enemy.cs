@@ -42,7 +42,7 @@ public abstract class Enemy : MonoBehaviour
         InitializeVariables();
         MoveEnemy();
         AttackEnemy();
-        //Obser();
+        Obser();
     }
 
     void InitializeVariables()
@@ -116,7 +116,15 @@ public abstract class Enemy : MonoBehaviour
 
     void Obser()
     {
-        transform.LookAt(player.transform.position);
+      //  transform.LookAt(player.transform.position);
+       if (player != null)
+        {
+            Vector3 direction = player.transform.position - transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            // Aplicar la rotación gradualmente
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15 * Time.deltaTime);
+        }
     }
     void ThrowDrop()
     {
