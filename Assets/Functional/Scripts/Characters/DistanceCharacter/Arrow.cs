@@ -5,7 +5,6 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     float bulletSpeed = 20f;
-
     bool isShot = false;
     Vector3 arrowDirection;
     private Transform arrowReference;
@@ -13,7 +12,6 @@ public class Arrow : MonoBehaviour
     private Rigidbody rb;
     float arrowDamage = 5;
     Vector3 offsetSpecialAttack = new Vector3(1, 0, 1);
-
     Vector3 realArrowDirection;
 
     [SerializeField]LayerMask hightFixLayer;
@@ -52,6 +50,7 @@ public class Arrow : MonoBehaviour
     public void ShotChargedArrow()
     {
         arrowDamage = 130;
+        print("disparando");
         Shot();
     }
 
@@ -66,6 +65,8 @@ public class Arrow : MonoBehaviour
         transform.rotation = arrowReference.rotation;
               
         rb.AddForce(realArrowDirection.normalized * bulletSpeed, ForceMode.Impulse);
+
+        print("disparandisimo");
         isShot = true;
     }
 

@@ -916,13 +916,13 @@ AnimatorStateMachine:
     m_Position: {x: 640, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1034964958083231000}
-    m_Position: {x: 500, y: -90, z: 0}
+    m_Position: {x: 510, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3208048691775472956}
     m_Position: {x: 190, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6507500117046748358}
-    m_Position: {x: 840, y: -90, z: 0}
+    m_Position: {x: 750, y: -60, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -955,7 +955,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.1
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 3
+    m_TimeScale: 5
     m_CycleOffset: 0
     m_DirectBlendParameter: speed
     m_Mirror: 0
