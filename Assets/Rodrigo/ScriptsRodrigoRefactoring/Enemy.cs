@@ -24,6 +24,7 @@ public abstract class Enemy : MonoBehaviour
     protected Animator animator;
     protected float timePassed;
     protected float newDestinationCD = 1f;
+    float probability;
 
     void Start()
     {
@@ -76,7 +77,12 @@ public abstract class Enemy : MonoBehaviour
 
     void Die()
     {
-        ThrowDrop();
+
+        probability = Random.value;
+        if (probability > 0.7f)
+        {
+            ThrowDrop();
+        }
         //Destroy(this.gameObject);
         this.gameObject.SetActive(false);
         GameManager.amountEnemyes--;
