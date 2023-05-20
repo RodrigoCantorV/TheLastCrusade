@@ -6,8 +6,27 @@ public class AnimationGifScript : MonoBehaviour
 {
     public Sprite[] animatedImages;
     public Image animateImageObj;
+    public int speedFPS;
+    public bool looping = true;
+    public int posActual;
     void Update()
     {
-       animateImageObj.sprite = animatedImages [(int)(Time.time * 10) % animatedImages.Length];
+        if (looping)
+        {
+            posActual = (int)(Time.time * speedFPS) % animatedImages.Length;
+            animateImageObj.sprite = animatedImages[posActual];
+        }
+
+        if (looping == false && posActual != animatedImages.Length - 1)
+        {
+            posActual = (int)(Time.time * speedFPS) % animatedImages.Length;
+            animateImageObj.sprite = animatedImages[posActual];
+
+        }
+        if (looping == false && posActual == animatedImages.Length - 1)
+        {
+            posActual = animatedImages.Length - 1;
+             animateImageObj.sprite = animatedImages[posActual];
+        }
     }
 }
