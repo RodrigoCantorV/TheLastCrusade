@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     {
         // InstanciateWaves();
         // if (can == 0 && entro == false) // 0 && true
+        Debug.Log(amountEnemyes);
         if (amountEnemyes == 0 && !(enter)) // 0 && true
         {
             StartCoroutine(InstanciateWavesWithTime());
@@ -35,9 +36,8 @@ public class GameManager : MonoBehaviour
         enter = true;
         yield return new WaitForSeconds(5);
         countWaves++; // = 2
-        amountEnemyes = countWaves; // 2
-
         waves.InstanceEnemyWave(countWaves);
         enter = false;
+        amountEnemyes = GameObject.Find("EnemyPooling").GetComponentsInChildren<Enemy>().Length;
     }
 }

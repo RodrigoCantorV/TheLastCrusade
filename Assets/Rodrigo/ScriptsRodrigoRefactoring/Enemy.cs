@@ -69,17 +69,17 @@ public abstract class Enemy : MonoBehaviour
         HitVFX(this.gameObject.transform.position);
         if (health <= 0)
         {
-            GameManager.amountEnemyes--;
             Die();
-
         }
     }
 
 
     void Die()
     {
+        ThrowDrop();
         //Destroy(this.gameObject);
         this.gameObject.SetActive(false);
+        GameManager.amountEnemyes--;
     }
 
     public void StartDealDamage()
@@ -111,6 +111,17 @@ public abstract class Enemy : MonoBehaviour
     void Obser()
     {
         transform.LookAt(player.transform.position);
+    }
+    void ThrowDrop()
+    {
+        Vector3 posicionActual;
+        GameObject drop = PoolDrops.Instance.RequestDrop();
+        drop.transform.position = this.transform.position;
+        //drop.transform.position = new Vector3(drop.transform.position.x,drop.transform.position.y + 1 ,drop.transform.position.z);
+        posicionActual = drop.transform.position;
+        posicionActual.y += 1;
+        drop.transform.position = new Vector3(drop.transform.position.x, posicionActual.y, drop.transform.position.z);
+
     }
 
     protected abstract void AttackEnemy();
