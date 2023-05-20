@@ -21,6 +21,7 @@ public class CharacterBase : MonoBehaviour
     public HeavyAttackState heavyAttacking;
     public LightAttackState lightAttacking;
     public SpecialAttackState specialAttacking;
+    public MenuGamePlay menuGamePlay;
 
     [HideInInspector]
     public CharacterController controller;
@@ -35,7 +36,6 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector]
     public string dashAnimationName, heavyAttackAnimationName, lightAttackAnimationName, specialAttackAnimationName;
     public float playerSyncWithPointer = 90f;
-    Ray ray;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -81,6 +81,10 @@ public class CharacterBase : MonoBehaviour
     void Die()
     {
         Debug.Log("se muertio");
+        if (menuGamePlay != null)
+        {
+            menuGamePlay.GameOver();
+        }
         //Destroy(this.gameObject);
     }
  
@@ -94,12 +98,8 @@ public class CharacterBase : MonoBehaviour
     {
         movementSM.currentState.PhysicsUpdate();
     }
-
-
     public float RotationAngle()
     {
-
-
         Vector3 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
         Vector3 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
 

@@ -6,11 +6,15 @@ using UnityEngine.SceneManagement;
 public class MenuGamePlay : MonoBehaviour
 {
     [SerializeField] private GameObject botonPause;
-    [SerializeField] private GameObject menuPause;
+    [SerializeField] private GameObject pausePanel;
     //[SerializeField] private GameObject quit;
     //[SerializeField] private GameObject resume;
     //[SerializeField] private GameObject restart;
     //[SerializeField] private GameObject volume;
+    public GameObject gameOverPanel;
+    [SerializeField] private GameObject winnerPanel;
+    //public GameObject pausePanel;
+
     private bool juegoPausado = false;
     private AudioSource audioSource;
 
@@ -42,7 +46,7 @@ public class MenuGamePlay : MonoBehaviour
         Time.timeScale = 0f;
         audioSource.Pause();
         botonPause.SetActive(false);
-        menuPause.SetActive(true);
+        pausePanel.SetActive(true);
         //resume.SetActive(true);
         //restart.SetActive(true);
         //quit.SetActive(true);
@@ -54,7 +58,7 @@ public class MenuGamePlay : MonoBehaviour
         juegoPausado = false;
         Time.timeScale = 1f;
         botonPause.SetActive(true);
-        menuPause.SetActive(false);
+        pausePanel.SetActive(false);
         //resume.SetActive(false);
         //restart.SetActive(false);
         //quit.SetActive(false);
@@ -75,6 +79,19 @@ public class MenuGamePlay : MonoBehaviour
     {
         SceneManager.LoadScene("Inicio");
     }
+
+    public void GameOver()
+    {
+        gameOverPanel.SetActive(true);
+        //juegoPausado = 
+    }
+
+    public void Winner()
+    {
+        winnerPanel.SetActive(true);
+    }
+
+
 
     //public void Quit()
     //{
