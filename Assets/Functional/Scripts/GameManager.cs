@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
         waves = GameObject.Find("EnemyPooling").GetComponent<SpawnEnemyManager>();
         waves.InstanceEnemyWave(countWaves);
-        amountEnemyes = countWaves;
+        amountEnemyes = GameObject.Find("EnemyPooling").GetComponentsInChildren<Enemy>().Length;
         //StartCoroutine(InstanciateWavesWithTime());
         //InvokeRepeating("InstanciateWaves",10,10);
         menuGamePlay = FindObjectOfType<MenuGamePlay>();
