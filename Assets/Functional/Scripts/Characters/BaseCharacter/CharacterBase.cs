@@ -21,6 +21,8 @@ public class CharacterBase : MonoBehaviour
     public HeavyAttackState heavyAttacking;
     public LightAttackState lightAttacking;
     public SpecialAttackState specialAttacking;
+    
+    [HideInInspector] 
     public MenuGamePlay menuGamePlay;
 
     [HideInInspector]
@@ -54,6 +56,8 @@ public class CharacterBase : MonoBehaviour
 
         movementSM.Initialize(movement);
 
+        menuGamePlay = GetComponent<MenuGamePlay>();
+        //StartCoroutine(menuGamePlay.GameOver());
         menuGamePlay = FindObjectOfType<MenuGamePlay>();
     }
     protected virtual void StartDealDamageLightAttack()
@@ -79,7 +83,8 @@ public class CharacterBase : MonoBehaviour
             Die();
             if (menuGamePlay != null)
             {
-                menuGamePlay.GameOver();
+                StartCoroutine(menuGamePlay.GameOver());
+                //menuGamePlay.GameOver();
             }
         }
     }

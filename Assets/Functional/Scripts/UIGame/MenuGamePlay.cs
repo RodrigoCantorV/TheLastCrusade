@@ -11,8 +11,8 @@ public class MenuGamePlay : MonoBehaviour
     //[SerializeField] private GameObject resume;
     //[SerializeField] private GameObject restart;
     //[SerializeField] private GameObject volume;
-    public GameObject gameOverPanel;
-    [SerializeField] private GameObject winnerPanel;
+    [SerializeField] public GameObject gameOverPanel;
+    [SerializeField] public GameObject winnerPanel;
     //public GameObject pausePanel;
 
     private bool juegoPausado = false;
@@ -80,15 +80,17 @@ public class MenuGamePlay : MonoBehaviour
         SceneManager.LoadScene("Inicio");
     }
 
-    public void GameOver()
+    public IEnumerator GameOver()
     {
+        yield return new WaitForSeconds(3);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
         audioSource.Pause();
     }
 
-    public void Winner()
+    public IEnumerator Winner()
     {
+        yield return new WaitForSeconds(5);
         winnerPanel.SetActive(true);
         Time.timeScale = 0f;
         audioSource.Pause();

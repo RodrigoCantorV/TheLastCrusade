@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     private int countWaves = 1;
     private bool enter = false;
     private SpawnEnemyManager waves;
+    [HideInInspector] public MenuGamePlay menuGamePlay; 
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
         amountEnemyes = countWaves;
         //StartCoroutine(InstanciateWavesWithTime());
         //InvokeRepeating("InstanciateWaves",10,10);
+        menuGamePlay = FindObjectOfType<MenuGamePlay>();
     }
 
     // Update is called once per frame
@@ -24,7 +26,16 @@ public class GameManager : MonoBehaviour
     {
         // InstanciateWaves();
         // if (can == 0 && entro == false) // 0 && true
-        if (amountEnemyes == 0 && !(enter)) // 0 && true
+
+        if(countWaves == 3)
+        {
+            Debug.Log("Winner");
+            if (menuGamePlay != null)
+            {
+                StartCoroutine(menuGamePlay.Winner());
+                //menuGamePlay.Winner();
+            }
+        } else if(amountEnemyes == 0 && !enter)
         {
             StartCoroutine(InstanciateWavesWithTime());
         }
