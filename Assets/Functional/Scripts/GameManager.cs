@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private int countWaves = 1;
     private bool enter = false;
     private SpawnEnemyManager waves;
-    [HideInInspector] public MenuGamePlay menuGamePlay; 
+    [HideInInspector] public MenuGamePlay menuGamePlay;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         // InstanciateWaves();
         // if (can == 0 && entro == false) // 0 && true
 
-        if(countWaves == 3)
+        if (countWaves == 3)
         {
             Debug.Log("Winner");
             if (menuGamePlay != null)
@@ -35,7 +35,10 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(menuGamePlay.Winner());
                 //menuGamePlay.Winner();
             }
-        } else if(amountEnemyes == 0 && !enter)
+        }
+        else if (amountEnemyes == 0 && !enter)
+            Debug.Log(amountEnemyes);
+        if (amountEnemyes == 0 && !(enter)) // 0 && true
         {
             StartCoroutine(InstanciateWavesWithTime());
         }
@@ -46,9 +49,8 @@ public class GameManager : MonoBehaviour
         enter = true;
         yield return new WaitForSeconds(5);
         countWaves++; // = 2
-        amountEnemyes = countWaves; // 2
-
         waves.InstanceEnemyWave(countWaves);
         enter = false;
+        amountEnemyes = GameObject.Find("EnemyPooling").GetComponentsInChildren<Enemy>().Length;
     }
 }
