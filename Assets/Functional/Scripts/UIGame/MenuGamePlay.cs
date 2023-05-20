@@ -83,12 +83,15 @@ public class MenuGamePlay : MonoBehaviour
     public void GameOver()
     {
         gameOverPanel.SetActive(true);
-        //juegoPausado = 
+        Time.timeScale = 0f;
+        audioSource.Pause();
     }
 
     public void Winner()
     {
         winnerPanel.SetActive(true);
+        Time.timeScale = 0f;
+        audioSource.Pause();
     }
 
 

@@ -53,6 +53,8 @@ public class CharacterBase : MonoBehaviour
         specialAttacking = new SpecialAttackState(this, movementSM);
 
         movementSM.Initialize(movement);
+
+        menuGamePlay = FindObjectOfType<MenuGamePlay>();
     }
     protected virtual void StartDealDamageLightAttack()
     {        
@@ -75,16 +77,16 @@ public class CharacterBase : MonoBehaviour
         if (life <= 0)
         {
             Die();
+            if (menuGamePlay != null)
+            {
+                menuGamePlay.GameOver();
+            }
         }
     }
 
     void Die()
     {
         Debug.Log("se muertio");
-        if (menuGamePlay != null)
-        {
-            menuGamePlay.GameOver();
-        }
         //Destroy(this.gameObject);
     }
  
