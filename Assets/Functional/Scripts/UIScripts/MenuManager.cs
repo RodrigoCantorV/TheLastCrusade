@@ -11,12 +11,18 @@ public class MenuManager : MonoBehaviour
         menuInit.SetActive(false);
         menuSelect.SetActive(true);
     }
+    public void MenuSelectCharacter()
+    {
+        menuSelect.SetActive(true);
+        menuInit.SetActive(false);
+    }
 
     public void ReturnBack()
     {
         menuInit.SetActive(true);
         menuSelect.SetActive(false);
     }
+
 
     public void Exit()
     {

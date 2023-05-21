@@ -13,6 +13,7 @@ public class MenuGamePlay : MonoBehaviour
     //[SerializeField] private GameObject volume;
     [SerializeField] public GameObject gameOverPanel;
     [SerializeField] public GameObject winnerPanel;
+    [SerializeField] public MenuManager menuManager;
     //public GameObject pausePanel;
 
     private bool juegoPausado = false;
@@ -80,9 +81,22 @@ public class MenuGamePlay : MonoBehaviour
         SceneManager.LoadScene("Inicio");
     }
 
+    public void ReturnSelectCharacter()
+    {
+        //menuManager = GetComponent<MenuManager>();
+
+        SceneManager.LoadScene("Inicio");
+        if(menuManager != null)
+        {
+            menuManager.MenuSelectCharacter();
+        }
+        Debug.Log("cambio a selecccion");
+
+    }
+
     public IEnumerator GameOver()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
         audioSource.Pause();
@@ -90,7 +104,7 @@ public class MenuGamePlay : MonoBehaviour
 
     public IEnumerator Winner()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(8);
         winnerPanel.SetActive(true);
         Time.timeScale = 0f;
         audioSource.Pause();
