@@ -6,7 +6,7 @@ public class CharacterBase : MonoBehaviour
     public float playerSpeed;
     public float dashSpeed;
     public float life;
-    
+
     [Header("Animation Smoothing")]
     [Range(0, 1)]
     public float delayAnimationTime = 0f;
@@ -21,8 +21,8 @@ public class CharacterBase : MonoBehaviour
     public HeavyAttackState heavyAttacking;
     public LightAttackState lightAttacking;
     public SpecialAttackState specialAttacking;
-    
-    [HideInInspector] 
+
+    [HideInInspector]
     public MenuGamePlay menuGamePlay;
 
     [HideInInspector]
@@ -37,9 +37,8 @@ public class CharacterBase : MonoBehaviour
 
     public string dashAnimationName, heavyAttackAnimationName, lightAttackAnimationName, specialAttackAnimationName, hurtAnimationName, deadAnimationName;
     [HideInInspector]
-    public float playerSyncWithPointer = 90f; 
-
-
+    public float playerSyncWithPointer = 90f;
+    public bool estaAfuera;
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -62,14 +61,14 @@ public class CharacterBase : MonoBehaviour
         menuGamePlay = FindObjectOfType<MenuGamePlay>();
     }
     protected virtual void StartDealDamageLightAttack()
-    {        
+    {
     }
     protected virtual void EndDealDamageLightAttack()
     {
     }
 
     protected virtual void StartDealDamageHeavyAttack()
-    {        
+    {
     }
     protected virtual void EndDealDamageHeavyAttack()
     {
@@ -94,13 +93,13 @@ public class CharacterBase : MonoBehaviour
     {
         Debug.Log("se muertio");
     }
- 
+
     protected void Update()
     {
-        movementSM.currentState.HandleInput(); 
+        movementSM.currentState.HandleInput();
         movementSM.currentState.LogicUpdate();
     }
- 
+
     protected void FixedUpdate()
     {
         movementSM.currentState.PhysicsUpdate();
@@ -115,5 +114,21 @@ public class CharacterBase : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         return angle;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name.Equals("Wall2"))
+        {
+            estaAfuera = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name.Equals("Wall2"))
+        {
+            estaAfuera = false;
+        }
     }
 }
