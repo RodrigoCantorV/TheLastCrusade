@@ -39,6 +39,7 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector]
     public float playerSyncWithPointer = 90f;
     public bool estaAfuera;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -61,18 +62,26 @@ public class CharacterBase : MonoBehaviour
         menuGamePlay = FindObjectOfType<MenuGamePlay>();
     }
     protected virtual void StartDealDamageLightAttack()
-    {
+    {        
     }
     protected virtual void EndDealDamageLightAttack()
     {
     }
 
     protected virtual void StartDealDamageHeavyAttack()
-    {
+    {        
     }
     protected virtual void EndDealDamageHeavyAttack()
     {
     }
+
+    protected virtual void StartDealDamageSpecialAttack()
+    {        
+    }
+    protected virtual void EndDealDamageSpecialAttack()
+    {
+    }
+
 
     public void TakeDamage(float damageAmount)
     {
@@ -92,14 +101,15 @@ public class CharacterBase : MonoBehaviour
     void Die()
     {
         Debug.Log("se muertio");
+        //Destroy(this.gameObject);
     }
-
+ 
     protected void Update()
     {
-        movementSM.currentState.HandleInput();
+        movementSM.currentState.HandleInput(); 
         movementSM.currentState.LogicUpdate();
     }
-
+ 
     protected void FixedUpdate()
     {
         movementSM.currentState.PhysicsUpdate();

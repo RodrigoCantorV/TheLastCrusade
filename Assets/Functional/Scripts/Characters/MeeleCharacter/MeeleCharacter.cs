@@ -8,11 +8,13 @@ public class MeeleCharacter : CharacterBase
     public AudioClip attackSound;
     public AudioClip patadaSound;
     bool isAttacking; 
+    [SerializeField] private GameObject novaParticlesObject;
+    [SerializeField] private LayerMask whatAreDamageable;
 
-    private const string DASH_ANIMATION_NAME = "DashMeeleAnimation";
-    private const string HEAVY_ATTACK_ANIMATION_NAME = "HeavyAttackMeeleAnimation";
-    private const string LIGHT_ATTACK_ANIMATION_NAME = "LightAtackMeeletAnimation";
-    private const string SPECIAL_ATTACK_ANIMATION_NAME = "SpecialAttackMeeleAnimation";// CAMBIAR A NOMBRE DE ANIMACION SPECIAL
+    private const string DASH_ANIMATION_NAME = "MeeleDashAnimation";
+    private const string HEAVY_ATTACK_ANIMATION_NAME = "MeeleHeavyAttackAnimation";
+    private const string LIGHT_ATTACK_ANIMATION_NAME = "MeeleLigthAttackAnimation";
+    private const string SPECIAL_ATTACK_ANIMATION_NAME = "MeeleUltiAnimation";// CAMBIAR A NOMBRE DE ANIMACION SPECIAL
 
     
 
@@ -77,5 +79,41 @@ public class MeeleCharacter : CharacterBase
         GetComponentInChildren<DamageDealer>().EndDealDamage();
         isAttacking = false;
     }
+
+    protected override void StartDealDamageSpecialAttack()
+    {
+        base.StartDealDamageSpecialAttack();
+        
+        GetComponentInChildren<DamageDealer>().SetDamage(base.heavyAttackDamage);
+        GetComponentInChildren<DamageDealer>().StartDealDamage();
+        novaParticlesObject.SetActive(true);
+        novaParticlesObject.GetComponent<ParticleSystem>().Play();
+
+        audioSource.clip = patadaSound;
+        audioSource.time = 3.6f;
+        audioSource.Play();
+    }
+    /*protected override void EndDealDamageSpecialAttack()
+    {
+        base.EndDealDamageSpecialAttack();
+        GetComponentInChildren<DamageDealer>().EndDealDamage();
+        isAttacking = false;
+    }*/
+
+    private void CheckForDamageable()
+    {
+        Debug.Log("Entro aca!");
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 4f, whatAreDamageable);
+        foreach(Collider c in colliders)
+        {
+            Debug.Log("Luego por aca");
+            if (c.GetComponent<EnemyShortDistance>())
+            {
+                Debug.Log("por ultimo hizo daño!");
+                c.GetComponent<EnemyShortDistance>().TakeDamage(200f);
+            }
+        }
+    }
+
 
 }
