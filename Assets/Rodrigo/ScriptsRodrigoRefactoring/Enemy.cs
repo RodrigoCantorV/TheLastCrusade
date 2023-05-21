@@ -40,9 +40,14 @@ public abstract class Enemy : MonoBehaviour
     private void LateUpdate()
     {
         InitializeVariables();
-        MoveEnemy();
-        AttackEnemy();
-        Obser();
+        if (animator.GetBool("isDeath") == false)
+        {
+
+            MoveEnemy();
+            AttackEnemy();
+            Obser();
+        }
+
     }
 
     void InitializeVariables()
@@ -65,19 +70,24 @@ public abstract class Enemy : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
+        
         health -= damageAmount;
         animator.SetTrigger("damage");
+        
+       
         HitVFX(this.gameObject.transform.position);
         if (health <= 0)
         {
-            Die();
+             animator.SetBool("isDeath", true);
+            animator.SetTrigger("death");
+            Invoke("Die", 5);
+            //Die();
         }
     }
 
 
     void Die()
     {
-
         probability = Random.value;
         if (probability > 0.7f)
         {
@@ -116,8 +126,8 @@ public abstract class Enemy : MonoBehaviour
 
     void Obser()
     {
-      //  transform.LookAt(player.transform.position);
-       if (player != null)
+        //  transform.LookAt(player.transform.position);
+        if (player != null)
         {
             Vector3 direction = player.transform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
