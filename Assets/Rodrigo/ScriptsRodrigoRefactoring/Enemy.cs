@@ -124,18 +124,28 @@ public abstract class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, aggroRange);
     }
 
-    void Obser()
+/*     void Obser()
     {
         //  transform.LookAt(player.transform.position);
         if (player != null)
         {
             Vector3 direction = player.transform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-
             // Aplicar la rotación gradualmente
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15 * Time.deltaTime);
         }
+    } */
+
+    void Obser()
+    {
+        //  transform.LookAt(player.transform.position);
+        if (player != null)
+        {
+            Vector3 targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+            transform.rotation = Quaternion.LookRotation(targetPos - transform.position);
+        }
     }
+
     void ThrowDrop()
     {
         Vector3 posicionActual;
