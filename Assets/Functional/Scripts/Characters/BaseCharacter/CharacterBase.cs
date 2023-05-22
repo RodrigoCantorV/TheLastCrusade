@@ -39,6 +39,8 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector]
     public float playerSyncWithPointer = 90f;
     public bool estaAfuera;
+    public bool estaVivo;
+
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -60,6 +62,7 @@ public class CharacterBase : MonoBehaviour
         menuGamePlay = GetComponent<MenuGamePlay>();
         //StartCoroutine(menuGamePlay.GameOver());
         menuGamePlay = FindObjectOfType<MenuGamePlay>();
+        estaVivo = true;
     }
     protected virtual void StartDealDamageLightAttack()
     {        
@@ -86,7 +89,7 @@ public class CharacterBase : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         life -= damageAmount;
-        //animator.SetTrigger("damage");
+        animator.SetBool("damage", true);
         if (life <= 0)
         {
             Die();
@@ -96,10 +99,14 @@ public class CharacterBase : MonoBehaviour
                 //menuGamePlay.GameOver();
             }
         }
+        //animator.SetTrigger("move");
     }
 
     void Die()
     {
+        estaVivo = false;
+        // se ejecuta animacion dead
+        animator.SetBool("dead", true);
         Debug.Log("se muertio");
         //Destroy(this.gameObject);
     }

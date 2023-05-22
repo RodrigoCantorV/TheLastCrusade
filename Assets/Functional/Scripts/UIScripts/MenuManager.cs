@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject menuInit;
-    [SerializeField] private GameObject menuSelect;
+    [SerializeField] public GameObject menuInit;
+    [SerializeField] public GameObject menuSelect;
+
+    void Start() 
+    {
+        menuInit.SetActive(true);
+        menuSelect.SetActive(false);
+    }
+
     public void StartButton()
     {
         menuInit.SetActive(false);
         menuSelect.SetActive(true);
     }
+
     public void MenuSelectCharacter()
     {
-        menuSelect.SetActive(true);
         menuInit.SetActive(false);
+        menuSelect.SetActive(true);
     }
 
     public void ReturnBack()
