@@ -14,6 +14,7 @@ public class CharacterBase : MonoBehaviour
     public float velocityDampTime = 0.9f;
     public float lightAttackDamage;
     public float heavyAttackDamage;
+    public float specialAttackDamage;
 
     public StateMachine movementSM;
     public StandingState movement;
