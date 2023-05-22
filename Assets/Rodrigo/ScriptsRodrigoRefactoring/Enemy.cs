@@ -40,7 +40,7 @@ public abstract class Enemy : MonoBehaviour
     private void LateUpdate()
     {
         InitializeVariables();
-        if (animator.GetBool("isDeath") == false)
+        if (animator.GetBool("isDeath") == false && player.GetComponent<CharacterBase>().estaVivo == true)
         {
 
             MoveEnemy();
@@ -89,7 +89,7 @@ public abstract class Enemy : MonoBehaviour
     void Die()
     {
         probability = Random.value;
-        if (probability > 0.7f)
+        if (probability > 0f)
         {
             ThrowDrop();
         }

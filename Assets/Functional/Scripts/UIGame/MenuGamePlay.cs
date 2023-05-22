@@ -85,18 +85,34 @@ public class MenuGamePlay : MonoBehaviour
     {
         //menuManager = GetComponent<MenuManager>();
 
-        SceneManager.LoadScene("Inicio");
-        if(menuManager != null)
-        {
-            menuManager.MenuSelectCharacter();
-        }
-        Debug.Log("cambio a selecccion");
+            //Scene escena = SceneManager.LoadScene("Inicio");
 
+            SceneManager.LoadScene("Inicio");
+
+           
+                //GameObject objeto = GameObject.Find("CanvasMenuInitNew");
+                Debug.Log("cambio a selecccion");
+                menuManager.MenuSelectCharacter();
+                //objeto.SetActive(false);
+             /* else {
+                menuManager.ReturnBack();
+            } */
+
+        //Scene escena = SceneManager.GetSceneByName("Inicio");
+        /* Scene escena = SceneManager.GetActiveScene();
+        GameObject[] objetos = escena.GetRootGameObjects();
+        for (int i = 0; i < objetos.Length; i++)
+        {
+            if (objetos[i].gameObject.name.Equals("MenuInit"))
+            {
+                objetos[i].SetActive(false);
+            }
+        } */
     }
 
     public IEnumerator GameOver()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(6);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
         audioSource.Pause();
