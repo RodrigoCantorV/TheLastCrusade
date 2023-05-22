@@ -111,7 +111,7 @@ public class MeeleCharacter : CharacterBase
             if (c.GetComponent<EnemyShortDistance>())
             {
                 Debug.Log("por ultimo hizo daño!");
-                c.GetComponent<EnemyShortDistance>().transform.position += transform.position * Time.deltaTime * KnockbackForce;
+                c.GetComponent<EnemyShortDistance>().transform.position -= c.transform.forward * Time.deltaTime * KnockbackForce;
                 c.GetComponent<EnemyShortDistance>().TakeDamage(ultiDamage);
             }
         }
