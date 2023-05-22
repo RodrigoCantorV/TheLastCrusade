@@ -8,8 +8,10 @@ public class MeeleCharacter : CharacterBase
     public AudioClip attackSound;
     public AudioClip patadaSound;
     bool isAttacking; 
-    [SerializeField] private GameObject novaParticlesObject;
+    [SerializeField] private GameObject ultiParticlesObject;
     [SerializeField] private LayerMask whatAreDamageable;
+    [SerializeField] private float radiusSphere;
+    [SerializeField] private float KnockbackForce;
 
     private const string DASH_ANIMATION_NAME = "MeeleDashAnimation";
     private const string HEAVY_ATTACK_ANIMATION_NAME = "MeeleHeavyAttackAnimation";
@@ -84,10 +86,9 @@ public class MeeleCharacter : CharacterBase
     {
         base.StartDealDamageSpecialAttack();
         
-        GetComponentInChildren<DamageDealer>().SetDamage(base.heavyAttackDamage);
-        GetComponentInChildren<DamageDealer>().StartDealDamage();
-        novaParticlesObject.SetActive(true);
-        novaParticlesObject.GetComponent<ParticleSystem>().Play();
+        ultiParticlesObject.SetActive(true);
+        ultiParticlesObject.GetComponent<ParticleSystem>().Play();
+        CheckForDamageable(base.specialAttackDamage);
 
         audioSource.clip = patadaSound;
         audioSource.time = 3.6f;
@@ -100,17 +101,18 @@ public class MeeleCharacter : CharacterBase
         isAttacking = false;
     }*/
 
-    private void CheckForDamageable()
+    private void CheckForDamageable(float ultiDamage)
     {
         Debug.Log("Entro aca!");
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 4f, whatAreDamageable);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radiusSphere, whatAreDamageable);
         foreach(Collider c in colliders)
         {
             Debug.Log("Luego por aca");
             if (c.GetComponent<EnemyShortDistance>())
             {
                 Debug.Log("por ultimo hizo daño!");
-                c.GetComponent<EnemyShortDistance>().TakeDamage(200f);
+                c.GetComponent<EnemyShortDistance>().transform.position += transform.position * Time.deltaTime * KnockbackForce;
+                c.GetComponent<EnemyShortDistance>().TakeDamage(ultiDamage);
             }
         }
     }
