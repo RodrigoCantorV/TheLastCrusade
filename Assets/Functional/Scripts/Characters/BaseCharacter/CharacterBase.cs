@@ -1,11 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
 public class CharacterBase : MonoBehaviour
 {
     [Header("Controls")]
     public float playerSpeed;
     public float dashSpeed;
     public float life;
+
+    public Image lifeBar;
+    public GameObject lifeeBar;
+    public float maxLife;
 
     [Header("Animation Smoothing")]
     [Range(0, 1)]
@@ -42,6 +48,12 @@ public class CharacterBase : MonoBehaviour
     public bool estaAfuera;
     public bool estaVivo;
 
+    void Awake() 
+    {
+        maxLife = 160;
+        lifeeBar = GameObject.Find("LifeBar");
+        lifeBar = lifeeBar.GetComponent<Image>();
+    }
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -91,6 +103,7 @@ public class CharacterBase : MonoBehaviour
     {
         life -= damageAmount;
         animator.SetBool("damage", true);
+        LifeManagement();
         if (life <= 0)
         {
             Die();
@@ -101,6 +114,13 @@ public class CharacterBase : MonoBehaviour
             }
         }
         //animator.SetTrigger("move");
+    }
+
+    public void LifeManagement()
+    {
+        //lifeBar.GetComponent<Image>().fillAmount = life / maxLife;
+        lifeBar.fillAmount = life / maxLife;
+        Debug.Log("resta vidaa");
     }
 
     void Die()
