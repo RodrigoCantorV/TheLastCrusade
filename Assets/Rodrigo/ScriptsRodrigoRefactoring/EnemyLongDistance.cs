@@ -24,7 +24,7 @@ public class EnemyLongDistance : Enemy
 
     void CreatePower()
     {
-        //power = PowerPool.Instance.RequestPower();
+       // power = PowerPool.Instance.RequestPower();
         power = GetComponentInChildren<PowerPool>().RequestPower();
         Vector3 position = transform.position;
         position = position + transform.forward * 5;

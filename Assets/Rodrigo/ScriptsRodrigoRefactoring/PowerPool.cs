@@ -4,33 +4,36 @@ using UnityEngine;
 public class PowerPool : MonoBehaviour
 {
     [SerializeField] private GameObject powerPrefab;
-    [SerializeField] private int poolZise = 3 ;
+    [SerializeField] private int poolZise = 3;
     [SerializeField] private List<GameObject> powerList;
+    public bool createPowers = true;
 
     // Patron singleton
-    // private static PowerPool instance;
-    // public static PowerPool Instance { get { return instance; } }
+    //private static PowerPool instance;
+    //public static PowerPool Instance { get { return instance; } }
     private void Awake()
     {
 
 
-        //   if (instance == null)
-        //   {
-        //       instance = this;
-        //   }
-        //  else
-        //  {
-        //      Destroy(gameObject);
-        //  }
+      //  if (instance == null)
+      //  {
+      //      instance = this;
+     //   }
+     //   else
+     //   {
+      //      Destroy(gameObject);
+     //   }
     }
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        addPowersToPool(poolZise);
-    }
-    void Start()
-    {
+        if (createPowers)
+        {
+            addPowersToPool(poolZise);
+        }
+        createPowers = false;
 
     }
+
     private void addPowersToPool(int amount)
     {
         for (int i = 0; i < amount; i++)
@@ -56,5 +59,4 @@ public class PowerPool : MonoBehaviour
         powerList[powerList.Count - 1].SetActive(true);
         return (powerList[powerList.Count - 1]);
     }
-
 }
