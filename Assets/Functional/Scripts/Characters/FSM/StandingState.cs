@@ -54,7 +54,7 @@ public class StandingState : State
             heavyAttack = true;
            
         }
-        if (specialAttackAction.triggered && CharacterBase.specialCharges >=5)
+        if (specialAttackAction.triggered && CharacterBase.specialCharges >= 3)
         {
             specialAttack = true;
         }
@@ -71,7 +71,7 @@ public class StandingState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
+        Debug.Log("especial: "+CharacterBase.specialCharges);
         CharacterBase.animator.SetFloat("speed", input.magnitude, CharacterBase.delayAnimationTime, Time.deltaTime);
 
         if(dash)
