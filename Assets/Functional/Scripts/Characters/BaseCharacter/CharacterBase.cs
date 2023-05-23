@@ -68,6 +68,14 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector] protected Image powerupBar;
     public float powrupCharge = 0.4f;
 
+
+    // SONIDOS
+
+    public AudioSource audioSource;
+    public AudioClip lightAttackSound;
+    public AudioClip hardAttackSound;
+    public AudioClip ultiSound;
+
     void Awake() 
     {
         maxLife = 160;
@@ -279,4 +287,23 @@ public class CharacterBase : MonoBehaviour
             other.gameObject.SetActive(false);
         }
     }
+
+    private void soundLightAttack()
+    {
+        audioSource.clip = lightAttackSound;
+        audioSource.Play();
+    }
+
+    private void soundHardAttack()
+    {
+        audioSource.clip = hardAttackSound;
+        audioSource.Play();
+    }
+
+    private void soundUlti()
+    {
+        audioSource.clip = ultiSound;
+        audioSource.Play();
+    }
+
 }
