@@ -7,6 +7,10 @@ public class MenuGamePlay : MonoBehaviour
 {
     [SerializeField] private GameObject botonPause;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject backgroundLife;
+    [SerializeField] private GameObject backgroundPowerup;
+    [SerializeField] private GameObject gameOverLetter;
+    Animator animatorLetter;
     //[SerializeField] private GameObject quit;
     //[SerializeField] private GameObject resume;
     //[SerializeField] private GameObject restart;
@@ -18,6 +22,7 @@ public class MenuGamePlay : MonoBehaviour
 
     private bool juegoPausado = false;
     private AudioSource audioSource;
+    //public AudioClip chainGameOver;
 
     private void Awake()
     {
@@ -26,7 +31,7 @@ public class MenuGamePlay : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (juegoPausado)
             {
@@ -48,6 +53,8 @@ public class MenuGamePlay : MonoBehaviour
         audioSource.Pause();
         botonPause.SetActive(false);
         pausePanel.SetActive(true);
+        backgroundLife.SetActive(false);
+        backgroundPowerup.SetActive(false);
         //resume.SetActive(true);
         //restart.SetActive(true);
         //quit.SetActive(true);
@@ -60,6 +67,8 @@ public class MenuGamePlay : MonoBehaviour
         Time.timeScale = 1f;
         botonPause.SetActive(true);
         pausePanel.SetActive(false);
+        backgroundLife.SetActive(true);
+        backgroundPowerup.SetActive(true);
         //resume.SetActive(false);
         //restart.SetActive(false);
         //quit.SetActive(false);
@@ -97,14 +106,22 @@ public class MenuGamePlay : MonoBehaviour
     {
         yield return new WaitForSeconds(6.5f);
         gameOverPanel.SetActive(true);
-        Time.timeScale = 0f;
+        backgroundLife.SetActive(false);
+        backgroundPowerup.SetActive(false);
+        botonPause.SetActive(false);
+        animatorLetter = gameOverLetter.GetComponent<Animator>();
+        animatorLetter.SetTrigger("lose");
+        //Time.timeScale = 0f;
         audioSource.Pause();
     }
 
     public IEnumerator Winner()
     {
-        yield return new WaitForSeconds(13);
+        yield return new WaitForSeconds(8);
         winnerPanel.SetActive(true);
+        backgroundLife.SetActive(false);
+        backgroundPowerup.SetActive(false);
+        botonPause.SetActive(false);
         Time.timeScale = 0f;
         audioSource.Pause();
     }
