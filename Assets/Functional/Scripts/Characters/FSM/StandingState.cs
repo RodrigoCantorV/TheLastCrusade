@@ -92,6 +92,11 @@ public class StandingState : State
             stateMachine.ChangeState(CharacterBase.specialAttacking);
             CharacterBase.specialCharges = 0;
         }
+        if (!CharacterBase.isAlive)
+        {
+            Debug.Log("tha hell");
+            stateMachine.ChangeState(CharacterBase.deadState);
+        }
     }
 
     public override void PhysicsUpdate()

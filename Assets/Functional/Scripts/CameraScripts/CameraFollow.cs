@@ -44,7 +44,7 @@ public class CameraFollow : MonoBehaviour
             transform.position = Vector3.SmoothDamp(currentPosition, targetPosition, ref velocity, smoothSpeed);
         }
 
-        if (!characterBase.estaVivo) {
+        if (!characterBase.isAlive) {
              // Calculamos la nueva posición de la cámara
             targetPosition = target.position - transform.forward * 5f;
             

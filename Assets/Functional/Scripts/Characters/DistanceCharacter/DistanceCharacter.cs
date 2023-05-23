@@ -29,7 +29,7 @@ public class DistanceCharacter : CharacterBase
         GameObject arrow =  ArrowPool.Instance.RequestArrow();
         arrow.transform.position = arrowReference.position;
         arrow.transform.rotation = arrowReference.rotation;
-        arrow.transform.localScale = new Vector3(2, 1, 2);
+        arrow.transform.localScale = new Vector3(3, 1, 3);
         arrowFunctional = arrow.GetComponent<Arrow>();
     }
 

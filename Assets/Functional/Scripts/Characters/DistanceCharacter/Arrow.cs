@@ -95,7 +95,10 @@ public class Arrow : MonoBehaviour
             gameObject.SetActive(false);
             print("arrow Damage: " + arrowDamage);
         }
-        //gameObject.SetActive(false);
+        if (other.CompareTag("Enviroment")){
+            gameObject.SetActive(false);
+        }
+        
     }
 
 

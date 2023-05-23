@@ -47,7 +47,7 @@ public class LightAttackState : State
         }
 
         Debug.Log(CharacterBase.ToString());
-        if (CharacterBase.ToString() == "DistanceCharacter (DistanceCharacter)")
+        if (CharacterBase.ToString() == "DistanceCharacter(Clone) (DistanceCharacter)")
         {
             CharacterBase.transform.rotation = Quaternion.Euler(new Vector3(0, -CharacterBase.RotationAngle() + CharacterBase.playerSyncWithPointer, 0));
         }

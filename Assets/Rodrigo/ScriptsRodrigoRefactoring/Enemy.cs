@@ -40,7 +40,7 @@ public abstract class Enemy : MonoBehaviour
     private void LateUpdate()
     {
         InitializeVariables();
-        if (animator.GetBool("isDeath") == false && player.GetComponent<CharacterBase>().estaVivo == true)
+        if (animator.GetBool("isDeath") == false && player.GetComponent<CharacterBase>().isAlive == true)
         {
             MoveEnemy();
             AttackEnemy();

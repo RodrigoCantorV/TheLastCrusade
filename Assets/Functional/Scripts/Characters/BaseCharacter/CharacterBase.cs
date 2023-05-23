@@ -42,6 +42,7 @@ public class CharacterBase : MonoBehaviour
     public HeavyAttackState heavyAttacking;
     public LightAttackState lightAttacking;
     public SpecialAttackState specialAttacking;
+    public DeadState deadState;
 
     [HideInInspector]
     public MenuGamePlay menuGamePlay;
@@ -59,9 +60,10 @@ public class CharacterBase : MonoBehaviour
     public string dashAnimationName, heavyAttackAnimationName, lightAttackAnimationName, specialAttackAnimationName, hurtAnimationName, deadAnimationName;
     [HideInInspector]
     public float playerSyncWithPointer = 90f;
-    public bool estaVivo;
+    public bool isAlive=true;
 
     public int specialCharges;
+   
 
     void Awake() 
     {
@@ -79,7 +81,7 @@ public class CharacterBase : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
-        //dealer = GetComponentInChildren<DamageDealer>();
+      
 
         movementSM = new StateMachine();
         movement = new StandingState(this, movementSM);
@@ -87,13 +89,14 @@ public class CharacterBase : MonoBehaviour
         heavyAttacking = new HeavyAttackState(this, movementSM);
         lightAttacking = new LightAttackState(this, movementSM);
         specialAttacking = new SpecialAttackState(this, movementSM);
+        deadState = new DeadState(this, movementSM);
 
         movementSM.Initialize(movement);
 
         menuGamePlay = GetComponent<MenuGamePlay>();
 
         menuGamePlay = FindObjectOfType<MenuGamePlay>();
-        estaVivo = true;
+        isAlive = true;
     }
 
     protected virtual void StartDealDamageLightAttack()
@@ -117,7 +120,7 @@ public class CharacterBase : MonoBehaviour
     {
     }
 
-    protected void ActivarImagen(int cantidad)
+    protected void ActivateDamageImages(int cantidad)
     {
 
         fadeTime = 0f;
@@ -162,44 +165,37 @@ public class CharacterBase : MonoBehaviour
     {
         life -= damageAmount;
         animator.SetTrigger("damage");
-        ActivarImagen(Mathf.CeilToInt(life));
-        LifeManagement();
+        ActivateDamageImages(Mathf.CeilToInt(life));
+        LifeBarManagement();
         if (life <= 0)
         {
             Die();
             if (menuGamePlay != null)
             {
-                StartCoroutine(menuGamePlay.GameOver());
-                //menuGamePlay.GameOver();
+                StartCoroutine(menuGamePlay.GameOver());            
             }
         }
-        //animator.SetTrigger("move");
-
+       
     }
 
-    public void LifeManagement()
+    public void LifeBarManagement()
     {
-        lifeBar.fillAmount = life / maxLife;
-        Debug.Log("resta vidaa");
+        lifeBar.fillAmount = life / maxLife;     
     }
 
     void Die()
     {
-        estaVivo = false;
-        // se ejecuta animacion dead
-        animator.SetBool("dead", true);
-        Debug.Log("se muertio");
-        //Destroy(this.gameObject);
+        isAlive = false;  
     }
  
     protected void Update()
     {
         movementSM.currentState.HandleInput(); 
         movementSM.currentState.LogicUpdate();
-        UpdateAlpha();
+        UpdateDamageImagesAlpha();
     }
 
-    private void UpdateAlpha()
+    private void UpdateDamageImagesAlpha()
 {
     float alpha = Mathf.SmoothDamp(levelAttackk.color.a, targetAlpha, ref currentVelocity, fadeDuration);
     Color levelAttackColor = levelAttackk.color;
@@ -262,7 +258,7 @@ public class CharacterBase : MonoBehaviour
         if (other.CompareTag("Life"))
         {
             life += 70;
-            LifeManagement();
+            LifeBarManagement();
             other.gameObject.SetActive(false);
         }
         if (other.CompareTag("Power"))
