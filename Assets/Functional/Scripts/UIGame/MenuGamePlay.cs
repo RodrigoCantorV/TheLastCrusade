@@ -95,7 +95,7 @@ public class MenuGamePlay : MonoBehaviour
 
     public IEnumerator GameOver()
     {
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(6.5f);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
         audioSource.Pause();
@@ -103,7 +103,7 @@ public class MenuGamePlay : MonoBehaviour
 
     public IEnumerator Winner()
     {
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(13);
         winnerPanel.SetActive(true);
         Time.timeScale = 0f;
         audioSource.Pause();

@@ -15,6 +15,8 @@ public class CameraFollow : MonoBehaviour
     private bool estaTocando = false;
     private float sumatoria;
     private CharacterBase characterBase;
+
+    private Vector3 newPosition;
     float max;
     private void Start()
     {
@@ -41,62 +43,16 @@ public class CameraFollow : MonoBehaviour
             // Movimiento suave de la c�mara
             transform.position = Vector3.SmoothDamp(currentPosition, targetPosition, ref velocity, smoothSpeed);
         }
-        //float max = Vector3.Distance(this.transform.position, target.position);
-        // Vector3 distanceVector = this.transform.position - target.position;
-        //float distance2 = distanceVector.magnitude;
 
-        //Debug.Log("===========" + max);
-/*
-        if (characterBase.estaAfuera == false)
-        {
-            max = Vector3.Distance(this.transform.position, target.position);
+        if (!characterBase.estaVivo) {
+             // Calculamos la nueva posición de la cámara
+            targetPosition = target.position - transform.forward * 5f;
+            
+            // Movimiento suave de la cámara hacia la nueva posición
+            newPosition = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.2f);
+            transform.position = newPosition;
+            Debug.Log("Muerteeee");
         }
-        else
-        {
-            max = 0;
-        }
-
-        if (max > 11)
-        {
-            estaTocando = false;
-        }
-
-
-        if (estaTocando == true)
-        {
-            yRotationAux = 50;
-            yRotation = Mathf.SmoothDamp(yRotation, yRotationAux, ref yRotationRerence, 0.1f);
-        }
-        if (estaTocando == false)
-        {
-            yRotationAux = 40;
-            yRotation = Mathf.SmoothDamp(yRotation, yRotationAux, ref yRotationRerence, 0.1f);
-        }
-*/
+        
     }
-/*
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Toco la pared triger enter");
-        estaTocando = false;
-    }
-
-
-    private void OnTriggerExit(Collider other)
-    {
-        estaTocando = true;
-        Debug.Log("Toco la pared triger exit");
-        //yRotationAux = 60;
-        // estaTocando = true;    // donde estamos  // donde quiero llegar // no se toca// velocidad con la que va a cambiar
-        // yRotation = Mathf.SmoothDamp(yRotation, yRotationAux, ref yRotationRerence, 4.0f);
-    }
-
-
-
-    private void OnTriggerStay(Collider other)
-    {
-        Debug.Log("Toco la pared triger stay");
-        estaTocando = false;
-    }
-*/
 }
