@@ -192,14 +192,12 @@ public class CharacterBase : MonoBehaviour
 
     public void LifeBarManagement()
     {
-        lifeBar.fillAmount = life / maxLife;
-        Debug.Log("resta vidaa");
+        lifeBar.fillAmount = life / maxLife;       
     }
 
     public void PowerupManagement() 
     {
-        powerupBar.fillAmount = specialCharges + powrupCharge;
-        Debug.Log("Sumaa powerUP");
+        powerupBar.fillAmount = specialCharges/3;        
     }
 
     void Die()
@@ -282,7 +280,7 @@ public class CharacterBase : MonoBehaviour
         }
         if (other.CompareTag("Power"))
         {
-            specialCharges += powrupCharge;
+            specialCharges += 1;
             PowerupManagement();
             other.gameObject.SetActive(false);
         }

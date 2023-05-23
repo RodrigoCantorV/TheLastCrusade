@@ -18,23 +18,23 @@ public class Arrow : MonoBehaviour
     void Start()
     {
         arrowReference = GameObject.Find("ArrowReference").transform; 
-        rb = GetComponent<Rigidbody>();        
+        rb = GetComponent<Rigidbody>();  
     }
- 
 
-    void SetPointOfShoot()
-    {
+    void SetPointOfShoot()    {
+ 
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit rayInfo, float.MaxValue, hightFixLayer))
         {
             arrowDirection = new Vector3(rayInfo.point.x, 0, rayInfo.point.z);
-            realArrowDirection = arrowDirection - transform.position;
+            realArrowDirection = arrowDirection - transform.position;     
         }
     }
 
     // Update is called once per frame
     void Update()
-    {        
+    {
+        
         if (!isShot)
         {
             transform.rotation = arrowReference.rotation;
@@ -44,29 +44,29 @@ public class Arrow : MonoBehaviour
 
     public void ShotArrow()
     {
+       
         arrowDamage = 50;
+        SetPointOfShoot();
         Shot();
     }  
     public void ShotChargedArrow()
     {
         arrowDamage = 130;
-        print("disparando");
+        SetPointOfShoot();
         Shot();
     }
 
     public void ShotSpecialAttack(int arrowCounter)
     {
         arrowDamage = 100;
+        SetPointOfShoot();
         ShotSpecial(arrowCounter);   
     }
 
     void Shot()
     {
-        transform.rotation = arrowReference.rotation;
-              
+        transform.rotation = arrowReference.rotation;              
         rb.AddForce(realArrowDirection.normalized * bulletSpeed, ForceMode.Impulse);
-
-        print("disparandisimo");
         isShot = true;
     }
 
@@ -91,14 +91,30 @@ public class Arrow : MonoBehaviour
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             enemy.TakeDamage(arrowDamage);
-
+            rb.velocity = Vector3.zero;            
             gameObject.SetActive(false);
-            print("arrow Damage: " + arrowDamage);
+            
         }
         if (other.CompareTag("Enviroment")){
+            rb.velocity = Vector3.zero;
             gameObject.SetActive(false);
         }
         
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enviroment"))
+        {
+            rb.velocity = Vector3.zero;
+            gameObject.SetActive(false);
+        }
+
+    }
+
+    private void OnDisable()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        //transform.rotation = Quaternion.Euler(0, 0, 0);       
     }
 
 
