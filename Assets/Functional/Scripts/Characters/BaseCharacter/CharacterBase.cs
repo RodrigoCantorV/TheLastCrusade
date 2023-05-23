@@ -16,7 +16,9 @@ public class CharacterBase : MonoBehaviour
     private float currentVelocity;
     public float fadeTime = 0.1f;
 
-    [SerializeField] private float fadeDuration = 2f;
+    [SerializeField] private float fadeDuration = 0.5f;
+
+    public float fadeTimer = 0f;
 
     private bool isFading = false; // Variable para controlar si la imagen está desvaneciéndose
 
@@ -61,13 +63,16 @@ public class CharacterBase : MonoBehaviour
     public float playerSyncWithPointer = 90f;
     public bool estaVivo;
 
-    public int specialCharges;
+    public float specialCharges;
+    [HideInInspector] protected Image powerupBar;
+    public float powrupCharge = 0.4f;
 
     void Awake() 
     {
         maxLife = 160;
         //lifeeBar = GameObject.Find("LifeBar");
         lifeBar = GameObject.Find("LifeBar").GetComponent<Image>();
+        powerupBar = GameObject.Find("PowerUps").GetComponent<Image>();
         levelAttackk = GameObject.Find("LevelAttack").GetComponent<Image>();
         hardAttackk = GameObject.Find("HardAttack").GetComponent<Image>();
         fatalAttackk = GameObject.Find("FatalAttack").GetComponent<Image>();
@@ -120,7 +125,7 @@ public class CharacterBase : MonoBehaviour
     protected void ActivarImagen(int cantidad)
     {
 
-        fadeTime = 0f;
+        fadeTimer = 0f;
         isFading = false;
 
         if (cantidad > 120 && cantidad <= 140)
@@ -152,7 +157,7 @@ public class CharacterBase : MonoBehaviour
         {
             // Si la imagen se activa, inicia el temporizador de desvanecimiento
             isFading = true;
-            fadeTime = fadeDuration;
+            fadeTimer = fadeDuration;
         }
 
     }
@@ -181,6 +186,12 @@ public class CharacterBase : MonoBehaviour
     {
         lifeBar.fillAmount = life / maxLife;
         Debug.Log("resta vidaa");
+    }
+
+    public void PowerupManagement() 
+    {
+        powerupBar.fillAmount = specialCharges + powrupCharge;
+        Debug.Log("Sumaa powerUP");
     }
 
     void Die()
@@ -229,9 +240,9 @@ public class CharacterBase : MonoBehaviour
 
     if (isFading)
     {
-        fadeTime -= Time.deltaTime * 2;
+        fadeTimer -= Time.deltaTime;
 
-        if (fadeTime <= 0f)
+        if (fadeTimer <= 0f)
         {
             // Si el temporizador ha alcanzado cero, comienza a desvanecer la imagen
             targetAlpha = 0f;
@@ -267,7 +278,8 @@ public class CharacterBase : MonoBehaviour
         }
         if (other.CompareTag("Power"))
         {
-            specialCharges += 1;
+            specialCharges += powrupCharge;
+            PowerupManagement();
             other.gameObject.SetActive(false);
         }
     }

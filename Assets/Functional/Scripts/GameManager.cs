@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         // InstanciateWaves();
         // if (can == 0 && entro == false) // 0 && true
 
-        if (countWaves == 3)
+        if (countWaves == 11)
         {
             Debug.Log("Winner");
             if (menuGamePlay != null)
