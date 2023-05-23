@@ -17,9 +17,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.5851848
-  m_TransitionOffset: 0.12275879
-  m_ExitTime: 0.7499999
+  m_TransitionDuration: 0.54080963
+  m_TransitionOffset: 0.004418373
+  m_ExitTime: 1.0037754
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1037,7 +1037,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 688b2232a26939d44a0ac2d3a1048ae6,
       type: 3}
-    m_Threshold: 0.1
+    m_Threshold: 0.001
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -1046,7 +1046,7 @@ BlendTree:
   m_BlendParameter: speed
   m_BlendParameterY: Blend
   m_MinThreshold: 0
-  m_MaxThreshold: 0.1
+  m_MaxThreshold: 0.001
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0

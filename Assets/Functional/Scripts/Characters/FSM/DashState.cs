@@ -96,6 +96,7 @@ public class DashState : State
         {        
             stateMachine.ChangeState(CharacterBase.movement);
             CharacterBase.animator.SetTrigger("move");
+            CharacterBase.animator.SetFloat("speed", 0.3f);
             //dash = false;
         }
 
