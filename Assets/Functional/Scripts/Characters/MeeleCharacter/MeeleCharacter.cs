@@ -103,14 +103,11 @@ public class MeeleCharacter : CharacterBase
 
     private void CheckForDamageable(float ultiDamage)
     {
-        Debug.Log("Entro aca!");
         Collider[] colliders = Physics.OverlapSphere(transform.position, radiusSphere, whatAreDamageable);
         foreach(Collider c in colliders)
         {
-            Debug.Log("Luego por aca");
             if (c.GetComponent<EnemyShortDistance>())
             {
-                Debug.Log("por ultimo hizo daño!");
                 c.GetComponent<EnemyShortDistance>().transform.position -= c.transform.forward * Time.deltaTime * KnockbackForce;
                 c.GetComponent<EnemyShortDistance>().TakeDamage(ultiDamage);
             }
