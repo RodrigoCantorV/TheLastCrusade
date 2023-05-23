@@ -42,7 +42,6 @@ public abstract class Enemy : MonoBehaviour
         InitializeVariables();
         if (animator.GetBool("isDeath") == false && player.GetComponent<CharacterBase>().estaVivo == true)
         {
-
             MoveEnemy();
             AttackEnemy();
             Obser();
@@ -56,6 +55,7 @@ public abstract class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
     }
+
     void MoveEnemy()
     {
         animator.SetFloat("speed", agent.velocity.magnitude / agent.speed);
@@ -70,21 +70,31 @@ public abstract class Enemy : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        
+
         health -= damageAmount;
         animator.SetTrigger("damage");
-        
-       
+
+
         HitVFX(this.gameObject.transform.position);
         if (health <= 0)
         {
-             animator.SetBool("isDeath", true);
+            DesactivasMesh();
+            animator.SetBool("isDeath", true);
             animator.SetTrigger("death");
             Invoke("Die", 5);
             //Die();
         }
     }
 
+    void DesactivasMesh()
+    {
+        CapsuleCollider collider = this.gameObject.GetComponent<CapsuleCollider>();
+        if (collider != null)
+        {
+            // Desactiva el CapsuleCollider
+            collider.enabled = false;
+        }
+    }
 
     void Die()
     {
@@ -124,17 +134,17 @@ public abstract class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, aggroRange);
     }
 
-/*     void Obser()
-    {
-        //  transform.LookAt(player.transform.position);
-        if (player != null)
+    /*     void Obser()
         {
-            Vector3 direction = player.transform.position - transform.position;
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            // Aplicar la rotación gradualmente
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15 * Time.deltaTime);
-        }
-    } */
+            //  transform.LookAt(player.transform.position);
+            if (player != null)
+            {
+                Vector3 direction = player.transform.position - transform.position;
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                // Aplicar la rotación gradualmente
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15 * Time.deltaTime);
+            }
+        } */
 
     void Obser()
     {
