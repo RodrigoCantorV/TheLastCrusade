@@ -163,7 +163,6 @@ public abstract class Enemy : MonoBehaviour
         drop.transform.position = this.transform.position;
         //drop.transform.position = new Vector3(drop.transform.position.x,drop.transform.position.y + 1 ,drop.transform.position.z);
         posicionActual = drop.transform.position;
-        posicionActual.y += 1;
         drop.transform.position = new Vector3(drop.transform.position.x, posicionActual.y, drop.transform.position.z);
 
     }
