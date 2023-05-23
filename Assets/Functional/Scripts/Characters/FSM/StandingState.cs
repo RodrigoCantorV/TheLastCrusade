@@ -54,7 +54,7 @@ public class StandingState : State
             heavyAttack = true;
            
         }
-        if (specialAttackAction.triggered)
+        if (specialAttackAction.triggered && CharacterBase.specialCharges >=5)
         {
             specialAttack = true;
         }
@@ -90,6 +90,7 @@ public class StandingState : State
         if(specialAttack)
         {
             stateMachine.ChangeState(CharacterBase.specialAttacking);
+            CharacterBase.specialCharges = 0;
         }
     }
 

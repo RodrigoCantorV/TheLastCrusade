@@ -45,14 +45,15 @@ public class CharacterBase : MonoBehaviour
     public string dashAnimationName, heavyAttackAnimationName, lightAttackAnimationName, specialAttackAnimationName, hurtAnimationName, deadAnimationName;
     [HideInInspector]
     public float playerSyncWithPointer = 90f;
-    public bool estaAfuera;
     public bool estaVivo;
+
+    public int specialCharges;
 
     void Awake() 
     {
         maxLife = 160;
-        lifeeBar = GameObject.Find("LifeBar");
-        lifeBar = lifeeBar.GetComponent<Image>();
+      //  lifeeBar = GameObject.Find("LifeBar");
+        lifeBar = GameObject.Find("LifeBar").GetComponent<Image>();
     }
 
     // Start is called before the first frame update
@@ -102,7 +103,7 @@ public class CharacterBase : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         life -= damageAmount;
-        animator.SetBool("damage", true);
+        animator.SetTrigger("damage");
         LifeManagement();
         if (life <= 0)
         {
@@ -154,19 +155,19 @@ public class CharacterBase : MonoBehaviour
         return angle;
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.name.Equals("Wall2"))
-        {
-            estaAfuera = true;
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.Equals("Wall2"))
+        if (other.CompareTag("Life"))
         {
-            estaAfuera = false;
+            life += 70;
+            LifeManagement();
+            other.gameObject.SetActive(false);
+        }
+        if (other.CompareTag("Power"))
+        {
+            specialCharges += 1;
+            other.gameObject.SetActive(false);
         }
     }
 }
