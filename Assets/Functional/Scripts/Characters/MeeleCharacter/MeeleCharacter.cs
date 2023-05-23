@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class MeeleCharacter : CharacterBase
 {
-    public AudioSource audioSource;
+    /*public AudioSource audioSource;
     public AudioClip attackSound;
     public AudioClip patadaSound;
+    */
+
     bool isAttacking; 
     [SerializeField] private GameObject ultiParticlesObject;
     [SerializeField] private LayerMask whatAreDamageable;
@@ -55,8 +57,11 @@ public class MeeleCharacter : CharacterBase
         base.StartDealDamageLightAttack();
         GetComponentInChildren<DamageDealer>().SetDamage(base.lightAttackDamage);
         GetComponentInChildren<DamageDealer>().StartDealDamage();
+        
+        /*
         audioSource.clip = attackSound;
         audioSource.Play();
+        */
     }
 
     protected override void EndDealDamageLightAttack()
@@ -71,9 +76,12 @@ public class MeeleCharacter : CharacterBase
         base.StartDealDamageHeavyAttack();
         GetComponentInChildren<DamageDealer>().SetDamage(base.heavyAttackDamage);
         GetComponentInChildren<DamageDealer>().StartDealDamage();
+        
+        /*
         audioSource.clip = patadaSound;
         audioSource.time = 3.6f;
         audioSource.Play();
+        */
     }
     protected override void EndDealDamageHeavyAttack()
     {
@@ -90,9 +98,11 @@ public class MeeleCharacter : CharacterBase
         ultiParticlesObject.GetComponent<ParticleSystem>().Play();
         CheckForDamageable(base.specialAttackDamage);
 
+        /*
         audioSource.clip = patadaSound;
         audioSource.time = 3.6f;
         audioSource.Play();
+        */
     }
     /*protected override void EndDealDamageSpecialAttack()
     {

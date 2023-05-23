@@ -48,6 +48,14 @@ public class CharacterBase : MonoBehaviour
     public bool estaAfuera;
     public bool estaVivo;
 
+
+    // SONIDOS
+
+    public AudioSource audioSource;
+    public AudioClip lightAttackSound;
+    public AudioClip hardAttackSound;
+    public AudioClip ultiSound;
+
     void Awake() 
     {
         maxLife = 160;
@@ -169,4 +177,23 @@ public class CharacterBase : MonoBehaviour
             estaAfuera = false;
         }
     }
+
+    private void soundLightAttack()
+    {
+        audioSource.clip = lightAttackSound;
+        audioSource.Play();
+    }
+
+    private void soundHardAttack()
+    {
+        audioSource.clip = hardAttackSound;
+        audioSource.Play();
+    }
+
+    private void soundUlti()
+    {
+        audioSource.clip = ultiSound;
+        audioSource.Play();
+    }
+
 }
