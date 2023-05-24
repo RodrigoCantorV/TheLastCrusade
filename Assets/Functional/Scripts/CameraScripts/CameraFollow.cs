@@ -13,15 +13,9 @@ public class CameraFollow : MonoBehaviour
     public float XRotation = 0.0f; // Rotaci�n en el eje Y
     private Vector3 velocity = Vector3.zero;
     private bool estaTocando = false;
-    private float sumatoria;
     private CharacterBase characterBase;
 
     private Vector3 newPosition;
-    float max;
-    private void Start()
-    {
-        // characterBase = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterBase>();
-    }
     void LateUpdate()
     {
         characterBase = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterBase>();
@@ -50,8 +44,7 @@ public class CameraFollow : MonoBehaviour
             
             // Movimiento suave de la cámara hacia la nueva posición
             newPosition = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.2f);
-            transform.position = newPosition;
-            Debug.Log("Muerteeee");
+            transform.position = newPosition;        
         }
         
     }

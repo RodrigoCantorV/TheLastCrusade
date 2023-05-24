@@ -9,8 +9,6 @@ public class CharacterBase : MonoBehaviour
     public float dashSpeed;
     public float life;
 
-    float alphaRef;
-    Color color;
 
     private float targetAlpha = 0f;
     private float currentVelocity;

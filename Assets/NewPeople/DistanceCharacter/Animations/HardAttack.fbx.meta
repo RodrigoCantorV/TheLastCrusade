@@ -57,6 +57,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.15648863
+        functionName: soundHardAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.47524095
         functionName: GenerateArrow
         data: 
@@ -66,13 +73,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.7757256
         functionName: ShotChargedArrow
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.3931624
-        functionName: soundHardAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

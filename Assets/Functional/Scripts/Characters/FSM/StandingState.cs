@@ -9,29 +9,24 @@ public class StandingState : State
     bool dash;
     bool specialAttack;
     float playerSyncWithPointer = 90f;
-
     Vector3 cVelocity;
 
     public StandingState(CharacterBase _character, StateMachine _stateMachine) : base(_character, _stateMachine)
     {
         CharacterBase = _character;
-        stateMachine = _stateMachine;
-       
+        stateMachine = _stateMachine;       
     }
 
     public override void Enter()
     {
         base.Enter();
-
-
         heavyAttack = false;
         lightAttack = false;
         specialAttack = false; 
         dash = false;
         input = Vector2.zero;
         velocity = Vector3.zero;
-        currentVelocity = Vector3.zero;
-     
+        currentVelocity = Vector3.zero;   
 
         playerSpeed = CharacterBase.playerSpeed;
     }
@@ -58,9 +53,6 @@ public class StandingState : State
         {
             specialAttack = true;
         }
-
-
-
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
 
@@ -71,13 +63,11 @@ public class StandingState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        Debug.Log("especial: "+CharacterBase.specialCharges);
         CharacterBase.animator.SetFloat("speed", input.magnitude, CharacterBase.delayAnimationTime, Time.deltaTime);
 
         if(dash)
         {
-            stateMachine.ChangeState(CharacterBase.dashing);
-            
+            stateMachine.ChangeState(CharacterBase.dashing);            
         }
         if (lightAttack)
         {
@@ -93,8 +83,7 @@ public class StandingState : State
             CharacterBase.specialCharges = 0;
         }
         if (!CharacterBase.isAlive)
-        {
-            Debug.Log("tha hell");
+        {           
             stateMachine.ChangeState(CharacterBase.deadState);
         }
     }
@@ -118,20 +107,13 @@ public class StandingState : State
     {
         Vector3 positionOnScreen = Camera.main.WorldToViewportPoint(CharacterBase.transform.position);
         Vector3 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
-
         Vector3 direction = mouseOnScreen - positionOnScreen;
-
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
         return angle;
     }
-
-
     public override void Exit()
     {
         base.Exit();
-
         CharacterBase.playerVelocity = new Vector3(input.x, 0, input.y);
-
     }
 }

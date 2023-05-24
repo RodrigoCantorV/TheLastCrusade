@@ -8,7 +8,6 @@ public class SpecialAttackState : State
     float clipLength;
     float clipSpeed;
     bool attack;
-    
     public SpecialAttackState(CharacterBase _characterVideo, StateMachine _stateMachine) : base(_characterVideo, _stateMachine)
     {
         CharacterBase = _characterVideo;
@@ -29,10 +28,7 @@ public class SpecialAttackState : State
     {
         base.LogicUpdate();
 
-
         timePassed += Time.deltaTime;
-
-
         clipLength = FindAnimation(CharacterBase.animator, CharacterBase.specialAttackAnimationName).length;
         clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
 
@@ -41,7 +37,6 @@ public class SpecialAttackState : State
             CharacterBase.animator.SetTrigger("specialAttack");
             attack = false;
         }
-
 
         if (timePassed > clipLength / clipSpeed)
         {

@@ -4,37 +4,32 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    float bulletSpeed = 20f;
-    bool isShot = false;
-    Vector3 arrowDirection;
-    private Transform arrowReference;
-    Ray ray;
     private Rigidbody rb;
+    private Transform arrowReference;
+    bool isShot = false;   
+    float bulletSpeed = 20f;
     float arrowDamage = 5;
     Vector3 offsetSpecialAttack = new Vector3(1, 0, 1);
+    Vector3 arrowDirection;
     Vector3 realArrowDirection;
-
+    Ray ray;
     [SerializeField]LayerMask hightFixLayer;
     void Start()
     {
         arrowReference = GameObject.Find("ArrowReference").transform; 
         rb = GetComponent<Rigidbody>();  
     }
-
-    void SetPointOfShoot()    {
- 
+    void SetPointOfShoot()
+    { 
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit rayInfo, float.MaxValue, hightFixLayer))
         {
             arrowDirection = new Vector3(rayInfo.point.x, 0, rayInfo.point.z);
             realArrowDirection = arrowDirection - transform.position;     
         }
-    }
-
-    // Update is called once per frame
+    } 
     void Update()
-    {
-        
+    {        
         if (!isShot)
         {
             transform.rotation = arrowReference.rotation;
@@ -45,20 +40,20 @@ public class Arrow : MonoBehaviour
     public void ShotArrow()
     {
        
-        arrowDamage = 50;
+        arrowDamage = 35;
         SetPointOfShoot();
         Shot();
     }  
     public void ShotChargedArrow()
     {
-        arrowDamage = 130;
+        arrowDamage = 60;
         SetPointOfShoot();
         Shot();
     }
 
     public void ShotSpecialAttack(int arrowCounter)
     {
-        arrowDamage = 100;
+        arrowDamage = 80;
         SetPointOfShoot();
         ShotSpecial(arrowCounter);   
     }
@@ -89,7 +84,7 @@ public class Arrow : MonoBehaviour
     {
         if (other.CompareTag("EnemyBoss1")|| other.CompareTag("EnemyBase1") || other.CompareTag("EnemyBase2"))
         {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();         
             enemy.TakeDamage(arrowDamage);
             rb.velocity = Vector3.zero;            
             gameObject.SetActive(false);

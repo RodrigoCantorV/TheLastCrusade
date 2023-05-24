@@ -12,8 +12,6 @@ public class DistanceCharacter : CharacterBase
     private int arrowsSpecialAmount = 3;
     private Arrow[] arrowsFunctional;
     public Transform arrowReference;
-
-    
     protected override void Start()
     {
         base.Start();
@@ -32,7 +30,6 @@ public class DistanceCharacter : CharacterBase
         arrow.transform.localScale = new Vector3(3, 1, 3);
         arrowFunctional = arrow.GetComponent<Arrow>();
     }
-
     public void GenerateArrows()
     {
         for(int i=0; i < arrowsSpecialAmount; i++)
@@ -45,18 +42,15 @@ public class DistanceCharacter : CharacterBase
             
         }
     }
-
     public void ShotArrow()
     {
         arrowFunctional.ShotArrow();
-        
     }
 
     public void ShotChargedArrow()
     {
         arrowFunctional.ShotChargedArrow();
     }
-
     public void ShotSpecialAttack()
     {
         for(int i=0;i<arrowsSpecialAmount; i++)

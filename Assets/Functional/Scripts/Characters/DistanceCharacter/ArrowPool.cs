@@ -25,7 +25,6 @@ public class ArrowPool : MonoBehaviour
     {
         AddArrowsToPool(poolSize);
     }
-
     private void AddArrowsToPool(int amount)
     {
         for (int i = 0; i < amount; i++)
@@ -36,7 +35,6 @@ public class ArrowPool : MonoBehaviour
             arrow.transform.parent = transform;
         }
     }
-
     public GameObject RequestArrow()
     {
         for(int i =0; i< arrowList.Count; i++)
@@ -47,11 +45,8 @@ public class ArrowPool : MonoBehaviour
                 return arrowList[i];
             }
         }
-
         AddArrowsToPool(1);
         arrowList[arrowList.Count - 1].SetActive(true);
         return arrowList[arrowList.Count - 1];
     }
-
-
 }
