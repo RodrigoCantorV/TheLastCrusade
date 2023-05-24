@@ -8,7 +8,7 @@ public class GameControl : MonoBehaviour
 
     public GameObject[] characters;
     public Transform playerStartPosition;
-    public string menuScene = "Character Selection Menu";
+    public string menuScene = "SelectChar";
     private string selectedCharacterDataName = "SelectedCharacter";
     int selectedCharacter;
     public GameObject playerObject;
@@ -31,7 +31,5 @@ public class GameControl : MonoBehaviour
     public void ReturnToMainMenu()
     {
         SceneManager.LoadScene(menuScene);
-
     }
-
 }
