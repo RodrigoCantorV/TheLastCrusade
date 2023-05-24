@@ -7,19 +7,92 @@ public class InstructionsPanel : MonoBehaviour
 {
     public GameObject[] panelsInstructions;
 
-    public PlayerInput playerInput;
-    public CharacterBase CharacterBase;
+    [HideInInspector] public PlayerInput playerInput;
+    [HideInInspector] public CharacterBase characterBase;
 
-    public int indexPanels = 0;
+    [HideInInspector] public int indexPanels = 0;
+
+    private bool gameStarted = false;
+
+    void Start()
+    {
+        playerInput = characterBase.GetComponent<PlayerInput>();
+        StartCoroutine(ShowPanelsWithDelay());
+    }
+
+    void Update()
+    {
+        if (!gameStarted)
+            return;
+
+        if (panelsInstructions[indexPanels].activeSelf)
+        {
+            CheckInputForPanel();
+        }
+    }
+
+    void CheckInputForPanel()
+    {
+        if (indexPanels == 0 && playerInput.actions["Move"].IsPressed())
+        {
+            panelsInstructions[0].SetActive(false);
+            NextPanel();
+        }
+        else if (indexPanels == 1 && playerInput.actions["LightAttack"].IsPressed())
+        {
+            panelsInstructions[1].SetActive(false);
+            NextPanel();
+        }
+        else if (indexPanels == 2 && playerInput.actions["HeavyAttack"].IsPressed())
+        {
+            panelsInstructions[2].SetActive(false);
+            NextPanel();
+        }
+        else if (indexPanels == 3 && playerInput.actions["Dash"].IsPressed())
+        {
+            panelsInstructions[3].SetActive(false);
+            NextPanel();
+        }
+        else if (indexPanels == 4 && playerInput.actions["SpecialAttack"].IsPressed())
+        {
+            panelsInstructions[4].SetActive(false);
+            NextPanel();
+        }
+        else if (indexPanels == 5 && Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            panelsInstructions[5].SetActive(false);
+            NextPanel();
+        }
+    }
+
+    void NextPanel()
+    {
+        indexPanels++;
+        if (indexPanels < panelsInstructions.Length)
+        {
+            panelsInstructions[indexPanels].SetActive(true);
+        }
+        else
+        {
+            // Se han mostrado todos los paneles, aquí puedes realizar alguna acción adicional si es necesario.
+        }
+    }
+
+    IEnumerator ShowPanelsWithDelay()
+    {
+        yield return new WaitForSeconds(3f);
+        gameStarted = true;
+        panelsInstructions[indexPanels].SetActive(true);
+    }
     
-    public InstructionsPanel(CharacterBase _character) {
+   /*  public InstructionsPanel(CharacterBase _character) {
         CharacterBase = _character;
     }
 
-    /* void Start() {
+    void Start() {
         playerInput = characterBase.GetComponent<PlayerInput>();
         //panelsInstructions = GetComponent<GameObject>();
-    } */
+    }
 
     void Update() {
         ActivePanels();
@@ -46,7 +119,7 @@ public class InstructionsPanel : MonoBehaviour
         }
        
 
-        /* for(int indexPanels = 0; indexPanels < panelsInstructions.Length; indexPanels++){
+        for(int indexPanels = 0; indexPanels < panelsInstructions.Length; indexPanels++){
             panelsInstructions[indexPanels].SetActive(true);
             if (indexPanels == 0 && Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
             {
@@ -56,6 +129,6 @@ public class InstructionsPanel : MonoBehaviour
             } else if (indexPanels == 2 && Input.GetMouseButtonDown(1)) {
                 panelsInstructions[2].SetActive(false);
             }
-        } */
-    }
+        }
+    } */
 }
