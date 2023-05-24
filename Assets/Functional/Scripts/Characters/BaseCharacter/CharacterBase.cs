@@ -185,6 +185,7 @@ public class CharacterBase : MonoBehaviour
                 StartCoroutine(menuGamePlay.GameOver());            
             }
         }
+        animator.SetTrigger("move");
        
     }
 
