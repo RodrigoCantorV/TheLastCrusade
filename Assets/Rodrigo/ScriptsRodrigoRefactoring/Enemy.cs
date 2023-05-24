@@ -8,6 +8,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Live")]
     // Variable de vida para todos los enemigos
     [SerializeField] float health = 3;
+    [SerializeField] float newHeath;
     // Variable para el efecto visual cusndo el enemigo sea golpeado
     [SerializeField] GameObject hitVFX;
 
@@ -26,15 +27,9 @@ public abstract class Enemy : MonoBehaviour
     protected float newDestinationCD = 1f;
     float probability;
 
-    void Start()
+    private void Awake()
     {
-
-    }
-
-
-    void Update()
-    {
-
+        newHeath = health;
     }
 
     private void LateUpdate()
@@ -46,7 +41,6 @@ public abstract class Enemy : MonoBehaviour
             AttackEnemy();
             Obser();
         }
-
     }
 
     void InitializeVariables()
@@ -99,7 +93,7 @@ public abstract class Enemy : MonoBehaviour
     void Die()
     {
         probability = Random.value;
-        if (probability > 0f)
+        if (probability > .5f)
         {
             ThrowDrop();
         }
@@ -165,6 +159,11 @@ public abstract class Enemy : MonoBehaviour
         posicionActual = drop.transform.position;
         drop.transform.position = new Vector3(drop.transform.position.x, posicionActual.y, drop.transform.position.z);
 
+    }
+
+    public void setHealth()
+    {
+        health = newHeath;
     }
 
     protected abstract void AttackEnemy();

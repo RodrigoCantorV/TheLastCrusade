@@ -23,6 +23,8 @@ public class SpawnEnemyManager : MonoBehaviour
 
     public void InstanceEnemyWave(int amountWave)
     {
+        amountWave += 2;
+        
         for (int i = 0; i < amountWave; i++)
         {
             int positionCube = Random.Range(0, positions.Count);
@@ -34,24 +36,28 @@ public class SpawnEnemyManager : MonoBehaviour
                 // Desactiva el CapsuleCollider
                 collider.enabled = true;
             }
+            enemy.GetComponent<Enemy>().setHealth();
         }
 
-        if ((amountWave % waveBaseEnemy2) == 0)
+        // if ((amountWave % waveBaseEnemy2) == 0)
+        // {
+        //    int amountEnemiBase2 = amountWave / waveBaseEnemy2;
+        //    for (int i = 0; i < amountEnemiBase2; i++)
+        for (int i = 0; i < amountWave; i++)
         {
-            int amountEnemiBase2 = amountWave / waveBaseEnemy2;
-            for (int i = 0; i < amountEnemiBase2; i++)
+            int positionCube = Random.Range(0, positions.Count);
+            GameObject enemy = EnemyPool.Instance.RequestEnemy("EnemyBase2");
+            enemy.transform.position = positions[positionCube].transform.position;
+            CapsuleCollider collider = enemy.gameObject.GetComponent<CapsuleCollider>();
+            if (collider != null)
             {
-                int positionCube = Random.Range(0, positions.Count);
-                GameObject enemy = EnemyPool.Instance.RequestEnemy("EnemyBase2");
-                enemy.transform.position = positions[positionCube].transform.position;
-                CapsuleCollider collider = enemy.gameObject.GetComponent<CapsuleCollider>();
-                if (collider != null)
-                {
-                    // Desactiva el CapsuleCollider
-                    collider.enabled = true;
-                }
+                // Desactiva el CapsuleCollider
+                collider.enabled = true;
             }
+            enemy.GetComponent<Enemy>().setHealth();
         }
+
+        // }
 
         // Instanciar enemigos
         if ((amountWave % waveBoosEnemy1) == 0)
@@ -68,6 +74,7 @@ public class SpawnEnemyManager : MonoBehaviour
                     // Desactiva el CapsuleCollider
                     collider.enabled = true;
                 }
+                enemy.GetComponent<Enemy>().setHealth();
             }
         }
     }
