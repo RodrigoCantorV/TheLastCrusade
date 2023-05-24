@@ -66,7 +66,8 @@ public class CharacterBase : MonoBehaviour
 
     public float specialCharges;
     [HideInInspector] protected Image powerupBar;
-    public float powrupCharge = 0.4f;
+    public float powrupCharge = 1.8f;
+    //public float loadingPower = 1.2f;
 
     void Awake() 
     {
@@ -190,7 +191,7 @@ public class CharacterBase : MonoBehaviour
 
     public void PowerupManagement() 
     {
-        powerupBar.fillAmount = specialCharges + powrupCharge;
+        powerupBar.fillAmount = specialCharges / 1.2f;
         Debug.Log("Sumaa powerUP");
     }
 
