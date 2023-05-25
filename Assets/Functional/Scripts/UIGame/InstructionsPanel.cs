@@ -117,8 +117,8 @@ public class InstructionsPanel : MonoBehaviour
         {
             panelsInstructions[cantidadPanel].gameObject.SetActive(false);
             //contadorPasos++;
-            ResetTimer();
-            estaActivo = true;
+            //ResetTimer();
+            //estaActivo = true;
             //cantidadPanel++;
         }
     }

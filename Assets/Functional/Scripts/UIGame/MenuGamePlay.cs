@@ -11,10 +11,6 @@ public class MenuGamePlay : MonoBehaviour
     [SerializeField] private GameObject backgroundPowerup;
     [SerializeField] private GameObject gameOverLetter;
     Animator animatorLetter;
-    //[SerializeField] private GameObject quit;
-    //[SerializeField] private GameObject resume;
-    //[SerializeField] private GameObject restart;
-    //[SerializeField] private GameObject volume;
     [SerializeField] public GameObject gameOverPanel;
     [SerializeField] public GameObject winnerPanel;
     [SerializeField] public MenuManager menuManager;
@@ -51,30 +47,21 @@ public class MenuGamePlay : MonoBehaviour
         juegoPausado = true;
         Time.timeScale = 0f;
         audioSource.Pause();
-        botonPause.SetActive(false);
         pausePanel.SetActive(true);
         backgroundLife.SetActive(false);
         backgroundPowerup.SetActive(false);
-        //resume.SetActive(true);
-        //restart.SetActive(true);
-        //quit.SetActive(true);
-        //volume.SetActive(true);
+        
     }
 
     public void Reanudar()
     {
         juegoPausado = false;
         Time.timeScale = 1f;
-        botonPause.SetActive(true);
+        audioSource.UnPause();
         pausePanel.SetActive(false);
         backgroundLife.SetActive(true);
         backgroundPowerup.SetActive(true);
-        //resume.SetActive(false);
-        //restart.SetActive(false);
-        //quit.SetActive(false);
-        //volume.SetActive(false);
-
-        audioSource.UnPause();
+        
     }
 
     public void Reiniciar()
@@ -92,12 +79,9 @@ public class MenuGamePlay : MonoBehaviour
 
     public void ReturnSelectCharacter()
     {
-        //Scene escena = SceneManager.LoadScene("Inicio");
 
         SceneManager.LoadScene("MenuInicial");
 
-           
-        //GameObject objeto = GameObject.Find("CanvasMenuInitNew");
         Debug.Log("cambio a selecccion");
         menuManager.MenuSelectCharacter();
     }
@@ -108,7 +92,6 @@ public class MenuGamePlay : MonoBehaviour
         gameOverPanel.SetActive(true);
         backgroundLife.SetActive(false);
         backgroundPowerup.SetActive(false);
-        botonPause.SetActive(false);
         animatorLetter = gameOverLetter.GetComponent<Animator>();
         animatorLetter.SetTrigger("lose");
         //Time.timeScale = 0f;
@@ -121,29 +104,7 @@ public class MenuGamePlay : MonoBehaviour
         winnerPanel.SetActive(true);
         backgroundLife.SetActive(false);
         backgroundPowerup.SetActive(false);
-        botonPause.SetActive(false);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         audioSource.Pause();
     }
-
-
-
-    //public void Quit()
-    //{
-    //    Debug.Log("Se cierra el juego");
-    //    audioSource.Stop();
-    //    //StartCoroutine(LoadMainMenu());
-    //    //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-    //    SceneManager.LoadScene("Main Menu (Mobile) 1");
-    //    Time.timeScale = 1f;
-    //    //SceneManager.SetActiveScene(SceneManager.LoadScene("Main Menu(Mobile) 1"));
-    //    //Application.Quit();
-    //}
-    //
-    //private IEnumerator LoadMainMenu()
-    //{
-    //    //cinematic.Play();
-    //    yield return new WaitForSeconds(0.1f);
-    //    SceneManager.LoadScene("Main Menu (Mobile) 1");
-    //}
 }
