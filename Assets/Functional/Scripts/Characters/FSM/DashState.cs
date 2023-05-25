@@ -76,8 +76,7 @@ public class DashState : State
         if (timePassed >= clipLength / clipSpeed)
         {        
             stateMachine.ChangeState(CharacterBase.movement);
-            CharacterBase.animator.SetTrigger("move");
-            CharacterBase.animator.SetFloat("speed", 0.3f);         
+            CharacterBase.animator.SetTrigger("move");         
         }
 
     }
@@ -94,6 +93,7 @@ public class DashState : State
     {
         base.Exit();        
         CharacterBase.animator.SetTrigger("move");
+        CharacterBase.animator.SetFloat("speed", 1f);
         timePassed = 0f;
     }
 }

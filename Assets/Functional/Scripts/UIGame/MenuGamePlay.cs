@@ -17,12 +17,10 @@ public class MenuGamePlay : MonoBehaviour
     //public GameObject pausePanel;
 
     private bool juegoPausado = false;
-    private AudioSource audioSource;
-    //public AudioClip chainGameOver;
 
     private void Awake()
     {
-        audioSource = GameObject.Find("SoundManager").GetComponent<AudioSource>();
+        SoundManager.Instance.playSoundBack();
     }
 
     private void Update()
@@ -32,12 +30,12 @@ public class MenuGamePlay : MonoBehaviour
             if (juegoPausado)
             {
                 Reanudar();
-                audioSource.UnPause();
+                SoundManager.Instance.playSoundBack();
             }
             else
             {
                 Pause();
-                audioSource.Pause();
+                SoundManager.Instance.pauseSoundBack();
             }
         }
     }
@@ -46,7 +44,8 @@ public class MenuGamePlay : MonoBehaviour
     {
         juegoPausado = true;
         Time.timeScale = 0f;
-        audioSource.Pause();
+        SoundManager.Instance.pauseSoundBack();
+        botonPause.SetActive(false);
         pausePanel.SetActive(true);
         backgroundLife.SetActive(false);
         backgroundPowerup.SetActive(false);
@@ -57,11 +56,15 @@ public class MenuGamePlay : MonoBehaviour
     {
         juegoPausado = false;
         Time.timeScale = 1f;
-        audioSource.UnPause();
         pausePanel.SetActive(false);
         backgroundLife.SetActive(true);
         backgroundPowerup.SetActive(true);
-        
+        //resume.SetActive(false);
+        //restart.SetActive(false);
+        //quit.SetActive(false);
+        //volume.SetActive(false);
+
+        SoundManager.Instance.playSoundBack();
     }
 
     public void Reiniciar()
@@ -69,7 +72,7 @@ public class MenuGamePlay : MonoBehaviour
         juegoPausado = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        audioSource.Play();
+        SoundManager.Instance.playSoundBack();
     }
 
     public void ReturnMenu()
@@ -82,6 +85,7 @@ public class MenuGamePlay : MonoBehaviour
 
         SceneManager.LoadScene("MenuInicial");
 
+        //GameObject objeto = GameObject.Find("CanvasMenuInitNew");
         Debug.Log("cambio a selecccion");
         menuManager.MenuSelectCharacter();
     }
@@ -95,7 +99,10 @@ public class MenuGamePlay : MonoBehaviour
         animatorLetter = gameOverLetter.GetComponent<Animator>();
         animatorLetter.SetTrigger("lose");
         //Time.timeScale = 0f;
-        audioSource.Pause();
+        //audioSource.Pause();
+        
+        SoundManager.Instance.pauseSoundBack();
+        SoundManager.Instance.playSoundLose();
     }
 
     public IEnumerator Winner()
@@ -104,7 +111,8 @@ public class MenuGamePlay : MonoBehaviour
         winnerPanel.SetActive(true);
         backgroundLife.SetActive(false);
         backgroundPowerup.SetActive(false);
-        //Time.timeScale = 0f;
-        audioSource.Pause();
+        botonPause.SetActive(false);
+        Time.timeScale = 0f;
+        SoundManager.Instance.pauseSoundBack();
     }
 }

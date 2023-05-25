@@ -74,6 +74,7 @@ public class CharacterBase : MonoBehaviour
     public AudioClip lightAttackSound;
     public AudioClip hardAttackSound;
     public AudioClip ultiSound;
+    public AudioClip walkSound;
 
     void Awake() 
     {
@@ -92,7 +93,7 @@ public class CharacterBase : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
-      
+    
 
         movementSM = new StateMachine();
         movement = new StandingState(this, movementSM);
@@ -186,7 +187,8 @@ public class CharacterBase : MonoBehaviour
                 StartCoroutine(menuGamePlay.GameOver());            
             }
         }
-       
+        animator.SetTrigger("move");
+    
     }
 
     public void LifeBarManagement()
@@ -300,6 +302,12 @@ public class CharacterBase : MonoBehaviour
     private void soundUlti()
     {
         audioSource.clip = ultiSound;
+        audioSource.Play();
+    }
+
+    private void soundWalk()
+    {
+        audioSource.clip = walkSound;
         audioSource.Play();
     }
 
