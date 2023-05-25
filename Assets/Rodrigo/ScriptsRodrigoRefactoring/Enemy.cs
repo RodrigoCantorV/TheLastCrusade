@@ -7,8 +7,12 @@ public abstract class Enemy : MonoBehaviour
 {
     [Header("Live")]
     // Variable de vida para todos los enemigos
-    [SerializeField] float health = 3;
+    [SerializeField] public float health = 3;
+    
+    [SerializeField] public GameObject damageText;
+
     [SerializeField] float newHeath;
+
     // Variable para el efecto visual cusndo el enemigo sea golpeado
     [SerializeField] GameObject hitVFX;
 
@@ -78,6 +82,8 @@ public abstract class Enemy : MonoBehaviour
             Invoke("Die", 5);
             //Die();
         }
+            DamageEnemyIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageEnemyIndicator>();
+            indicator.SetDamageText(damageAmount);
     }
 
     void DesactivasMesh()
