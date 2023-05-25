@@ -40,6 +40,19 @@ public class CreditosManager : MonoBehaviour
         yield return new WaitForSeconds(7.8f);
         animation = Cinematics[6].GetComponent<Animator>();
         animation.SetBool("isActive", true);
+
+        yield return new WaitForSeconds(7.8f);
+        animation = Cinematics[7].GetComponent<Animator>();
+        animation.SetBool("isActive", true);
+
+        yield return new WaitForSeconds(7.8f);
+        animation = Cinematics[8].GetComponent<Animator>();
+        animation.SetBool("isActive", true);
+
+        yield return new WaitForSeconds(3f);
+        
     }
+
+
 }
 
