@@ -188,7 +188,6 @@ public class CharacterBase : MonoBehaviour
             }
         }
         animator.SetTrigger("move");
-    
     }
 
     public void LifeBarManagement()
