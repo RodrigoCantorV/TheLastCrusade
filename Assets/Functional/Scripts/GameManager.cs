@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject[] imagenes;
     public static int amountEnemyes = 1; // Esto es igual a cero !! ESTO NO ME LO SABIA
     private int countWaves = 1;
     private bool enter = false;
     private SpawnEnemyManager waves;
     [HideInInspector] public MenuGamePlay menuGamePlay;
+    Animator animatorCinematic;
+    int ramdom;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +44,8 @@ public class GameManager : MonoBehaviour
             Debug.Log(amountEnemyes);
         if (amountEnemyes == 0 && !(enter)) // 0 && true
         {
+            ramdom = Random.Range(0, imagenes.Length - 1);
+            getCinematic(ramdom);
             StartCoroutine(InstanciateWavesWithTime());
         }
     }
@@ -47,10 +53,44 @@ public class GameManager : MonoBehaviour
     IEnumerator InstanciateWavesWithTime()
     {
         enter = true;
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(12);
         countWaves++; // = 2
         waves.InstanceEnemyWave(countWaves);
         enter = false;
         amountEnemyes = GameObject.Find("EnemyPooling").GetComponentsInChildren<Enemy>().Length;
     }
+
+    void getCinematic(int numeroCinematica)
+    {
+        GameObject cinema = imagenes[numeroCinematica].gameObject;
+        cinema.SetActive(true);
+        animatorCinematic = imagenes[numeroCinematica].GetComponent<Animator>();
+        animatorCinematic.SetBool("isActive", true);
+        StartCoroutine(pararCinematicas(numeroCinematica));
+        StartCoroutine(DesactivarCinematicas(numeroCinematica));
+        //  Invoke("pararCinematica", 3);
+    }
+
+    /* void pararCinematica()
+     {
+         animatorCinematic = imagenes[ramdom].GetComponent<Animator>();
+         animatorCinematic.SetBool("isActive", false);
+     }
+ */
+
+    IEnumerator pararCinematicas(int numeroCinematica)
+    {
+        yield return new WaitForSeconds(2);
+        animatorCinematic = imagenes[numeroCinematica].GetComponent<Animator>();
+        animatorCinematic.SetBool("isActive", false);
+    }
+
+    IEnumerator DesactivarCinematicas(int numeroCinematica)
+    {
+        yield return new WaitForSeconds(7);
+        GameObject cinema = imagenes[numeroCinematica].gameObject;
+        cinema.SetActive(false);
+    }
+
+
 }

@@ -21,12 +21,16 @@ public class AnimationGifScript : MonoBehaviour
         {
             posActual = (int)(Time.time * speedFPS) % animatedImages.Length;
             animateImageObj.sprite = animatedImages[posActual];
-
         }
+
         if (looping == false && posActual == animatedImages.Length - 1)
         {
             posActual = animatedImages.Length - 1;
-             animateImageObj.sprite = animatedImages[posActual];
+            animateImageObj.sprite = animatedImages[posActual];
+            if (posActual == animatedImages.Length - 1)
+            {
+                this.gameObject.SetActive(false);
+            }
         }
     }
 }
