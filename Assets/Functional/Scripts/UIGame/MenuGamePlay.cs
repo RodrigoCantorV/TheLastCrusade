@@ -20,6 +20,10 @@ public class MenuGamePlay : MonoBehaviour
 
     private void Awake()
     {
+
+    }
+    private void Start()
+    {
         SoundManager.Instance.playSoundBack();
     }
 
@@ -49,7 +53,7 @@ public class MenuGamePlay : MonoBehaviour
         pausePanel.SetActive(true);
         backgroundLife.SetActive(false);
         backgroundPowerup.SetActive(false);
-        
+
     }
 
     public void Reanudar()
@@ -100,7 +104,7 @@ public class MenuGamePlay : MonoBehaviour
         animatorLetter.SetTrigger("lose");
         //Time.timeScale = 0f;
         //audioSource.Pause();
-        
+
         SoundManager.Instance.pauseSoundBack();
         SoundManager.Instance.playSoundLose();
     }
