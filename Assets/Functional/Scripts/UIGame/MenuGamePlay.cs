@@ -7,8 +7,8 @@ public class MenuGamePlay : MonoBehaviour
 {
     [SerializeField] private GameObject botonPause;
     [SerializeField] private GameObject pausePanel;
-    [SerializeField] private GameObject backgroundLife;
-    [SerializeField] private GameObject backgroundPowerup;
+    [SerializeField] public GameObject backgroundLife;
+    [SerializeField] public GameObject backgroundPowerup;
     [SerializeField] private GameObject gameOverLetter;
     Animator animatorLetter;
     [SerializeField] public GameObject gameOverPanel;

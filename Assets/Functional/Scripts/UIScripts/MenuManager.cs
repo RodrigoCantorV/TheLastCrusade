@@ -5,37 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    //[SerializeField] public GameObject menuInit;
-    //[SerializeField] public GameObject menuSelect;
-
-   /*  void Start() 
-    {
-        SceneManager.LoadScene("SelectChar");
-        menuInit.SetActive(true);
-        menuSelect.SetActive(false);
-    } */
-
     public void StartButton()
     {
         SceneManager.LoadScene("SelectChar");
-        /* menuInit.SetActive(false);
-        menuSelect.SetActive(true); */
     }
 
     public void MenuSelectCharacter()
     {
         SceneManager.LoadScene("SelectChar");
-        /* menuInit.SetActive(false);
-        menuSelect.SetActive(true); */
+    }
+    
+    public void Credits()
+    {
+        SceneManager.LoadScene("Creditos");
     }
 
     public void ReturnBack()
     {
         SceneManager.LoadScene("MenuInicial");
-        /* menuInit.SetActive(true);
-        menuSelect.SetActive(false); */
     }
-
 
     public void Exit()
     {

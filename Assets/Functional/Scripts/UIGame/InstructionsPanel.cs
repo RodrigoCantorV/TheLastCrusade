@@ -69,9 +69,7 @@ public class InstructionsPanel : MonoBehaviour
                     break;
                 //default:
             }
-        }
-
-        Debug.Log("revise y active los paneles");  
+        }  
 
         if (contadorPasos == 1 && playerInput.FindAction("Move").IsPressed() && elapsedTime > 7)
         {

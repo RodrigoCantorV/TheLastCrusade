@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public MenuGamePlay menuGamePlay;
     Animator animatorCinematic;
     int ramdom;
+    public MenuGamePlay disableUiGame;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +69,20 @@ public class GameManager : MonoBehaviour
         animatorCinematic.SetBool("isActive", true);
         StartCoroutine(pararCinematicas(numeroCinematica));
         StartCoroutine(DesactivarCinematicas(numeroCinematica));
+        DisableUI();
         //  Invoke("pararCinematica", 3);
+    }
+
+    void DisableUI() {
+        menuGamePlay.GetComponent<MenuGamePlay>();
+        menuGamePlay.backgroundLife.SetActive(false);
+        menuGamePlay.backgroundPowerup.SetActive(false);
+    }
+
+    void EnableUI() {
+        menuGamePlay.GetComponent<MenuGamePlay>();
+        menuGamePlay.backgroundLife.SetActive(true);
+        menuGamePlay.backgroundPowerup.SetActive(true);
     }
 
     /* void pararCinematica()
@@ -90,6 +104,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(7);
         GameObject cinema = imagenes[numeroCinematica].gameObject;
         cinema.SetActive(false);
+        EnableUI();
     }
 
 
