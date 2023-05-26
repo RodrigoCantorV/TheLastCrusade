@@ -14,6 +14,9 @@ public class MenuGamePlay : MonoBehaviour
     [SerializeField] public GameObject gameOverPanel;
     [SerializeField] public GameObject winnerPanel;
     [SerializeField] public MenuManager menuManager;
+    //[SerializeField] public InstructionsPanel disablePanels;
+    [SerializeField] private InstructionsPanel disabledPanel;
+
     //public GameObject pausePanel;
 
     private bool juegoPausado = false;
@@ -104,6 +107,7 @@ public class MenuGamePlay : MonoBehaviour
         animatorLetter.SetTrigger("lose");
         //Time.timeScale = 0f;
         //audioSource.Pause();
+        DisableInstruccionsPanels();
 
         SoundManager.Instance.pauseSoundBack();
         SoundManager.Instance.playSoundLose();
@@ -118,5 +122,17 @@ public class MenuGamePlay : MonoBehaviour
         botonPause.SetActive(false);
         Time.timeScale = 0f;
         SoundManager.Instance.pauseSoundBack();
+    }
+
+    void DisableInstruccionsPanels() 
+    {
+        disabledPanel = GameObject.Find("InstruccionsPanel").GetComponent<InstructionsPanel>();
+        for(int i = 0; i < disabledPanel.panelsInstructions.Length; i++ ) 
+        {
+            if(disabledPanel.panelsInstructions[i].gameObject.activeSelf == true) {
+                disabledPanel.panelsInstructions[i].gameObject.SetActive(false);
+                break;
+            }    
+        }
     }
 }
