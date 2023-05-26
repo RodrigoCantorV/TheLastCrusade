@@ -7,7 +7,8 @@ public class CharacterBase : MonoBehaviour
     [Header("Controls")]
     public float playerSpeed;
     public float dashSpeed;
-    public float life;
+    public float currentLife;
+    public float characterMaxLife;
 
 
     private float targetAlpha = 0f;
@@ -175,11 +176,11 @@ public class CharacterBase : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        life -= damageAmount;
+        currentLife -= damageAmount;
         animator.SetTrigger("damage");
-        ActivateDamageImages(Mathf.CeilToInt(life));
+        ActivateDamageImages(Mathf.CeilToInt(currentLife));
         LifeBarManagement();
-        if (life <= 0)
+        if (currentLife <= 0)
         {
             Die();
             if (menuGamePlay != null)
@@ -190,9 +191,25 @@ public class CharacterBase : MonoBehaviour
         animator.SetTrigger("move");
     }
 
+    void LifeManagement()
+    {
+        if (currentLife < characterMaxLife)
+        {
+            if (currentLife + 60 > characterMaxLife)
+            {
+                currentLife = characterMaxLife;
+            }
+            else
+            {
+                currentLife += 60;
+            }
+        }
+        LifeBarManagement();
+    }
+
     public void LifeBarManagement()
     {
-        lifeBar.fillAmount = life / maxLife;       
+        lifeBar.fillAmount = currentLife / maxLife;       
     }
 
     public void PowerupManagement() 
@@ -274,8 +291,7 @@ public class CharacterBase : MonoBehaviour
     {
         if (other.CompareTag("Life"))
         {
-            life += 70;
-            LifeBarManagement();
+            LifeManagement();            
             other.gameObject.SetActive(false);
         }
         if (other.CompareTag("Power"))
