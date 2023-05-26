@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CreditosManager : MonoBehaviour
 {
     public GameObject[] Cinematics;
     private new Animator animation;
+
+    public AudioSource EpicMusic;
 
     private void Start()
     {
@@ -44,15 +47,24 @@ public class CreditosManager : MonoBehaviour
         yield return new WaitForSeconds(7.8f);
         animation = Cinematics[7].GetComponent<Animator>();
         animation.SetBool("isActive", true);
-
-        yield return new WaitForSeconds(7.8f);
         animation = Cinematics[8].GetComponent<Animator>();
         animation.SetBool("isActive", true);
 
-        yield return new WaitForSeconds(3f);
-        
+        yield return new WaitForSeconds(7.8f);
+        animation = Cinematics[9].GetComponent<Animator>();
+        animation.SetBool("isActive", true);
+
+        yield return new WaitForSeconds(8.3f);
+        EpicMusic.Stop();
+
+        yield return new WaitForSeconds(1f);
+        LoadScene();
     }
 
+    public void LoadScene()
+    {
+        SceneManager.LoadScene("MenuInicial");
+    }
 
 }
 
