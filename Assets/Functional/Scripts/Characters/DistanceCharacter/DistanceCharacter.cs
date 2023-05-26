@@ -15,6 +15,9 @@ public class DistanceCharacter : CharacterBase
     protected override void Start()
     {
         base.Start();
+        base.currentLife = 120f;
+        base.characterMaxLife = 120f;
+        
         arrowsFunctional = new Arrow[arrowsSpecialAmount];
         dashAnimationName = DASH_ANIMATION_NAME;
         heavyAttackAnimationName = HEAVY_ATTACK_ANIMATION_NAME;

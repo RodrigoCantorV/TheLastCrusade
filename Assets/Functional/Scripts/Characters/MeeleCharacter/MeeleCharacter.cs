@@ -20,6 +20,8 @@ public class MeeleCharacter : CharacterBase
         base.Start();
         base.lightAttackDamage = 65.0f;
         base.heavyAttackDamage = 130.0f;
+        base.currentLife = 200f;
+        base.characterMaxLife = 200f;
 
         dashAnimationName = DASH_ANIMATION_NAME;
         heavyAttackAnimationName = HEAVY_ATTACK_ANIMATION_NAME;
