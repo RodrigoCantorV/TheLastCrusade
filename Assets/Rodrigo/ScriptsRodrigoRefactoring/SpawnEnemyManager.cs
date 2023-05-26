@@ -7,7 +7,7 @@ public class SpawnEnemyManager : MonoBehaviour
     public List<GameObject> positions;
     //public int amountWave;
 
-    public int waveBaseEnemy2;
+    //public int waveBaseEnemy2;
     public int waveBoosEnemy1;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class SpawnEnemyManager : MonoBehaviour
 
     public void InstanceEnemyWave(int amountWave)
     {
-      //  amountWave += 2;
+        amountWave += 2;
         
         for (int i = 0; i < amountWave; i++)
         {

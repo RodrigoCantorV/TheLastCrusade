@@ -99,7 +99,7 @@ public abstract class Enemy : MonoBehaviour
     void Die()
     {
         probability = Random.value;
-        if (probability > .5f)
+        if (probability > .35f)
         {
             ThrowDrop();
         }
