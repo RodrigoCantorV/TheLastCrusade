@@ -76,6 +76,7 @@ public class CharacterBase : MonoBehaviour
     public AudioClip hardAttackSound;
     public AudioClip ultiSound;
     public AudioClip walkSound;
+    public AudioClip hurtSound;
 
     void Awake() 
     {
@@ -323,6 +324,12 @@ public class CharacterBase : MonoBehaviour
     private void soundWalk()
     {
         audioSource.clip = walkSound;
+        audioSource.Play();
+    }
+
+    private void soundHurt()
+    {
+        audioSource.clip = hurtSound;
         audioSource.Play();
     }
 
