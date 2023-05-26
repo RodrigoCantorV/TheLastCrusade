@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     Animator animatorCinematic;
     int ramdom;
     public MenuGamePlay disableUiGame;
+    public InstructionsPanel disablePanel;
+    private GameObject panelIsDisable;
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +72,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(pararCinematicas(numeroCinematica));
         StartCoroutine(DesactivarCinematicas(numeroCinematica));
         DisableUI();
+        DisableInstruccionsPanels();
         //  Invoke("pararCinematica", 3);
     }
 
@@ -105,7 +108,22 @@ public class GameManager : MonoBehaviour
         GameObject cinema = imagenes[numeroCinematica].gameObject;
         cinema.SetActive(false);
         EnableUI();
+        ActiveInstruccionPanel();
     }
 
+    void DisableInstruccionsPanels() {
+        disablePanel = GameObject.Find("InstruccionsPanel").GetComponent<InstructionsPanel>();
+        for (int i = 0; i < disablePanel.panelsInstructions.Length; i++)
+        {
+            if(disablePanel.panelsInstructions[i].gameObject.activeSelf == true) {
+                panelIsDisable = disablePanel.panelsInstructions[i].gameObject;
+                disablePanel.panelsInstructions[i].gameObject.SetActive(false);
+                break;
+            }
+        }
+    }
 
+    void ActiveInstruccionPanel() {
+        panelIsDisable.gameObject.SetActive(true);
+    }
 }
