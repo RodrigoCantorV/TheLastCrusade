@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class CharacterSelectionMenu : MonoBehaviour
 {
 
@@ -13,6 +13,9 @@ public class CharacterSelectionMenu : MonoBehaviour
 
     private string selectedCharacterDataName = "SelectedCharacter";
 
+    public Button selectButton;
+    public Button incomingButton;
+
     void Start()
     {
 
@@ -22,6 +25,22 @@ public class CharacterSelectionMenu : MonoBehaviour
 
         Debug.Log(selectedCharacter);
         playerObjects[selectedCharacter].SetActive(true);
+    }
+
+    private void Update()
+    {
+        Debug.Log(playerObjects[selectedCharacter].name);
+        if (playerObjects[selectedCharacter].name == "Paladin")
+        {
+            selectButton.gameObject.SetActive(false);
+            incomingButton.gameObject.SetActive(true);
+
+        }
+        else
+        {
+            selectButton.gameObject.SetActive(true);
+            incomingButton.gameObject.SetActive(false);
+        }
     }
 
 
@@ -41,7 +60,7 @@ public class CharacterSelectionMenu : MonoBehaviour
         {
             selectedCharacter = 0;
         }
-        playerObjects[selectedCharacter].SetActive(true);
+        playerObjects[selectedCharacter].SetActive(true);       
     }
 
     public void PreviousCharacter()
@@ -57,6 +76,7 @@ public class CharacterSelectionMenu : MonoBehaviour
 
     public void StartGame()
     {
+        
         PlayerPrefs.SetInt(selectedCharacterDataName, selectedCharacter);
         SceneManager.LoadScene(gameScene);
     }
