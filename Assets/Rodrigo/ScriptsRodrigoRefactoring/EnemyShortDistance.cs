@@ -50,7 +50,4 @@ public class EnemyShortDistance : Enemy
         audioSource.clip = hurtSound;
         audioSource.Play();
     }
-
-
-
 }

@@ -8,7 +8,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Live")]
     // Variable de vida para todos los enemigos
     [SerializeField] public float health = 3;
-    
+
     [SerializeField] public GameObject damageText;
 
     [SerializeField] float newHeath;
@@ -57,7 +57,6 @@ public abstract class Enemy : MonoBehaviour
     void MoveEnemy()
     {
         animator.SetFloat("speed", agent.velocity.magnitude / agent.speed);
-
         if (newDestinationCD <= 0 && Vector3.Distance(player.transform.position, transform.position) <= aggroRange && animator.GetBool("isAttack") == false)
         {
             newDestinationCD = 0.5f;
@@ -71,19 +70,25 @@ public abstract class Enemy : MonoBehaviour
 
         health -= damageAmount;
         animator.SetTrigger("damage");
-
+        animator.SetFloat("speed", 1);
 
         HitVFX(this.gameObject.transform.position);
         if (health <= 0)
         {
+            probability = Random.value;
+            if (probability > 0.2f)
+            {
+                ThrowDrop();
+            }
             DesactivasMesh();
             animator.SetBool("isDeath", true);
             animator.SetTrigger("death");
             Invoke("Die", 5);
             //Die();
         }
-            DamageEnemyIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageEnemyIndicator>();
-            indicator.SetDamageText(damageAmount);
+        DamageEnemyIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageEnemyIndicator>();
+        indicator.SetDamageText(damageAmount);
+
     }
 
     void DesactivasMesh()
@@ -98,11 +103,6 @@ public abstract class Enemy : MonoBehaviour
 
     void Die()
     {
-        probability = Random.value;
-        if (probability > 0.2f)
-        {
-            ThrowDrop();
-        }
         //Destroy(this.gameObject);
         this.gameObject.SetActive(false);
         GameManager.amountEnemyes--;
@@ -112,6 +112,7 @@ public abstract class Enemy : MonoBehaviour
     {
         GetComponentInChildren<EnemyDamageDealer>().StartDealDamage();
         animator.SetBool("isAttack", true);
+        animator.SetBool("isAttack", false);
     }
 
     public void EndDealDamage()

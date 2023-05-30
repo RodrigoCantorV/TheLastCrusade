@@ -59,7 +59,7 @@ public class MeeleCharacter : CharacterBase
         base.StartDealDamageSpecialAttack();        
         ultiParticlesObject.SetActive(true);
         ultiParticlesObject.GetComponent<ParticleSystem>().Play();
-        CheckForDamageable(base.specialAttackDamage);   
+        CheckForDamageable(140);   
     }
 
     private void CheckForDamageable(float ultiDamage)

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System.Collections;
 
 public class CharacterBase : MonoBehaviour
 {
@@ -9,20 +10,20 @@ public class CharacterBase : MonoBehaviour
     public float dashSpeed;
     public float currentLife;
     public float characterMaxLife;
-
+    public float alphaRef;
 
     private float targetAlpha = 0f;
     private float currentVelocity;
     public float fadeTime = 0.1f;
 
-    [SerializeField] private float fadeDuration = 0.5f;
+    [SerializeField] private float fadeDuration = 1f;
 
     public float fadeTimer = 0f;
 
     private bool isFading = false; // Variable para controlar si la imagen está desvaneciéndose
 
     [HideInInspector] protected Image lifeBar;
-    public float maxLife;
+
 
     [SerializeField] protected Image levelAttackk;
     [SerializeField] protected Image hardAttackk;
@@ -61,7 +62,7 @@ public class CharacterBase : MonoBehaviour
     public string dashAnimationName, heavyAttackAnimationName, lightAttackAnimationName, specialAttackAnimationName, hurtAnimationName, deadAnimationName;
     [HideInInspector]
     public float playerSyncWithPointer = 90f;
-    public bool isAlive=true;
+    public bool isAlive = true;
 
     public float specialCharges;
     [HideInInspector] protected Image powerupBar;
@@ -78,9 +79,8 @@ public class CharacterBase : MonoBehaviour
     public AudioClip walkSound;
     public AudioClip hurtSound;
 
-    void Awake() 
+    void Awake()
     {
-        maxLife = 160;
         //lifeeBar = GameObject.Find("LifeBar");
         lifeBar = GameObject.Find("LifeBar").GetComponent<Image>();
         powerupBar = GameObject.Find("PowerUps").GetComponent<Image>();
@@ -95,7 +95,7 @@ public class CharacterBase : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
-    
+
 
         movementSM = new StateMachine();
         movement = new StandingState(this, movementSM);
@@ -114,26 +114,27 @@ public class CharacterBase : MonoBehaviour
     }
 
     protected virtual void StartDealDamageLightAttack()
-    {        
+    {
     }
     protected virtual void EndDealDamageLightAttack()
     {
     }
 
     protected virtual void StartDealDamageHeavyAttack()
-    {        
+    {
     }
     protected virtual void EndDealDamageHeavyAttack()
     {
     }
 
     protected virtual void StartDealDamageSpecialAttack()
-    {        
+    {
     }
     protected virtual void EndDealDamageSpecialAttack()
     {
     }
 
+/*
     protected void ActivateDamageImages(int cantidad)
     {
 
@@ -173,7 +174,7 @@ public class CharacterBase : MonoBehaviour
         }
 
     }
-
+*/
 
     public void TakeDamage(float damageAmount)
     {
@@ -186,7 +187,7 @@ public class CharacterBase : MonoBehaviour
             Die();
             if (menuGamePlay != null)
             {
-                StartCoroutine(menuGamePlay.GameOver());            
+                StartCoroutine(menuGamePlay.GameOver());
             }
         }
         animator.SetTrigger("move");
@@ -210,67 +211,100 @@ public class CharacterBase : MonoBehaviour
 
     public void LifeBarManagement()
     {
-        lifeBar.fillAmount = currentLife / maxLife;       
+        lifeBar.fillAmount = currentLife / characterMaxLife;
     }
 
-    public void PowerupManagement() 
+    public void PowerupManagement()
     {
-        powerupBar.fillAmount = specialCharges/3;        
+        powerupBar.fillAmount = specialCharges / 3;
     }
 
     void Die()
     {
-        isAlive = false;  
+        isAlive = false;
     }
- 
+
     protected void Update()
     {
-        movementSM.currentState.HandleInput(); 
+        movementSM.currentState.HandleInput();
         movementSM.currentState.LogicUpdate();
-        UpdateDamageImagesAlpha();
+       // UpdateDamageImagesAlpha();
     }
-
-    private void UpdateDamageImagesAlpha()
-{
-    float alpha = Mathf.SmoothDamp(levelAttackk.color.a, targetAlpha, ref currentVelocity, fadeDuration);
-    Color levelAttackColor = levelAttackk.color;
-    levelAttackColor.a = alpha;
-    levelAttackk.color = levelAttackColor;
-
-    alpha = Mathf.SmoothDamp(hardAttackk.color.a, targetAlpha, ref currentVelocity, fadeDuration);
-    Color hardAttackColor = hardAttackk.color;
-    hardAttackColor.a = alpha;
-    hardAttackk.color = hardAttackColor;
-
-    alpha = Mathf.SmoothDamp(fatalAttackk.color.a, targetAlpha, ref currentVelocity, fadeDuration);
-    Color fatalAttackColor = fatalAttackk.color;
-    fatalAttackColor.a = alpha;
-    fatalAttackk.color = fatalAttackColor;
-
-    // Desactivar las imágenes cuando alcanzan un valor de alpha cercano a 0
-    if (Mathf.Abs(alpha - targetAlpha) < 0.01f)
+    /*
+        private void UpdateDamageImagesAlpha()
     {
-        if (targetAlpha == 0f)
+        float alpha = Mathf.SmoothDamp(levelAttackk.color.a, targetAlpha, ref currentVelocity, fadeDuration);
+        Color levelAttackColor = levelAttackk.color;
+        levelAttackColor.a = alpha;
+        levelAttackk.color = levelAttackColor;
+
+        alpha = Mathf.SmoothDamp(hardAttackk.color.a, targetAlpha, ref currentVelocity, fadeDuration);
+        Color hardAttackColor = hardAttackk.color;
+        hardAttackColor.a = alpha;
+        hardAttackk.color = hardAttackColor;
+
+        alpha = Mathf.SmoothDamp(fatalAttackk.color.a, targetAlpha, ref currentVelocity, fadeDuration);
+        Color fatalAttackColor = fatalAttackk.color;
+        fatalAttackColor.a = alpha;
+        fatalAttackk.color = fatalAttackColor;
+
+        // Desactivar las imágenes cuando alcanzan un valor de alpha cercano a 0
+        if (Mathf.Abs(alpha - targetAlpha) < 0.01f)
         {
-            levelAttackk.gameObject.SetActive(false);
-            hardAttackk.gameObject.SetActive(false);
-            fatalAttackk.gameObject.SetActive(false);
+            if (targetAlpha == 0f)
+            {
+                levelAttackk.gameObject.SetActive(false);
+                hardAttackk.gameObject.SetActive(false);
+                fatalAttackk.gameObject.SetActive(false);
+            }
+        }
+
+        if (isFading)
+        {
+            fadeTimer -= Time.deltaTime;
+
+            if (fadeTimer <= 0f)
+            {
+                // Si el temporizador ha alcanzado cero, comienza a desvanecer la imagen
+                targetAlpha = 0f;
+                isFading = false;
+            }
+        }
+    }
+     */
+    public void ActivateDamageImages(int cantidad)
+    {
+        if (cantidad > ((characterMaxLife / 3) * 2) && cantidad <= characterMaxLife)
+        {
+            levelAttackk.gameObject.SetActive(true);
+            StartCoroutine(SmoothDampCorutine(levelAttackk));
+        }
+        else if (cantidad > ((characterMaxLife / 3)) && cantidad <= ((characterMaxLife / 3) * 2))
+        {
+            hardAttackk.gameObject.SetActive(true);
+            StartCoroutine(SmoothDampCorutine(hardAttackk));
+        }
+        else if (cantidad <= ((characterMaxLife / 3)))
+        {
+            fatalAttackk.gameObject.SetActive(true);
+            StartCoroutine(SmoothDampCorutine(fatalAttackk));
         }
     }
 
-    if (isFading)
+     public IEnumerator SmoothDampCorutine(Image image)
     {
-        fadeTimer -= Time.deltaTime;
+        float alpha = 255;
 
-        if (fadeTimer <= 0f)
+        while (alpha > 0.01f)
         {
-            // Si el temporizador ha alcanzado cero, comienza a desvanecer la imagen
-            targetAlpha = 0f;
-            isFading = false;
+            alpha = Mathf.SmoothDamp(alpha, 0, ref alphaRef, fadeDuration);
+            Color imageColor = image.color;
+            imageColor.a = alpha;
+            image.color = imageColor;
+            yield return null;
         }
     }
-}
- 
+
     protected void FixedUpdate()
     {
         movementSM.currentState.PhysicsUpdate();
@@ -292,7 +326,7 @@ public class CharacterBase : MonoBehaviour
     {
         if (other.CompareTag("Life"))
         {
-            LifeManagement();            
+            LifeManagement();
             other.gameObject.SetActive(false);
         }
         if (other.CompareTag("Power"))
