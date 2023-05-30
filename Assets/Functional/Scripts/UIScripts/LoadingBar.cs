@@ -31,10 +31,10 @@ public class LoadingBar : MonoBehaviour
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
             slider.value = progress; 
             progressText.text = (progress * 100f).ToString("F0") + "%";
-             /* if (progress >= 0.9f)
+             if (progress >= 0.9f)
                 {
                     operation.allowSceneActivation = true; // Activa la escena cuando el progreso alcance el 90%
-                } */
+                }
             Debug.Log(progress + "aca el progreso");
             yield return null;
         }
