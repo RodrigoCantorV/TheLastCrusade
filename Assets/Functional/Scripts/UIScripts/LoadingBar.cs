@@ -18,16 +18,23 @@ public class LoadingBar : MonoBehaviour
     }
 
     IEnumerator LoadAsynchronusly(string nameScene) {
+        yield return new WaitForSeconds(0.1f);
         AsyncOperation operation = SceneManager.LoadSceneAsync("GameMainScene");
+        //operation.allowSceneActivation = false;
+
         
-        //loadingScreen.SetActive(true);
+        //loadingScreen.gameObject.SetActive(true);
         //startGame = GameObject.Find("Play")
 
         while (!operation.isDone) {
             Debug.Log(operation.progress + "debug operations");
-            float progress = Mathf.Clamp01(operation.progress / .9f);
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
             slider.value = progress; 
-            progressText.text = progress * 100f + "%";
+            progressText.text = (progress * 100f).ToString("F0") + "%";
+             /* if (progress >= 0.9f)
+                {
+                    operation.allowSceneActivation = true; // Activa la escena cuando el progreso alcance el 90%
+                } */
             Debug.Log(progress + "aca el progreso");
             yield return null;
         }
