@@ -54,6 +54,7 @@ public class MenuGamePlay : MonoBehaviour
         SoundManager.Instance.pauseSoundBack();
         botonPause.SetActive(false);
         pausePanel.SetActive(true);
+        DisableInstruccionsPanels();
         backgroundLife.SetActive(false);
         backgroundPowerup.SetActive(false);
 

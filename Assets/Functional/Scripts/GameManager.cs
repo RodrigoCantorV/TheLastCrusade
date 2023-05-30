@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
         GameObject cinema = imagenes[numeroCinematica].gameObject;
         cinema.SetActive(false);
         EnableUI();
-        ActiveInstruccionPanel();
+        //ActiveInstruccionPanel();
     }
 
     void DisableInstruccionsPanels() {
