@@ -100,14 +100,15 @@ public class MenuGamePlay : MonoBehaviour
         gameOverPanel.SetActive(true);
         backgroundLife.SetActive(false);
         backgroundPowerup.SetActive(false);
-        animatorLetter = gameOverLetter.GetComponent<Animator>();
-        animatorLetter.SetTrigger("lose");
+        //animatorLetter = gameOverLetter.GetComponent<Animator>();
+        //animatorLetter.SetTrigger("lose");
+
         //Time.timeScale = 0f;
         //audioSource.Pause();
         DisableInstruccionsPanels();
 
         SoundManager.Instance.pauseSoundBack();
-        SoundManager.Instance.playSoundLose();
+        //SoundManager.Instance.playSoundLose();
     }
 
     public IEnumerator Winner()
