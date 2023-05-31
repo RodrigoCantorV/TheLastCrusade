@@ -10,10 +10,10 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("SelectChar");
     }
 
-    public void MenuSelectCharacter()
+    /* public void MenuSelectCharacter()
     {
         SceneManager.LoadScene("SelectChar");
-    }
+    } */
     
     public void Credits()
     {
