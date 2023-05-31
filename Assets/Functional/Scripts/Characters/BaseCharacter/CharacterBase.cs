@@ -16,6 +16,8 @@ public class CharacterBase : MonoBehaviour
     private float currentVelocity;
     public float fadeTime = 0.1f;
 
+    public bool vulnerable;
+
     [SerializeField] private float fadeDuration = 1f;
 
     public float fadeTimer = 0f;
@@ -45,6 +47,7 @@ public class CharacterBase : MonoBehaviour
     public LightAttackState lightAttacking;
     public SpecialAttackState specialAttacking;
     public DeadState deadState;
+    public HurtState hurtState;
 
     [HideInInspector]
     public MenuGamePlay menuGamePlay;
@@ -104,6 +107,7 @@ public class CharacterBase : MonoBehaviour
         lightAttacking = new LightAttackState(this, movementSM);
         specialAttacking = new SpecialAttackState(this, movementSM);
         deadState = new DeadState(this, movementSM);
+        hurtState = new HurtState(this, movementSM);
 
         movementSM.Initialize(movement);
 
@@ -111,6 +115,7 @@ public class CharacterBase : MonoBehaviour
 
         menuGamePlay = FindObjectOfType<MenuGamePlay>();
         isAlive = true;
+        vulnerable = true;
     }
 
     protected virtual void StartDealDamageLightAttack()
@@ -133,64 +138,25 @@ public class CharacterBase : MonoBehaviour
     protected virtual void EndDealDamageSpecialAttack()
     {
     }
-
-/*
-    protected void ActivateDamageImages(int cantidad)
-    {
-
-        fadeTimer = 0f;
-        isFading = false;
-
-        if (cantidad > 120 && cantidad <= 140)
-        {
-            targetAlpha = 1f;
-            levelAttackk.gameObject.SetActive(true);
-            Debug.Log("Damage LevelAttack");
-        }
-        else if (cantidad >= 80 && cantidad <= 100)
-        {
-            levelAttackk.gameObject.SetActive(false);
-            targetAlpha = 1f;
-            hardAttackk.gameObject.SetActive(true);
-            Debug.Log("HardAttack");
-        }
-        else if (cantidad >= 20 && cantidad <= 40)
-        {
-            hardAttackk.gameObject.SetActive(false);
-            targetAlpha = 1f;
-            fatalAttackk.gameObject.SetActive(true);
-            Debug.Log("FatalAttack");
-        }
-        else
-        {
-            targetAlpha = 0f; // Establecer el valor de alpha a 0 si no se cumple ninguna condición
-        }
-
-        if (targetAlpha == 1f)
-        {
-            // Si la imagen se activa, inicia el temporizador de desvanecimiento
-            isFading = true;
-            fadeTimer = fadeDuration;
-        }
-
-    }
-*/
-
     public void TakeDamage(float damageAmount)
     {
-        currentLife -= damageAmount;
-        animator.SetTrigger("damage");
-        ActivateDamageImages(Mathf.CeilToInt(currentLife));
-        LifeBarManagement();
-        if (currentLife <= 0)
+
+
+        if (vulnerable)
         {
-            Die();
-            if (menuGamePlay != null)
+            movementSM.ChangeState(hurtState);
+            vulnerable = false;
+            currentLife -= damageAmount;          
+            ActivateDamageImages(Mathf.CeilToInt(currentLife));
+            LifeBarManagement();
+            if (currentLife <= 0)
             {
-                StartCoroutine(menuGamePlay.GameOver());
+                Die();
             }
+            StartCoroutine(UnvulneravilityControl(1.5f));
         }
-        animator.SetTrigger("move");
+  
+       
     }
 
     void LifeManagement()
@@ -219,59 +185,22 @@ public class CharacterBase : MonoBehaviour
         powerupBar.fillAmount = specialCharges / 3;
     }
 
-    void Die()
+    public void Die()
     {
         isAlive = false;
+        if (menuGamePlay != null)
+        {
+            StartCoroutine(menuGamePlay.GameOver());
+        }
     }
 
     protected void Update()
     {
         movementSM.currentState.HandleInput();
         movementSM.currentState.LogicUpdate();
-       // UpdateDamageImagesAlpha();
+        print(vulnerable);
     }
-    /*
-        private void UpdateDamageImagesAlpha()
-    {
-        float alpha = Mathf.SmoothDamp(levelAttackk.color.a, targetAlpha, ref currentVelocity, fadeDuration);
-        Color levelAttackColor = levelAttackk.color;
-        levelAttackColor.a = alpha;
-        levelAttackk.color = levelAttackColor;
 
-        alpha = Mathf.SmoothDamp(hardAttackk.color.a, targetAlpha, ref currentVelocity, fadeDuration);
-        Color hardAttackColor = hardAttackk.color;
-        hardAttackColor.a = alpha;
-        hardAttackk.color = hardAttackColor;
-
-        alpha = Mathf.SmoothDamp(fatalAttackk.color.a, targetAlpha, ref currentVelocity, fadeDuration);
-        Color fatalAttackColor = fatalAttackk.color;
-        fatalAttackColor.a = alpha;
-        fatalAttackk.color = fatalAttackColor;
-
-        // Desactivar las imágenes cuando alcanzan un valor de alpha cercano a 0
-        if (Mathf.Abs(alpha - targetAlpha) < 0.01f)
-        {
-            if (targetAlpha == 0f)
-            {
-                levelAttackk.gameObject.SetActive(false);
-                hardAttackk.gameObject.SetActive(false);
-                fatalAttackk.gameObject.SetActive(false);
-            }
-        }
-
-        if (isFading)
-        {
-            fadeTimer -= Time.deltaTime;
-
-            if (fadeTimer <= 0f)
-            {
-                // Si el temporizador ha alcanzado cero, comienza a desvanecer la imagen
-                targetAlpha = 0f;
-                isFading = false;
-            }
-        }
-    }
-     */
     public void ActivateDamageImages(int cantidad)
     {
         if (cantidad > ((characterMaxLife / 3) * 2) && cantidad <= characterMaxLife)
@@ -303,6 +232,12 @@ public class CharacterBase : MonoBehaviour
             image.color = imageColor;
             yield return null;
         }
+    }
+
+    public IEnumerator UnvulneravilityControl(float time)
+    {
+        yield return new WaitForSeconds(time);
+        vulnerable = true;
     }
 
     protected void FixedUpdate()

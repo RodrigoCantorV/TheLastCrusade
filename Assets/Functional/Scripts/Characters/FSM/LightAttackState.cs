@@ -31,7 +31,7 @@ public class LightAttackState : State
         clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
 
         if (timePassed < clipLength / clipSpeed && attack)
-        {
+        {           
             CharacterBase.animator.SetTrigger("lightAttack");
             attack = false;
         }            
@@ -50,6 +50,7 @@ public class LightAttackState : State
         base.Exit();
         CharacterBase.animator.SetTrigger("move");
         timePassed = 0f;
+        
     }
 
     public AnimationClip FindAnimation(Animator animator, string name)

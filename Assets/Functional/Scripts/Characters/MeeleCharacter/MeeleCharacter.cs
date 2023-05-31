@@ -13,7 +13,8 @@ public class MeeleCharacter : CharacterBase
     private const string DASH_ANIMATION_NAME = "MeeleDashAnimation";
     private const string HEAVY_ATTACK_ANIMATION_NAME = "MeeleHeavyAttackAnimation";
     private const string LIGHT_ATTACK_ANIMATION_NAME = "MeeleLigthAttackAnimation";
-    private const string SPECIAL_ATTACK_ANIMATION_NAME = "MeeleUltiAnimation";// CAMBIAR A NOMBRE DE ANIMACION SPECIAL
+    private const string SPECIAL_ATTACK_ANIMATION_NAME = "MeeleUltiAnimation";
+    private const string HURT_ANIMATION_NAME = "MeleeHurtAnimation";
 
     protected override void Start()
     {
@@ -27,6 +28,7 @@ public class MeeleCharacter : CharacterBase
         heavyAttackAnimationName = HEAVY_ATTACK_ANIMATION_NAME;
         lightAttackAnimationName = LIGHT_ATTACK_ANIMATION_NAME;
         specialAttackAnimationName = SPECIAL_ATTACK_ANIMATION_NAME;
+        hurtAnimationName = HURT_ANIMATION_NAME;
     }
 
     protected override void StartDealDamageLightAttack()
