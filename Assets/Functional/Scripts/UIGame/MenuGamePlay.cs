@@ -13,7 +13,7 @@ public class MenuGamePlay : MonoBehaviour
     Animator animatorLetter;
     [SerializeField] public GameObject gameOverPanel;
     [SerializeField] public GameObject winnerPanel;
-    [SerializeField] public MenuManager menuManager;
+    //[SerializeField] public MenuManager menuManager;
     //[SerializeField] public InstructionsPanel disablePanels;
     [SerializeField] private InstructionsPanel disabledPanel;
 
@@ -21,10 +21,6 @@ public class MenuGamePlay : MonoBehaviour
 
     private bool juegoPausado = false;
 
-    private void Awake()
-    {
-
-    }
     private void Start()
     {
         SoundManager.Instance.playSoundBack();
@@ -34,15 +30,15 @@ public class MenuGamePlay : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (juegoPausado)
-            {
-                Reanudar();
-                SoundManager.Instance.playSoundBack();
-            }
-            else
+            if (!juegoPausado)
             {
                 Pause();
                 SoundManager.Instance.pauseSoundBack();
+            }
+            else
+            {
+                Reanudar();
+                SoundManager.Instance.playSoundBack();
             }
         }
     }
@@ -91,11 +87,11 @@ public class MenuGamePlay : MonoBehaviour
     public void ReturnSelectCharacter()
     {
 
-        SceneManager.LoadScene("MenuInicial");
+        SceneManager.LoadScene("SelectChar");
 
         //GameObject objeto = GameObject.Find("CanvasMenuInitNew");
         Debug.Log("cambio a selecccion");
-        menuManager.MenuSelectCharacter();
+        //menuManager.MenuSelectCharacter();
     }
 
     public IEnumerator GameOver()
