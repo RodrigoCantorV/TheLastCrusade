@@ -55,7 +55,7 @@ public class SpecialAttackState : State
     {
         base.Exit();
         CharacterBase.PowerupManagement();
-        CharacterBase.animator.SetTrigger("move");
+        //CharacterBase.animator.SetTrigger("move");
         timePassed = 0f;
     }
 

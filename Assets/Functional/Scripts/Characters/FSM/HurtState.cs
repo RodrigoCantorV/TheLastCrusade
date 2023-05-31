@@ -14,7 +14,7 @@ public class HurtState : State
         stateMachine = _stateMachine;
     }
 
-    // Start is called before the first frame update
+  
 
     public override void Enter()
     {
@@ -25,7 +25,7 @@ public class HurtState : State
         specialAttack = false;
         dash = false;
         CharacterBase.animator.SetTrigger("damage");
-        //CharacterBase.vulnerable = false;
+       
 
     }
 
@@ -57,34 +57,35 @@ public class HurtState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-
-        
-
         timePassed += Time.deltaTime;
         clipLength = FindAnimation(CharacterBase.animator, CharacterBase.hurtAnimationName).length;
         clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
 
         if (timePassed >= clipLength / clipSpeed)
         {
+            
             if (dash)
             {
                 stateMachine.ChangeState(CharacterBase.dashing);
+                Debug.Log("dash");
             }
-            Debug.Log("light:" +lightAttack);
-            if (lightAttack)
+            
+            else if (lightAttack)
             {
                 stateMachine.ChangeState(CharacterBase.lightAttacking);
-                Debug.Log("Perro");
+                Debug.Log("ataque1");
+
             }
             else if (heavyAttack)
             {
                 stateMachine.ChangeState(CharacterBase.heavyAttacking);
+                Debug.Log("ataque2");
             }
             else if (specialAttack)
             {
                 stateMachine.ChangeState(CharacterBase.specialAttacking);
                 CharacterBase.specialCharges = 0;
+                Debug.Log("especial");
             }
             else if (!CharacterBase.isAlive)
             {
@@ -93,7 +94,7 @@ public class HurtState : State
             else
             {
                 stateMachine.ChangeState(CharacterBase.movement);
-                CharacterBase.animator.SetTrigger("move");
+                Debug.Log("movimiento");       
             }
             
         }
@@ -114,9 +115,8 @@ public class HurtState : State
     public override void Exit()
     {
         base.Exit();
-        CharacterBase.animator.SetTrigger("move");
-        //CharacterBase.animator.SetFloat("speed", 1f);
+
         timePassed = 0f;
-        //CharacterBase.vulnerable = true;
+   
     }
 }
