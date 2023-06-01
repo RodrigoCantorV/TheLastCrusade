@@ -11,7 +11,7 @@ public class Drop : MonoBehaviour
 
     IEnumerator Desaparecer(GameObject dropo)
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(8);
         dropo.SetActive(false);
     }
 }

@@ -20,6 +20,8 @@ public class StandingState : State
     public override void Enter()
     {
         base.Enter();
+        CharacterBase.animator.SetFloat("speed", 0.1f, CharacterBase.delayAnimationTime, Time.deltaTime);
+        CharacterBase.animator.SetTrigger("move");        
         heavyAttack = false;
         lightAttack = false;
         specialAttack = false; 
@@ -55,15 +57,16 @@ public class StandingState : State
         }
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
-
         velocity = velocity.x * CharacterBase.transform.right.normalized + velocity.z * CharacterBase.transform.forward.normalized;
         velocity.y = 0f;
     }
 
     public override void LogicUpdate()
     {
+       
         base.LogicUpdate();
         CharacterBase.animator.SetFloat("speed", input.magnitude, CharacterBase.delayAnimationTime, Time.deltaTime);
+   
 
         if(dash)
         {
@@ -99,7 +102,6 @@ public class StandingState : State
             currentVelocity = Vector3.zero;
         }
         CharacterBase.controller.Move(currentVelocity * Time.deltaTime * playerSpeed);
-
         CharacterBase.transform.rotation = Quaternion.Euler(new Vector3(0, -RotationAngle() + playerSyncWithPointer, 0));
     }
 
@@ -115,5 +117,6 @@ public class StandingState : State
     {
         base.Exit();
         CharacterBase.playerVelocity = new Vector3(input.x, 0, input.y);
+        
     }
 }

@@ -4,8 +4,7 @@ public class LightAttackState : State
 {
     float timePassed;
     float clipLength;
-    float clipSpeed;
-    bool attack;
+    float clipSpeed;    
     public LightAttackState(CharacterBase _characterVideo, StateMachine _stateMachine) : base(_characterVideo, _stateMachine)
     {
         CharacterBase = _characterVideo;
@@ -15,7 +14,7 @@ public class LightAttackState : State
     public override void Enter()
     {
         base.Enter();
-        attack = true;
+        CharacterBase.animator.SetTrigger("lightAttack");        
     }
 
     public override void HandleInput()
@@ -30,16 +29,13 @@ public class LightAttackState : State
         clipLength = FindAnimation(CharacterBase.animator, CharacterBase.lightAttackAnimationName).length;
         clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
 
-        if (timePassed < clipLength / clipSpeed && attack)
-        {
-            CharacterBase.animator.SetTrigger("lightAttack");
-            attack = false;
-        }            
+        
+             
         if (timePassed > clipLength / clipSpeed)
         {           
-            stateMachine.ChangeState(CharacterBase.movement);                       
+            stateMachine.ChangeState(CharacterBase.movement);  
         }
-       // Debug.Log(CharacterBase.ToString());
+    
         if (CharacterBase.ToString() == "DistanceCharacter(Clone) (DistanceCharacter)")
         {
             CharacterBase.transform.rotation = Quaternion.Euler(new Vector3(0, -CharacterBase.RotationAngle() + CharacterBase.playerSyncWithPointer, 0));
@@ -47,9 +43,9 @@ public class LightAttackState : State
     }
     public override void Exit()
     {
-        base.Exit();
-        CharacterBase.animator.SetTrigger("move");
+        base.Exit();    
         timePassed = 0f;
+        
     }
 
     public AnimationClip FindAnimation(Animator animator, string name)

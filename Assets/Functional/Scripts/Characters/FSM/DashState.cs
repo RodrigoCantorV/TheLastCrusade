@@ -22,7 +22,9 @@ public class DashState : State
 
         heavyAttack = false;
         lightAttack = false;
-        CharacterBase.animator.SetTrigger("dash");     
+      
+        CharacterBase.animator.SetTrigger("dash");
+        CharacterBase.vulnerable = false;
         dashSpeed = CharacterBase.dashSpeed;
 
     }
@@ -42,7 +44,7 @@ public class DashState : State
         {
             heavyAttack = true;
         }
-    }
+       }
 
     public AnimationClip FindAnimation(Animator animator, string name)
     {
@@ -76,9 +78,7 @@ public class DashState : State
         if (timePassed >= clipLength / clipSpeed)
         {        
             stateMachine.ChangeState(CharacterBase.movement);
-            CharacterBase.animator.SetTrigger("move");         
         }
-
     }
 
     public override void PhysicsUpdate()
@@ -91,9 +91,8 @@ public class DashState : State
 
     public override void Exit()
     {
-        base.Exit();        
-        CharacterBase.animator.SetTrigger("move");
-        CharacterBase.animator.SetFloat("speed", 1f);
+        base.Exit();
+        CharacterBase.vulnerable = true;
         timePassed = 0f;
     }
 }

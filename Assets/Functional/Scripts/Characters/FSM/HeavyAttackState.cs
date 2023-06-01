@@ -5,7 +5,7 @@ public class HeavyAttackState : State
     float timePassed;
     float clipLength;
     float clipSpeed;
-    bool attack;
+    
     public HeavyAttackState(CharacterBase _characterVideo, StateMachine _stateMachine) : base(_characterVideo, _stateMachine)
     {
         CharacterBase = _characterVideo;
@@ -15,7 +15,8 @@ public class HeavyAttackState : State
     public override void Enter()
     {
         base.Enter();
-        attack=true;
+        CharacterBase.animator.SetTrigger("heavyAttack");
+
     }
 
     public override void HandleInput()
@@ -32,11 +33,7 @@ public class HeavyAttackState : State
         clipLength = FindAnimation(CharacterBase.animator, CharacterBase.heavyAttackAnimationName).length;
         clipSpeed = CharacterBase.animator.GetCurrentAnimatorStateInfo(0).speed;
 
-        if (timePassed < clipLength / clipSpeed && attack)
-        {
-            CharacterBase.animator.SetTrigger("heavyAttack");
-            attack = false;
-        }
+
 
         if (timePassed > clipLength / clipSpeed)
         {
@@ -61,8 +58,7 @@ public class HeavyAttackState : State
 
     public override void Exit()
     {
-        base.Exit();
-        CharacterBase.animator.SetTrigger("move");
+        base.Exit();      
         timePassed = 0f;
     }
 }

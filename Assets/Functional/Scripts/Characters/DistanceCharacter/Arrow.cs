@@ -46,7 +46,7 @@ public class Arrow : MonoBehaviour
     }  
     public void ShotChargedArrow()
     {
-        arrowDamage = 60;
+        arrowDamage = 70;
         SetPointOfShoot();
         Shot();
     }
