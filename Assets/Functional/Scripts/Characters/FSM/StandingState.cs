@@ -66,7 +66,7 @@ public class StandingState : State
        
         base.LogicUpdate();
         CharacterBase.animator.SetFloat("speed", input.magnitude, CharacterBase.delayAnimationTime, Time.deltaTime);
-        Debug.Log("speed set");
+   
 
         if(dash)
         {

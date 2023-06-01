@@ -197,8 +197,7 @@ public class CharacterBase : MonoBehaviour
     protected void Update()
     {
         movementSM.currentState.HandleInput();
-        movementSM.currentState.LogicUpdate();
-        print("current: " +movementSM.currentState);
+        movementSM.currentState.LogicUpdate();       
     }
 
     public void ActivateDamageImages(int cantidad)

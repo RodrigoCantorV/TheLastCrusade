@@ -12,8 +12,10 @@ public class CameraFollow : MonoBehaviour
     public float yRotationRerence;
     public float XRotation = 0.0f; // Rotaci�n en el eje Y
     private Vector3 velocity = Vector3.zero;
-    private bool estaTocando = false;
+    private bool camInWall = false;
     private CharacterBase characterBase;
+    private float distanceRef;
+    private float transitionSmoothTime=1; 
 
     private Vector3 newPosition;
     void LateUpdate()
@@ -29,14 +31,34 @@ public class CameraFollow : MonoBehaviour
         //// Creamos una rotaci�n en el eje Y
         Quaternion yRotationQuaternion = Quaternion.Euler(yRotation, XRotation, 0);
 
+        float camVPlayerDistance = Vector3.Distance(transform.position, target.position);
+       // print(camVPlayerDistance);
+
         //// Actualizamos la rotaci�n de la c�mara
         transform.rotation = yRotationQuaternion;
 
-        if (estaTocando == false)
+
+        if (!camInWall)
         {
-            // Movimiento suave de la c�mara
-            transform.position = Vector3.SmoothDamp(currentPosition, targetPosition, ref velocity, smoothSpeed);
-        }
+            distance = Mathf.SmoothDamp(distance, 13, ref distanceRef, transitionSmoothTime);
+            //distance = 13;
+            yRotation = Mathf.SmoothDamp(yRotation, 45, ref distanceRef, transitionSmoothTime);
+            //yRotation = 45;
+
+        }    
+        else
+        {
+            distance = Mathf.SmoothDamp(distance, 16, ref distanceRef, transitionSmoothTime);
+            yRotation = Mathf.SmoothDamp(yRotation, 60, ref distanceRef, transitionSmoothTime);
+           // distance = 16;
+           // yRotation = 60;
+            //Vector3 targetDirection = target.position - transform.position;
+           // transform.rotation = Quaternion.LookRotation(targetDirection);
+           // transform.position = transform.position;
+            camInWall = false;
+        };
+        transform.position = Vector3.SmoothDamp(currentPosition, targetPosition, ref velocity, smoothSpeed);
+
 
         if (!characterBase.isAlive) {
              // Calculamos la nueva posición de la cámara
@@ -48,4 +70,16 @@ public class CameraFollow : MonoBehaviour
         }
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("colision");
+        camInWall = true;
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        print("colision2");
+        camInWall =true;
+    }
+
 }
