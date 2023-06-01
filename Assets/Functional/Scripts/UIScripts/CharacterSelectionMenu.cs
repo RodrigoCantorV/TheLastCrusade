@@ -9,7 +9,7 @@ public class CharacterSelectionMenu : MonoBehaviour
     public GameObject[] playerObjects;
     public int selectedCharacter = 0;
 
-    public string gameScene = "Character Selection Scene";
+    public string gameScene = "GameMainScene";
 
     private string selectedCharacterDataName = "SelectedCharacter";
 
